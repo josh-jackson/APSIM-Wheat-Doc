@@ -1,0 +1,60 @@
+---
+title: "Documentation of APSIM-Wheat"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [citation.bib]
+biblio-style: citation.csl
+link-citations: yes
+github-repo: byzheng/APSIM-Wheat
+description: "Documentation of APSIM-Wheat"
+
+---
+
+
+# Introduction
+
+<div class="alert alert-info"><p>
+A simulation is setup to demo the relationship among traits based on the cv. Hartog with high nitrogen and irrigation management under 15TraitMod experiment. The values in the figures below could be variable in other environments.</p>
+</div>
+
+
+
+```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(
+    cache = TRUE, echo = FALSE, 
+    out.width = '80%', fig.asp = .75,
+    warning = FALSE, fig.align = 'center',
+    message = FALSE) 
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(xml2)
+source('utility.R')
+
+pmf <- read_xml('wheat.xml')
+```
+
+
+
+This is a developing documentation for Wheat model in [next generation of APSIM](https://github.com/APSIMInitiative/ApsimX).
+
+The main contents include 
+
+- Detail description of science parts of APSIM-Wheat model
+- Figures of default parameters
+- Figures of general outputs
+- Simple sensitivity analysis
+
+
+## Authors
+
+
+
+## How to contribute?
+
+This documentation is wrote by [RMarkdown](rmarkdown.rstudio.com). I suggest you firstly to read the introduction about [RMarkdown](rmarkdown.rstudio.com), then fork this repository into your github account. Feel free to submit a pull request. 
+
+

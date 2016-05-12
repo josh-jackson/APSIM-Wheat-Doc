@@ -1,0 +1,221 @@
+# Structure {#structure}
+
+
+```{r read_data}
+library(readr)
+library(dplyr)
+library(tidyr)
+source('utility.R')
+report <- read_csv('process_test/simulation.db.Report.csv')
+
+df <- report %>% 
+    filter(grepl('15TraitMod', Name),
+           Management == 'IHN',
+           Cultivar == 'hartog')
+
+```
+
+
+The Structure model predicts the development and mortality of phytomer and branch (tiller) according to plastochron and phyllochron. 
+
+
+
+
+## Promordia and node number
+
+Three primordias are initizliaed at stage Emergence (Section \@ref(stage-period)). The primordia number in main stem (MainStemPrimordiaNo, Section \@ref(output-structure)) is daily increased according to plastochron (Section \@ref(plastochron-phyllochron)) until stage Terminal Spikelet (Section \@ref(stage-period)). The leaf (`node` in [next generation APSIM](https://github.com/APSIMInitiative/ApsimX)) number in the main stem is daily increased according to the phyllochron (Section \@ref(plastochron-phyllochron)) until maximum leaf number is reached. 
+
+
+
+
+The total leaf number in the main stem (MainStemFinalNodeNumber, Section \@ref(output-structure)) is initialized as 30 and reset as the primordia number at stage Terminal Spikelet (Section \@ref(stage-period)). The node number in the main stem (MainStemNodeNo, Section \@ref(output-structure)) is daily increasing since stage  Emergence (Section \@ref(stage-period)) until reach the final node number according to the `phyllochron` and daily thermal time. 
+
+
+
+<div class="fig-output">
+```{r final-node-number, fig.cap='Final node number in main stem'}
+
+
+y_cols <- c(
+    'Wheat.Structure.MainStemFinalNodeNumber')
+x_var <- 'Wheat.Phenology.Stage'
+
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Final node number in main stem')
+
+```
+</div>
+
+
+
+Daily changes of primordia ($\Delta N_{pri}$) and node (leaf) ($\Delta N_{node}$) number in main stem are calculated using plastochron ($P_{pla}$) and phyllochron ($P_{phy}$), respectively, after plant stage Emergence (Section \@ref(stage-period) and Figure \@ref(fig:delta-node)).
+
+$$
+ \Delta N_{pri}=rac{\Delta TT_{d}}{P_{pla}}
+$$
+
+$$
+ \Delta N_{node}=rac{\Delta TT_{t}}{P_{phy}}
+$$
+
+where, $\Delta TT_{t}$ is the daily thermal time, which calculates from parameter `ThermalTime`. $P_{pla}$ and $P_{phy}$ calculates from parameter `MainStemPrimordiaInitiationRate` (plastochron) and `MainStemNodeAppearanceRate` (phyllochron), respectively (Section \@ref(plastochron-phyllochron)).
+
+
+
+<div class="alert alert-danger"><p>
+The daily delta primodia number is not a output variable.
+</p></div>
+
+
+
+<div class="fig-output">
+```{r delta-node, fig.cap='Daily increase of node number in main stem'}
+y_cols <- c('Wheat.Structure.DeltaNodeNumber')
+x_var <- 'Wheat.Phenology.Stage'
+
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Daily increase of node number in main stem')
+```
+</div>
+
+
+Total number of primordia ($N_{pri}$) and node ($N_{node}$) in main stem are summarised since initialisation.
+
+$$
+    N_{pri}=\sum_{t=T_{0}}^{T}\Delta N_{p}
+$$
+
+$$
+    N_{node}=\sum_{t=T_{0}}^{T}\Delta N_{n}
+$$
+
+where, $T_{0}$ is day of plant initialisation which is set by Leaf model (Emergence for wheat).  $T$ is today. In the Structure model, the primordia and node numbers are not calculated for branches or tillers, but only for main stem (Figure \@ref(fig:node-number)). 
+
+
+
+<div class="fig-output">
+```{r node-number, fig.cap='Primordia and node number in main stem'}
+y_cols <- c(
+    'Wheat.Structure.MainStemNodeNo', 
+    'Wheat.Structure.MainStemPrimordiaNo')
+x_var <- 'Wheat.Phenology.Stage'
+
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Primordia or node number in main stem')
+
+```
+</div>
+
+
+## Tillering
+
+<div class="alert alert-danger"><p>
+The tiller number is too sensitive to WSC stress (x = [0.1, 0.2]; y = [0, 1]). This feature is disabled in all analysis
+</p></div>
+
+
+
+In [next generation APSIM](https://github.com/APSIMInitiative/ApsimX), tillering for wheat is referred as branching. New tillers are initialised when increase of the node number in 
+main stem ($\Delta N_{node}$) is more than 1 although the branching rate ($\Delta N_{branch}$) is calculate everyday (Figure \@ref(fig:tiller-number)). 
+
+The new branch number for each plant 
+is specified by parameter BranchingRate ($\Delta N_{branch}$), which could be a function of 
+branch number on leaf rank in main stem.
+$$
+     P_{branch} = P \times \sum_{t=T_{0}}^{T}\Delta N_{branch}
+$$
+
+
+The branching rate is defined by potential branching rate and stresses (nitrogen and WSC). From stage Emergence to Terminal Spikelet (Section \@ref(stage-period)), the potential branching rate is defined as  a function of number of appreared cohorts in the main stem (Figure \@ref(fig:branching-rate)). Beyond this period, the branching rate is set as zero. 
+
+
+<div class="fig-input">
+```{r branching-rate, fig.cap='Branching rate of APSIM-Wheat as a function of appreared cohort number'}
+xpath <- '//Name[text()="PotentialBranchingRate"]'
+plot_xypair(pmf, xpath, x_lab = 'Number of appeared cohorts', y_lab = 'Branching rate')
+
+```
+</div>
+
+Figure \@ref(fig:tiller-number) shows the branching rate and total branching number in the test simulation
+
+<div class="fig-output">
+```{r tiller-number, fig.cap='The branching rate and branch number for wheat'}
+y_cols <- c('Wheat.Structure.BranchNumber', 
+            'Wheat.Structure.BranchingRate',
+            'Wheat.Leaf.AppearedCohortNo')
+x_var <- 'Wheat.Phenology.Stage'
+
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Branch number or branching rate')
+
+```
+</div>
+
+<div class="alert alert-danger"><p>
+It seems PMF uses the branching rate one day before to calculate the branch number.
+</p></div>
+
+
+
+<div class="fig-output">
+```{r tiller-number-mo, fig.cap='The mortality of tillers'}
+y_cols <- c(
+    
+    'Wheat.Structure.BranchMortality',
+    
+    'Wheat.Structure.ProportionBranchMortality', 
+            'Wheat.Structure.ProportionPlantMortality')
+
+
+x_var <- 'Wheat.Phenology.Stage'
+
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Mortality of branching')
+
+```
+
+</div>
+
+
+Plant population ($P$) is initialised at sowing from Sow event, and 
+daily reduced by the plant mortality ($\Delta P$).
+$$
+    P=P_{0} - \sum_{t=T_{0}}^{T}(\Delta P)
+$$
+where, $P_{0}$ is the sown population, which initialised at sowing.
+
+Population of main stem number ($P_{ms}$) is calculated  
+according to plant population ($P$) and primary bud number ($N_{bud}$) 
+with default value 1. The unit of $P_{ms}$ is per square meter.
+$$
+    P_{ms}=P \times N_{bud}
+$$
+
+Population of total stem ($P_{stem}$) is summed up 
+population of main stem ($P_{ms}$) and branches (($P_{branch}$)).
+$$
+    P_{stem} = P_{ms} + P_{branch}
+$$
+
+Three factors are considered to reduce the population of total stem ($P_{stem}$), i.e.
+1) Plant mortality ($\Delta P$), 2) Drought($\Delta N_{drought}$), 
+3) Shade ($\Delta N_{shade}$). 
+
+During a day, branches are first killed by plant mortality which 
+reduces population through killing all stems in a plant.
+$$
+P_{branch} = P_{branch} - rac{(P_{branch} + P_{ms})}{P_{ms}} \times \Delta P
+$$
+
+Then environmental stresses (drought and shade) only cause mortality of 
+the remaining branches.
+$$
+    P_{branch} = P_{branch} \times [1 - (\Delta N_{drought}+\Delta N_{shade})]
+$$
+The mortalities, caused by drought ($\Delta N_{drought}$)  
+and shade ($\Delta N_{shade}$), are calculated by parameters 
+DroughtInducedBranchMortality and ShadeInducedBranchMortality, respectively.
+
+
+
+
+
+
+
+
