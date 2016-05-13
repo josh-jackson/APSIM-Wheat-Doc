@@ -139,6 +139,15 @@ Two stresses are defined in the APSIM-Wheat inclduing nitrogen and WSC. A simple
 
 
 
+<div class="fig-input">
+```{r branching-rate-nstress, fig.cap='Nitrogen stress on branching rate as a function of nitrogen factor (???)'}
+xpath <- '//Name[text()="Nitrogen"]'
+plot_xypair(pmf, xpath, x_lab = 'Nitrogen factor (???)', y_lab = 'Effect of nitrogen stress on branching rate')
+
+```
+</div>
+
+
 Figure \@ref(fig:tiller-number) shows the branching rate and total branching number in the test simulation
 
 <div class="fig-output">
