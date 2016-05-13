@@ -82,7 +82,8 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Structure</a><ul>
 <li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#promordia-and-node-number"><i class="fa fa-check"></i><b>3.1</b> Promordia and node number</a></li>
 <li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#tillering"><i class="fa fa-check"></i><b>3.2</b> Tillering</a></li>
-<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#population"><i class="fa fa-check"></i><b>3.3</b> Population</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#mortality"><i class="fa fa-check"></i><b>3.3</b> Mortality</a></li>
+<li class="chapter" data-level="3.4" data-path="structure.html"><a href="structure.html#population"><i class="fa fa-check"></i><b>3.4</b> Population</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="output.html"><a href="output.html"><i class="fa fa-check"></i><b>4</b> Output</a><ul>
 <li class="chapter" data-level="4.1" data-path="phenology.html"><a href="phenology.html#phenology"><i class="fa fa-check"></i><b>4.1</b> Phenology</a></li>
@@ -93,6 +94,7 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="5.2" data-path="structure.html"><a href="structure.html#structure"><i class="fa fa-check"></i><b>5.2</b> Structure</a></li>
 <li class="chapter" data-level="5.3" data-path="terminology.html"><a href="terminology.html#leaf"><i class="fa fa-check"></i><b>5.3</b> Leaf</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="terminology.html"><a href="terminology.html#leaf"><i class="fa fa-check"></i><b>6</b> Leaf</a></li>
 <li class="divider"></li>
 <li><a href="http://www.apsim.info/" target="blank">APSIM</a></li>
 <li><a href="http://github.com/APSIMInitiative/ApsimX" target="blank">Next generation of APSIM</a></li>
@@ -188,6 +190,7 @@ Figure 3.4: Branching rate of APSIM-Wheat as a function of appreared cohort numb
 </p>
 </div>
 </div>
+<p>Two stresses are defined in the APSIM-Wheat inclduing nitrogen and WSC. A simple sensitivity analysis indicates the branching rate is too sensitive to WSC with default values (x = [0.1, 0.2]; y = [0, 1]). Consequently this feature is disabled for further analysis.</p>
 <p>Figure <a href="structure.html#fig:tiller-number">3.5</a> shows the branching rate and total branching number in the test simulation</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:tiller-number"></span>
@@ -202,6 +205,9 @@ Figure 3.5: The branching rate and branch number for wheat
 It seems PMF uses the branching rate one day before to calculate the branch number.
 </p>
 </div>
+</div>
+<div id="mortality" class="section level2">
+<h2><span class="header-section-number">3.3</span> Mortality</h2>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:tiller-number-mo"></span>
 <img src="APSIM-Wheat_files/figure-html/tiller-number-mo-1.png" alt="The mortality of tillers" width="80%" />
@@ -212,7 +218,7 @@ Figure 3.6: The mortality of tillers
 </div>
 </div>
 <div id="population" class="section level2">
-<h2><span class="header-section-number">3.3</span> Population</h2>
+<h2><span class="header-section-number">3.4</span> Population</h2>
 <p>Plant population (<span class="math inline">\(P\)</span>) is initialised at sowing from Sow event, and daily reduced by the plant mortality (<span class="math inline">\(\Delta P\)</span>). <span class="math display">\[
     P=P_{0} - \sum_{t=T_{0}}^{T}(\Delta P)
 \]</span> where, <span class="math inline">\(P_{0}\)</span> is the sown population, which initialised at sowing.</p>
