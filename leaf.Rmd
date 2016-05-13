@@ -1,5 +1,34 @@
 # Leaf {#cha-leaf}
 
 
+
 Leaf cohort model is used in the ...
+
+## Life growth cycle
+
+In the leaf cohort model, the leaf growth cycle is divided into 7 stages.
+
+```{r leaf-life-cycle, out.width='100%'}
+library(DiagrammeR)
+DiagrammeR("sequenceDiagram;
+	Initialized->>Appeared: Appearance 
+	Appeared->>Expanded: GrowthDuration
+	Expanded->>Senescing: LagDuration
+	Senescing->>Senesced: SenescenceDuration
+	Senesced->>Detaching: DetachmentLagDuration
+	Detaching->>Detached: DetachmentDuration
+	Initialized->Expanded: IsGrowing
+	Initialized->>Senesced: IsAlive
+	Initialized->>Senesced: IsGreen
+	Initialized->>Senescing: IsNotSenescing
+	Senescing->>Senesced: IsSenescing
+	Expanded->>Detached: IsFullyExpanded
+	Senesced->>Detached: ShouldBeDead
+	Senesced->>Detached: Finished
+	Appeared->>Detached: IsAppeared
+	Initialized->>Detached: IsInitialised
+")
+
+
+```
 

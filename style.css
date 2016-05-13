@@ -47,3 +47,13 @@ pre code {
 	float: left;
 	font-weight: bold;
 }
+
+
+.mermaid .actor {
+	font-size: 150% !important;
+}
+
+
+.mermaid .messageText {
+	font-size: 150% !important;
+}

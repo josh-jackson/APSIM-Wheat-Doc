@@ -9,7 +9,7 @@ bookdown::gitbook:
         <li><a href="http://github.com/APSIMInitiative/ApsimX" target="blank">Next generation of APSIM</a></li>
         <li><a href="http://byzheng.github.io/ApsimX/Documentation/html/index.html" target="blank">Developer documentation</a></li>
     edit:
-      link: https://github.com/byzheng/APSIM-Wheat/edit/master/%s
+      link: https://github.com/byzheng/APSIM-Wheat-Doc/edit/master/%s
     sharing:
       facebook: no
       twitter: no
