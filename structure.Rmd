@@ -1,4 +1,4 @@
-# Structure {#structure}
+# Structure {#cha-structure}
 
 
 ```{r read_data}
@@ -137,15 +137,17 @@ plot_xypair(pmf, xpath, x_lab = 'Number of appeared cohorts', y_lab = 'Branching
 
 Two stresses are defined in the APSIM-Wheat inclduing nitrogen and WSC. A simple sensitivity analysis indicates the branching rate is too sensitive to WSC with default values (x = [0.1, 0.2]; y = [0, 1]). Consequently this feature is disabled for further analysis. 
 
-
+The nitrogen stress is calculated as a function of fraction of nitrogen supply relative to nitrogen demand which is exported from the Arbitrator module (Chaptor \@ref(cha:arbitrator)). Wheat module assumes no nitrogen stress when the nitrogen supply is bigger than 1.5 times of nitrogen demand (Figure \@ref(fig:branching-rate-nstress)).
 
 <div class="fig-input">
-```{r branching-rate-nstress, fig.cap='Nitrogen stress on branching rate as a function of nitrogen factor (???)'}
+```{r branching-rate-nstress, fig.cap='Nitrogen stress on branching rate as a function of fraction of nitrogen supply relative to nitrogen demand'}
 xpath <- '//Name[text()="Nitrogen"]'
-plot_xypair(pmf, xpath, x_lab = 'Nitrogen factor (???)', y_lab = 'Effect of nitrogen stress on branching rate')
+plot_xypair(pmf, xpath, x_lab = 'Fraction of nitrogen supply relative to nitrogen demand', y_lab = 'Effect of nitrogen stress on branching rate')
 
 ```
 </div>
+
+
 
 
 Figure \@ref(fig:tiller-number) shows the branching rate and total branching number in the test simulation
