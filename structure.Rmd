@@ -197,7 +197,7 @@ $$
 
 where, $P_{0}$ is the sown population, which initialised at sowing.
 
-Population of main stem number ($P_{ms}$) is calculated according to plant population ($P$) and primary bud number ($N_{bud}$) with default value 1. The unit of $P_{ms}$ is per square meter.
+Population of main stem ($P_{ms}$) is calculated according to plant population ($P$) and primary bud number ($N_{bud}$) with default value 1. The unit of $P_{ms}$ is per square meter.
 $$
     P_{ms}=P \times N_{bud}
 $$
@@ -207,10 +207,10 @@ $$
     P_{stem} = P_{ms} + P_{branch}
 $$
 
-
+In the test simulation, the plant density ($P$) is 150 plants m^2^, so population of main stem ($P_{ms}$) equals to plant density (Figure \@ref(fig:plant-population)). From Emergence to terminal spikelet, the population of total stem ($P_{stem}$) multiply by stem number and plant density (Figure \@ref(fig:tiller-number)). 
 
 <div class="fig-output">
-```{r plant-popultion, fig.cap='The total population of main stem and all stems'}
+```{r plant-population, fig.cap='The total population of main stem and all stems'}
 y_cols <- c('Wheat.Structure.MainStemPopn',
             'Wheat.Structure.TotalStemPopn')
 x_var <- 'Wheat.Phenology.Stage'
@@ -227,27 +227,46 @@ plot_report(
 
 ## Mortality
 
-Three factors are considered to reduce the population of total stem ($P_{stem}$), i.e.
-1) Plant mortality ($\Delta P$), 2) Drought($\Delta N_{drought}$), 
-3) Shade ($\Delta N_{shade}$). 
-
-During a day, branches are first killed by plant mortality which 
-reduces population through killing all stems in a plant.
-$$
-P_{branch} = P_{branch} - rac{(P_{branch} + P_{ms})}{P_{ms}} \times \Delta P
-$$
-
-Then environmental stresses (drought and shade) only cause mortality of 
-the remaining branches.
-$$
-    P_{branch} = P_{branch} \times [1 - (\Delta N_{drought}+\Delta N_{shade})]
-$$
-The mortalities, caused by drought ($\Delta N_{drought}$)  
-and shade ($\Delta N_{shade}$), are calculated by parameters 
-DroughtInducedBranchMortality and ShadeInducedBranchMortality, respectively.
+Branching mortality starts from the Terminal Spikelet until Flowering which defines as a function of moving mean tiller growth rate (Figure \@ref(fig:mortality-growth-rate). The mean tiller growth rate is calculated as the 5 days moving means of tiller growth rate, which is calculated by the daily biomass supply divides thermal time and total stem population.  <font color="red">Reference required.</font>
 
 
 
+<div class="fig-input">
+```{r mortality-growth-rate, fig.cap='Tiller mortality as a function of moving mean tiller growth rate'}
+xpath <- '//Name[text()="Mortality"]'
+plot_xypair(pmf, xpath, x_lab = 'Moving mean tiller growth rate', y_lab = 'Branch motality')
+```
+</div>
+
+
+
+
+Figure \@ref(fig:tiller-growth-rate-factor) and \@ref(fig:tiller-growth-rate) show the mean tiller growth rate and the three factors to calculate it in the test simulation.
+
+<div class="fig-output">
+```{r tiller-growth-rate, fig.cap='The moving tiller growth rate'}
+y_cols <- c(
+    'Wheat.Structure.MeanTillerGrowthRate')
+x_var <- 'Wheat.Phenology.Stage'
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Moving tiller growth rate')
+
+```
+</div>
+
+
+
+<div class="fig-output">
+```{r tiller-growth-rate-factor, fig.asp=1.25, fig.cap='Three factors to calculate the tiller growth rate'}
+y_cols <- c(
+    'Wheat.Arbitrator.DMSupply',
+    'Wheat.Phenology.ThermalTime',
+    'Wheat.Structure.TotalStemPopn')
+x_var <- 'Wheat.Phenology.Stage'
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Three factors to calculate the tiller growth rate.',
+            panel = TRUE)
+
+```
+</div>
 
 
 
@@ -257,22 +276,17 @@ DroughtInducedBranchMortality and ShadeInducedBranchMortality, respectively.
 y_cols <- c(
     
     'Wheat.Structure.BranchMortality',
-    
     'Wheat.Structure.ProportionBranchMortality', 
             'Wheat.Structure.ProportionPlantMortality')
-
-
 x_var <- 'Wheat.Phenology.Stage'
-
 plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Mortality of branching')
 
 ```
-
 </div>
 
 
 
-As the primary bud number is equal to 1, the plant total node number and total primary node number are the same (Figure \@ref(fif:plant-node-number)). 
+As the primary bud number is equal to 1, the plant total node number and total primary node number are the same (Figure \@ref(fig:plant-node-number)). 
 
 <div class="fig-output">
 ```{r plant-node-number, fig.cap='The fraction of nitrogen supply relative to nitrogen demand'}
