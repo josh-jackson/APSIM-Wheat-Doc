@@ -89,12 +89,12 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="4.1" data-path="phenology.html"><a href="phenology.html#phenology"><i class="fa fa-check"></i><b>4.1</b> Phenology</a></li>
 <li class="chapter" data-level="4.2" data-path="output.html"><a href="output.html#output-structure"><i class="fa fa-check"></i><b>4.2</b> Structure</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="terminology.html"><a href="terminology.html"><i class="fa fa-check"></i><b>5</b> Terminology</a><ul>
-<li class="chapter" data-level="5.1" data-path="terminology.html"><a href="terminology.html#phenology-1"><i class="fa fa-check"></i><b>5.1</b> Phenology</a></li>
-<li class="chapter" data-level="5.2" data-path="structure.html"><a href="structure.html#structure"><i class="fa fa-check"></i><b>5.2</b> Structure</a></li>
-<li class="chapter" data-level="5.3" data-path="terminology.html"><a href="terminology.html#leaf"><i class="fa fa-check"></i><b>5.3</b> Leaf</a></li>
+<li class="chapter" data-level="5" data-path="leaf.html"><a href="leaf.html"><i class="fa fa-check"></i><b>5</b> Leaf</a></li>
+<li class="chapter" data-level="6" data-path="terminology.html"><a href="terminology.html"><i class="fa fa-check"></i><b>6</b> Terminology</a><ul>
+<li class="chapter" data-level="6.1" data-path="terminology.html"><a href="terminology.html#phenology-1"><i class="fa fa-check"></i><b>6.1</b> Phenology</a></li>
+<li class="chapter" data-level="6.2" data-path="structure.html"><a href="structure.html#structure"><i class="fa fa-check"></i><b>6.2</b> Structure</a></li>
+<li class="chapter" data-level="6.3" data-path="leaf.html"><a href="leaf.html#leaf"><i class="fa fa-check"></i><b>6.3</b> Leaf</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="terminology.html"><a href="terminology.html#leaf"><i class="fa fa-check"></i><b>6</b> Leaf</a></li>
 <li class="divider"></li>
 <li><a href="http://www.apsim.info/" target="blank">APSIM</a></li>
 <li><a href="http://github.com/APSIMInitiative/ApsimX" target="blank">Next generation of APSIM</a></li>
@@ -177,7 +177,7 @@ Figure 3.3: Primordia and node number in main stem
 The tiller number is too sensitive to WSC stress (x = [0.1, 0.2]; y = [0, 1]). This feature is disabled in all analysis
 </p>
 </div>
-<p>In <a href="https://github.com/APSIMInitiative/ApsimX">next generation APSIM</a>, tillering for wheat is referred as branching. New tillers are initialised when increase of the node number in main stem (<span class="math inline">\(\Delta N_{node}\)</span>) is more than 1 although the branching rate (<span class="math inline">\(\Delta N_{branch}\)</span>) is calculate everyday (Figure <a href="structure.html#fig:tiller-number">3.5</a>).</p>
+<p>In <a href="https://github.com/APSIMInitiative/ApsimX">next generation APSIM</a>, tillering for wheat is referred as branching. New tillers are initialised when increase of the node number in main stem (<span class="math inline">\(\Delta N_{node}\)</span>) is more than 1 although the branching rate (<span class="math inline">\(\Delta N_{branch}\)</span>) is calculate everyday (Figure <a href="structure.html#fig:tiller-number">3.6</a>).</p>
 <p>The new branch number for each plant is specified by parameter BranchingRate (<span class="math inline">\(\Delta N_{branch}\)</span>), which could be a function of branch number on leaf rank in main stem. <span class="math display">\[
      P_{branch} = P \times \sum_{t=T_{0}}^{T}\Delta N_{branch}
 \]</span></p>
@@ -191,12 +191,20 @@ Figure 3.4: Branching rate of APSIM-Wheat as a function of appreared cohort numb
 </div>
 </div>
 <p>Two stresses are defined in the APSIM-Wheat inclduing nitrogen and WSC. A simple sensitivity analysis indicates the branching rate is too sensitive to WSC with default values (x = [0.1, 0.2]; y = [0, 1]). Consequently this feature is disabled for further analysis.</p>
-<p>Figure <a href="structure.html#fig:tiller-number">3.5</a> shows the branching rate and total branching number in the test simulation</p>
+<div class="fig-input">
+<div class="figure" style="text-align: center"><span id="fig:branching-rate-nstress"></span>
+<img src="APSIM-Wheat_files/figure-html/branching-rate-nstress-1.png" alt="Nitrogen stress on branching rate as a function of nitrogen factor (???)" width="80%" />
+<p class="caption">
+Figure 3.5: Nitrogen stress on branching rate as a function of nitrogen factor (???)
+</p>
+</div>
+</div>
+<p>Figure <a href="structure.html#fig:tiller-number">3.6</a> shows the branching rate and total branching number in the test simulation</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:tiller-number"></span>
 <img src="APSIM-Wheat_files/figure-html/tiller-number-1.png" alt="The branching rate and branch number for wheat" width="80%" />
 <p class="caption">
-Figure 3.5: The branching rate and branch number for wheat
+Figure 3.6: The branching rate and branch number for wheat
 </p>
 </div>
 </div>
@@ -212,7 +220,7 @@ It seems PMF uses the branching rate one day before to calculate the branch numb
 <div class="figure" style="text-align: center"><span id="fig:tiller-number-mo"></span>
 <img src="APSIM-Wheat_files/figure-html/tiller-number-mo-1.png" alt="The mortality of tillers" width="80%" />
 <p class="caption">
-Figure 3.6: The mortality of tillers
+Figure 3.7: The mortality of tillers
 </p>
 </div>
 </div>
