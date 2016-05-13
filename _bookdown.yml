@@ -1,4 +1,4 @@
 book_filename: "APSIM-Wheat"
 chapter_name: "Chapter "
-rmd_files: ["index.Rmd", "phenology.Rmd", "structure.Rmd", "output.Rmd", "terminology.Rmd"]
+rmd_files: ["index.Rmd", "phenology.Rmd", "structure.Rmd", "output.Rmd", "terminology.Rmd", "leaf.Rmd"]
 
