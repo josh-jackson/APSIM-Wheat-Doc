@@ -165,6 +165,7 @@ plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Branch number or branch
 </div>
 
 
+The 
 
 <div class="fig-output">
 ```{r nitrogen-fn, fig.cap='The fraction of nitrogen supply relative to nitrogen demand'}
