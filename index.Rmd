@@ -46,7 +46,6 @@ The main contents include
 - Detail description of science parts of APSIM-Wheat model
 - Figures of default parameters
 - Figures of general outputs
-- Simple sensitivity analysis
 
 
 ## Authors
@@ -55,6 +54,6 @@ The main contents include
 
 ## How to contribute?
 
-This documentation is wrote by [RMarkdown](rmarkdown.rstudio.com). I suggest you firstly to read the introduction about [RMarkdown](rmarkdown.rstudio.com), then fork this repository into your github account. Feel free to submit a pull request. 
+This documentation is wrote by [RMarkdown](rmarkdown.rstudio.com) and [bookdown](bookdown.org). I suggest you firstly to read the introduction about [RMarkdown](rmarkdown.rstudio.com) and [bookdown](bookdown.org), then fork this repository into your github account. Feel free to submit a pull request. 
 
 
