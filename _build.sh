@@ -5,7 +5,7 @@ git clone --branch=gh-pages \
   https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git \
   book-output
 cd book-output
-git pull origin master
+git pull --no-edit origin master
 Rscript generate-gh-pages.R
 git add *
 git commit -m "Update the book"
