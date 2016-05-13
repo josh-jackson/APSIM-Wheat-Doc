@@ -230,15 +230,16 @@ Figure 4.7: The fraction of nitrogen supply relative to nitrogen demand
     P=P_{0} - \sum_{t=T_{0}}^{T}(\Delta P)
 \]</span></p>
 <p>where, <span class="math inline">\(P_{0}\)</span> is the sown population, which initialised at sowing.</p>
-<p>Population of main stem number (<span class="math inline">\(P_{ms}\)</span>) is calculated according to plant population (<span class="math inline">\(P\)</span>) and primary bud number (<span class="math inline">\(N_{bud}\)</span>) with default value 1. The unit of <span class="math inline">\(P_{ms}\)</span> is per square meter. <span class="math display">\[
+<p>Population of main stem (<span class="math inline">\(P_{ms}\)</span>) is calculated according to plant population (<span class="math inline">\(P\)</span>) and primary bud number (<span class="math inline">\(N_{bud}\)</span>) with default value 1. The unit of <span class="math inline">\(P_{ms}\)</span> is per square meter. <span class="math display">\[
     P_{ms}=P \times N_{bud}
 \]</span></p>
 <p>Population of total stem (<span class="math inline">\(P_{stem}\)</span>) is summed up population of main stem (<span class="math inline">\(P_{ms}\)</span>) and branches ((<span class="math inline">\(P_{branch}\)</span>)). <span class="math display">\[
     P_{stem} = P_{ms} + P_{branch}
 \]</span></p>
+<p>In the test simulation, the plant density (<span class="math inline">\(P\)</span>) is 150 plants m<sup>2</sup>, so population of main stem (<span class="math inline">\(P_{ms}\)</span>) equals to plant density (Figure <a href="cha-structure.html#fig:plant-population">4.8</a>). From Emergence to terminal spikelet, the population of total stem (<span class="math inline">\(P_{stem}\)</span>) multiply by stem number and plant density (Figure <a href="cha-structure.html#fig:tiller-number">4.6</a>).</p>
 <div class="fig-output">
-<div class="figure" style="text-align: center"><span id="fig:plant-popultion"></span>
-<img src="APSIM-Wheat_files/figure-html/plant-popultion-1.png" alt="The total population of main stem and all stems" width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:plant-population"></span>
+<img src="APSIM-Wheat_files/figure-html/plant-population-1.png" alt="The total population of main stem and all stems" width="80%" />
 <p class="caption">
 Figure 4.8: The total population of main stem and all stems
 </p>
@@ -247,28 +248,46 @@ Figure 4.8: The total population of main stem and all stems
 </div>
 <div id="mortality" class="section level2">
 <h2><span class="header-section-number">4.4</span> Mortality</h2>
-<p>Three factors are considered to reduce the population of total stem (<span class="math inline">\(P_{stem}\)</span>), i.e. 1) Plant mortality (<span class="math inline">\(\Delta P\)</span>), 2) Drought(<span class="math inline">\(\Delta N_{drought}\)</span>), 3) Shade (<span class="math inline">\(\Delta N_{shade}\)</span>).</p>
-<p>During a day, branches are first killed by plant mortality which reduces population through killing all stems in a plant. <span class="math display">\[
-P_{branch} = P_{branch} - rac{(P_{branch} + P_{ms})}{P_{ms}} \times \Delta P
-\]</span></p>
-<p>Then environmental stresses (drought and shade) only cause mortality of the remaining branches. <span class="math display">\[
-    P_{branch} = P_{branch} \times [1 - (\Delta N_{drought}+\Delta N_{shade})]
-\]</span> The mortalities, caused by drought (<span class="math inline">\(\Delta N_{drought}\)</span>)<br />
-and shade (<span class="math inline">\(\Delta N_{shade}\)</span>), are calculated by parameters DroughtInducedBranchMortality and ShadeInducedBranchMortality, respectively.</p>
+<p>Branching mortality starts from the Terminal Spikelet until Flowering which defines as a function of moving mean tiller growth rate (Figure <a href="cha-structure.html#fig:mortality-growth-rate">4.9</a>. The mean tiller growth rate is calculated as the 5 days moving means of tiller growth rate, which is calculated by the daily biomass supply divides thermal time and total stem population. <font color="red">Reference required.</font></p>
+<div class="fig-input">
+<div class="figure" style="text-align: center"><span id="fig:mortality-growth-rate"></span>
+<img src="APSIM-Wheat_files/figure-html/mortality-growth-rate-1.png" alt="Tiller mortality as a function of moving mean tiller growth rate" width="80%" />
+<p class="caption">
+Figure 4.9: Tiller mortality as a function of moving mean tiller growth rate
+</p>
+</div>
+</div>
+<p>Figure <a href="cha-structure.html#fig:tiller-growth-rate-factor">4.11</a> and <a href="cha-structure.html#fig:tiller-growth-rate">4.10</a> show the mean tiller growth rate and the three factors to calculate it in the test simulation.</p>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:tiller-growth-rate"></span>
+<img src="APSIM-Wheat_files/figure-html/tiller-growth-rate-1.png" alt="The moving tiller growth rate" width="80%" />
+<p class="caption">
+Figure 4.10: The moving tiller growth rate
+</p>
+</div>
+</div>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:tiller-growth-rate-factor"></span>
+<img src="APSIM-Wheat_files/figure-html/tiller-growth-rate-factor-1.png" alt="Three factors to calculate the tiller growth rate" width="80%" />
+<p class="caption">
+Figure 4.11: Three factors to calculate the tiller growth rate
+</p>
+</div>
+</div>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:tiller-number-mo"></span>
 <img src="APSIM-Wheat_files/figure-html/tiller-number-mo-1.png" alt="The mortality of tillers" width="80%" />
 <p class="caption">
-Figure 4.9: The mortality of tillers
+Figure 4.12: The mortality of tillers
 </p>
 </div>
 </div>
-<p>As the primary bud number is equal to 1, the plant total node number and total primary node number are the same (Figure <a href="#fif:plant-node-number"><strong>??</strong></a>).</p>
+<p>As the primary bud number is equal to 1, the plant total node number and total primary node number are the same (Figure <a href="cha-structure.html#fig:plant-node-number">4.13</a>).</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:plant-node-number"></span>
 <img src="APSIM-Wheat_files/figure-html/plant-node-number-1.png" alt="The fraction of nitrogen supply relative to nitrogen demand" width="80%" />
 <p class="caption">
-Figure 4.10: The fraction of nitrogen supply relative to nitrogen demand
+Figure 4.13: The fraction of nitrogen supply relative to nitrogen demand
 </p>
 </div>
 </div>
