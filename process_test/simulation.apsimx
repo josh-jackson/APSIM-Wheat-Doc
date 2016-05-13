@@ -2662,6 +2662,7 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Structure.BranchMortality.Value as Wheat.Structure.BranchMortality</string>
             <string>Wheat.Structure.PrimaryBudNo</string>
             <string>Wheat.Structure.PrimaryBudTotalNodeNo</string>
+            <string>Wheat.Arbitrator.FN</string>
           </VariableNames>
           <EventNames>
             <string>[Clock].DoReport</string>
