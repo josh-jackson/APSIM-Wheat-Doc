@@ -134,6 +134,11 @@ plot_xypair(pmf, xpath, x_lab = 'Number of appeared cohorts', y_lab = 'Branching
 ```
 </div>
 
+
+Two stresses are defined in the APSIM-Wheat inclduing nitrogen and WSC. A simple sensitivity analysis indicates the branching rate is too sensitive to WSC with default values (x = [0.1, 0.2]; y = [0, 1]). Consequently this feature is disabled for further analysis. 
+
+
+
 Figure \@ref(fig:tiller-number) shows the branching rate and total branching number in the test simulation
 
 <div class="fig-output">
@@ -152,7 +157,7 @@ plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Branch number or branch
 It seems PMF uses the branching rate one day before to calculate the branch number.
 </p></div>
 
-
+## Mortality
 
 <div class="fig-output">
 ```{r tiller-number-mo, fig.cap='The mortality of tillers'}
