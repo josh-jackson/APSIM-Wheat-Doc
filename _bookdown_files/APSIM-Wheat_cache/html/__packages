@@ -1,0 +1,8 @@
+base
+bookdown
+knitr
+readr
+dplyr
+ggplot2
+tidyr
+xml2

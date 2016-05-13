@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Documentation of APSIM-Wheat</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Documentation of APSIM-Wheat">
+  <meta name="generator" content="bookdown 0.0.71 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Documentation of APSIM-Wheat" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Documentation of APSIM-Wheat" />
+  <meta name="github-repo" content="byzheng/APSIM-Wheat" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Documentation of APSIM-Wheat" />
+  
+  <meta name="twitter:description" content="Documentation of APSIM-Wheat" />
+  
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="output.html">
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Documentation of ASPIM-Wheat</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#authors"><i class="fa fa-check"></i><b>1.1</b> Authors</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-to-contribute"><i class="fa fa-check"></i><b>1.2</b> How to contribute?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="phenology.html"><a href="phenology.html"><i class="fa fa-check"></i><b>2</b> Phenology</a><ul>
+<li class="chapter" data-level="2.1" data-path="phenology.html"><a href="phenology.html#thermal-time"><i class="fa fa-check"></i><b>2.1</b> Thermal time</a></li>
+<li class="chapter" data-level="2.2" data-path="phenology.html"><a href="phenology.html#stage-period"><i class="fa fa-check"></i><b>2.2</b> Stages and periods</a></li>
+<li class="chapter" data-level="2.3" data-path="phenology.html"><a href="phenology.html#plastochron-phyllochron"><i class="fa fa-check"></i><b>2.3</b> Plastochron and phyllochron</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Structure</a><ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#promordia-and-node-number"><i class="fa fa-check"></i><b>3.1</b> Promordia and node number</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#tillering"><i class="fa fa-check"></i><b>3.2</b> Tillering</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#population"><i class="fa fa-check"></i><b>3.3</b> Population</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="output.html"><a href="output.html"><i class="fa fa-check"></i><b>4</b> Output</a><ul>
+<li class="chapter" data-level="4.1" data-path="phenology.html"><a href="phenology.html#phenology"><i class="fa fa-check"></i><b>4.1</b> Phenology</a></li>
+<li class="chapter" data-level="4.2" data-path="output.html"><a href="output.html#output-structure"><i class="fa fa-check"></i><b>4.2</b> Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="terminology.html"><a href="terminology.html"><i class="fa fa-check"></i><b>5</b> Terminology</a><ul>
+<li class="chapter" data-level="5.1" data-path="terminology.html"><a href="terminology.html#phenology-1"><i class="fa fa-check"></i><b>5.1</b> Phenology</a></li>
+<li class="chapter" data-level="5.2" data-path="structure.html"><a href="structure.html#structure"><i class="fa fa-check"></i><b>5.2</b> Structure</a></li>
+<li class="chapter" data-level="5.3" data-path="terminology.html"><a href="terminology.html#leaf"><i class="fa fa-check"></i><b>5.3</b> Leaf</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="http://www.apsim.info/" target="blank">APSIM</a></li>
+<li><a href="http://github.com/APSIMInitiative/ApsimX" target="blank">Next generation of APSIM</a></li>
+<li><a href="http://byzheng.github.io/ApsimX/Documentation/html/index.html" target="blank">Developer documentation</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documentation of APSIM-Wheat</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="terminology" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Terminology</h1>
+<div id="phenology-1" class="section level2">
+<h2><span class="header-section-number">5.1</span> Phenology</h2>
+<ul>
+<li><strong>Plastochron</strong> The plastochron is commonly used as the thermal time between the appearance of successive leaf primordia on a shoot.</li>
+<li><strong>Phyllochron</strong> The phyllochron is the thermal time it takes for successive leaves on a shoot to reach the same developmental stage.</li>
+</ul>
+</div>
+<div id="structure" class="section level2">
+<h2><span class="header-section-number">5.2</span> Structure</h2>
+<ul>
+<li><strong>Node (Phytomer)</strong> A phytomer unit is defined as consisting of a leaf, and the associated axillary bud, node and internode.</li>
+<li><strong>Main stem</strong> The first culm that emerges from the seeds is the main stem.</li>
+<li><strong>Branch (Tiller)</strong> All remaining culms that emerges from main stem or other branches (tillers), are referred as branches or tillers.</li>
+</ul>
+</div>
+<div id="leaf" class="section level2">
+<h2><span class="header-section-number">5.3</span> Leaf</h2>
+
+<div id="refs" class="references">
+<div>
+<p>Jamieson, P. D., M. A. Semenov, I. R. Brooking, and G. S. Francis. 1998. “Sirius: A Mechanistic Model of Wheat Response to Environmental Variation.” <em>European Journal of Agronomy</em> 8 (3): 161–79. doi:<a href="https://doi.org/16/S1161-0301(98)00020-3">16/S1161-0301(98)00020-3</a>.</p>
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="output.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/byzheng/APSIM-Wheat/edit/master/terminology.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

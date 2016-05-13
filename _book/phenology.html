@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Documentation of APSIM-Wheat</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Documentation of APSIM-Wheat">
+  <meta name="generator" content="bookdown 0.0.71 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Documentation of APSIM-Wheat" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Documentation of APSIM-Wheat" />
+  <meta name="github-repo" content="byzheng/APSIM-Wheat" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Documentation of APSIM-Wheat" />
+  
+  <meta name="twitter:description" content="Documentation of APSIM-Wheat" />
+  
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="structure.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Documentation of ASPIM-Wheat</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#authors"><i class="fa fa-check"></i><b>1.1</b> Authors</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-to-contribute"><i class="fa fa-check"></i><b>1.2</b> How to contribute?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="phenology.html"><a href="phenology.html"><i class="fa fa-check"></i><b>2</b> Phenology</a><ul>
+<li class="chapter" data-level="2.1" data-path="phenology.html"><a href="phenology.html#thermal-time"><i class="fa fa-check"></i><b>2.1</b> Thermal time</a></li>
+<li class="chapter" data-level="2.2" data-path="phenology.html"><a href="phenology.html#stage-period"><i class="fa fa-check"></i><b>2.2</b> Stages and periods</a></li>
+<li class="chapter" data-level="2.3" data-path="phenology.html"><a href="phenology.html#plastochron-phyllochron"><i class="fa fa-check"></i><b>2.3</b> Plastochron and phyllochron</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="structure.html"><a href="structure.html"><i class="fa fa-check"></i><b>3</b> Structure</a><ul>
+<li class="chapter" data-level="3.1" data-path="structure.html"><a href="structure.html#promordia-and-node-number"><i class="fa fa-check"></i><b>3.1</b> Promordia and node number</a></li>
+<li class="chapter" data-level="3.2" data-path="structure.html"><a href="structure.html#tillering"><i class="fa fa-check"></i><b>3.2</b> Tillering</a></li>
+<li class="chapter" data-level="3.3" data-path="structure.html"><a href="structure.html#population"><i class="fa fa-check"></i><b>3.3</b> Population</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="output.html"><a href="output.html"><i class="fa fa-check"></i><b>4</b> Output</a><ul>
+<li class="chapter" data-level="4.1" data-path="phenology.html"><a href="phenology.html#phenology"><i class="fa fa-check"></i><b>4.1</b> Phenology</a></li>
+<li class="chapter" data-level="4.2" data-path="output.html"><a href="output.html#output-structure"><i class="fa fa-check"></i><b>4.2</b> Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="terminology.html"><a href="terminology.html"><i class="fa fa-check"></i><b>5</b> Terminology</a><ul>
+<li class="chapter" data-level="5.1" data-path="terminology.html"><a href="terminology.html#phenology-1"><i class="fa fa-check"></i><b>5.1</b> Phenology</a></li>
+<li class="chapter" data-level="5.2" data-path="structure.html"><a href="structure.html#structure"><i class="fa fa-check"></i><b>5.2</b> Structure</a></li>
+<li class="chapter" data-level="5.3" data-path="terminology.html"><a href="terminology.html#leaf"><i class="fa fa-check"></i><b>5.3</b> Leaf</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="http://www.apsim.info/" target="blank">APSIM</a></li>
+<li><a href="http://github.com/APSIMInitiative/ApsimX" target="blank">Next generation of APSIM</a></li>
+<li><a href="http://byzheng.github.io/ApsimX/Documentation/html/index.html" target="blank">Developer documentation</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documentation of APSIM-Wheat</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="phenology" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Phenology</h1>
+<div id="thermal-time" class="section level2">
+<h2><span class="header-section-number">2.1</span> Thermal time</h2>
+<p>The daily thermal time is calculated using daily records of maximum and minimum temperature. Before the terminal spikelet stage, the soil temperature is estimated using soil model in APSIM and used to calcualte the thermal time. After terminal spikelet stage, the air temperature is directly used.</p>
+</div>
+<div id="stage-period" class="section level2">
+<h2><span class="header-section-number">2.2</span> Stages and periods</h2>
+<p>The growth cycle of wheat is started from sowing and finished at harvest ripe.The whole cycle is separated into 10 stages and 10 phases. Wheat jumps into next stage or phase when certian conditions are statisfied (earliness “per se”, vernalization and photoperiod).</p>
+<table style="width:106%;">
+<colgroup>
+<col width="8%" />
+<col width="36%" />
+<col width="61%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Stage</th>
+<th align="left">Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Sowing</td>
+<td align="left">Sow seeds into field</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Germination</td>
+<td align="left">Germination begins when the seed imbibes water from the soil and reaches 35 to 45 percent moisture on a dry weight basis</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Emergence</td>
+<td align="left">The coleoptile extends to the soil surface</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">TerminalSpikelet</td>
+<td align="left">The terminal spikelet initial is formed</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">FlagLeaf</td>
+<td align="left">The appearance of flag leaf tip or ligule (??)</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Flowering</td>
+<td align="left">The 50% plants are flowering in the field</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">StartGrainFill</td>
+<td align="left">Grain filling follows anthesis and refers to the period during which the kernel matures or ripens</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">EndGrainFill</td>
+<td align="left">Grain filling follows anthesis and refers to the period during which the kernel matures or ripens</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">Maturity</td>
+<td align="left">Grain dry weight reaches its maximum which is correlated to the absence of green color in the chaff or kernels</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">HarvestRipe</td>
+<td align="left">Wheat is ready for harvest</td>
+</tr>
+</tbody>
+</table>
+<p>Each phase has a targer thermal time (earliness <em>per se</em>) and several impact factors to extend the growing period including vernalization, photoperiod, water, nitrogen stresses.</p>
+<table style="width:158%;">
+<colgroup>
+<col width="36%" />
+<col width="25%" />
+<col width="19%" />
+<col width="16%" />
+<col width="61%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Earliness per se</th>
+<th align="left">Vernalization</th>
+<th align="left">Photoperiod</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Germinating</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Depending on soil water in top layer</td>
+</tr>
+<tr class="even">
+<td align="left">Emerging</td>
+<td align="left"><span class="math inline">\(Lag + Rate*depth\)</span></td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">Depending on the sowing depth</td>
+</tr>
+<tr class="odd">
+<td align="left">Vegetative</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">StemElongation</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">EarlyReproductive</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">GrainDevelopment</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">GrainFilling</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Maturing</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">Ripening</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">ReadyForHarvesting</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="plastochron-phyllochron" class="section level2">
+<h2><span class="header-section-number">2.3</span> Plastochron and phyllochron</h2>
+<p>A plastochron is defined as the time interval between two successive recurring events during the growth of plant shoots, such as leaf initiation. The phyllochron is the intervening period between the sequential emergence of leaves on the main stem of a plant.</p>
+<p>Based on <span class="citation">(Jamieson et al. <a href="#ref-jamieson_sirius_1998">1998</a>)</span>, leaf appearace could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves &lt; 2 and 130% of base phyllochron for leaves &gt; 7. The base phyllochron set as 100 <sup>o</sup>Cd.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-jamieson_sirius_1998">
+<p>Jamieson, P. D., M. A. Semenov, I. R. Brooking, and G. S. Francis. 1998. “Sirius: A Mechanistic Model of Wheat Response to Environmental Variation.” <em>European Journal of Agronomy</em> 8 (3): 161–79. doi:<a href="https://doi.org/16/S1161-0301(98)00020-3">16/S1161-0301(98)00020-3</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="structure.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/byzheng/APSIM-Wheat/edit/master/phenology.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
