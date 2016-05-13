@@ -5,7 +5,8 @@
 
 
 
-plot_report <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value') {
+plot_report <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value',
+                        panel = FALSE) {
     library(ggplot2)
     x_var_name <- gsub('.*\\.(.*)', '\\1', x_var)
     x_var_n <- list()
@@ -21,10 +22,18 @@ plot_report <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value') {
 #         add_legend("stroke", title = "") %>%
 #         add_tooltip(function(df) paste0('Stage: ', df[[x_var_name]], '\nValue: ', df$Value))
 #
-    p <- ggplot(pd, aes_string(x_var_name, 'Value', colour = 'Trait')) +
-        geom_line() +
-        geom_point() +
-        theme_bw() +
+    p <- ggplot(pd)
+    if (panel) {
+        p <- p +
+            geom_line(aes_string(x_var_name, 'Value')) +
+            geom_point(aes_string(x_var_name, 'Value')) +
+            facet_wrap(~Trait, scales = 'free_y', ncol = 1)
+    } else {
+        p <- p +
+            geom_line(aes_string(x_var_name, 'Value', colour = 'Trait')) +
+            geom_point(aes_string(x_var_name, 'Value', colour = 'Trait'))
+    }
+    p <- p + theme_bw() +
         theme(legend.position = 'bottom') +
         xlab(x_lab) + ylab(y_lab) +
         guides(colour = guide_legend(title = '', ncol = 1))
