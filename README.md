@@ -1,6 +1,6 @@
 # Documentation of APSIM-Wheat
 
-See the compiled documentation from here: byzheng.github.io/APSIM-Wheat-Doc/
+See the compiled documentation from [gh-pages](http://byzheng.github.io/APSIM-Wheat-Doc).
 
 
 
