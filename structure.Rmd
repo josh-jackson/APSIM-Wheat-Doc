@@ -172,6 +172,7 @@ plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Mortality of branching'
 
 </div>
 
+## Population
 
 Plant population ($P$) is initialised at sowing from Sow event, and 
 daily reduced by the plant mortality ($\Delta P$).
