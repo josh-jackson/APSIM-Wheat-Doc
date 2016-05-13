@@ -286,15 +286,15 @@ plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Mortality of branching'
 
 
 
-As the primary bud number is equal to 1, the plant total node number and total primary node number are the same (Figure \@ref(fig:plant-node-number)). 
+As the primary bud number is equal to 1, the plant total node number and total primary node number are the same (Figure \@ref(fig:plant-node-number)). Figure \@ref(fig:plant-nod-number) show the total node number as the results of tiller appearing and mortality.
 
 <div class="fig-output">
-```{r plant-node-number, fig.cap='The fraction of nitrogen supply relative to nitrogen demand'}
+```{r plant-node-number, fig.cap='Total plant node number'}
 y_cols <- c('Wheat.Structure.PlantTotalNodeNo', 'Wheat.Structure.PrimaryBudTotalNodeNo')
 x_var <- 'Wheat.Phenology.Stage'
 
 plot_report(df,
-            x_var, y_cols, x_lab = 'Stage', y_lab = 'Ratio of nitrogen supply and demand')
+            x_var, y_cols, x_lab = 'Stage', y_lab = 'Total plant node number')
 
 ```
 </div>
