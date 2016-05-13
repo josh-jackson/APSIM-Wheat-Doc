@@ -1,17 +1,17 @@
-# Terminology
+# Terminology {#cha-terminology}
 
 
-## Phenology
+## Phenology {#output-phenology}
 
 - **Plastochron** The plastochron is commonly used as the thermal time between the appearance of  successive leaf primordia on a shoot.
 - **Phyllochron** The phyllochron is the thermal time it takes for successive leaves on a shoot to reach the same developmental stage.
 
-## Structure
+## Structure {#output-structure}
 
 - **Node (Phytomer)** A phytomer unit is defined as consisting of a leaf, and the associated axillary bud, node and internode.
 - **Main stem** The first culm that emerges from the seeds is the main stem.
 - **Branch (Tiller)** All remaining culms that emerges from main stem or other branches (tillers), are referred as branches or tillers.
 
 
-## Leaf
+## Leaf {#output-leaf}
 
