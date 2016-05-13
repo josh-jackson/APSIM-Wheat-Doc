@@ -165,6 +165,13 @@ plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Branch number or branch
 </div>
 
 
+
+<div class="alert alert-danger"><p>
+It seems PMF uses the branching rate one day before to calculate the branch number.
+</p></div>
+
+
+
 <div class="fig-output">
 ```{r nitrogen-fn, fig.cap='The fraction of nitrogen supply relative to nitrogen demand'}
 y_cols <- c('Wheat.Arbitrator.FN')
@@ -180,51 +187,45 @@ p + geom_hline(yintercept = 1.5)
 
 
 
-<div class="alert alert-danger"><p>
-It seems PMF uses the branching rate one day before to calculate the branch number.
-</p></div>
-
-## Mortality
-
-<div class="fig-output">
-```{r tiller-number-mo, fig.cap='The mortality of tillers'}
-y_cols <- c(
-    
-    'Wheat.Structure.BranchMortality',
-    
-    'Wheat.Structure.ProportionBranchMortality', 
-            'Wheat.Structure.ProportionPlantMortality')
-
-
-x_var <- 'Wheat.Phenology.Stage'
-
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Mortality of branching')
-
-```
-
-</div>
 
 ## Population
 
-Plant population ($P$) is initialised at sowing from Sow event, and 
-daily reduced by the plant mortality ($\Delta P$).
+Plant population ($P$) is initialised at sowing from Sow event, and daily reduced by the plant mortality ($\Delta P$).
 $$
     P=P_{0} - \sum_{t=T_{0}}^{T}(\Delta P)
 $$
+
 where, $P_{0}$ is the sown population, which initialised at sowing.
 
-Population of main stem number ($P_{ms}$) is calculated  
-according to plant population ($P$) and primary bud number ($N_{bud}$) 
-with default value 1. The unit of $P_{ms}$ is per square meter.
+Population of main stem number ($P_{ms}$) is calculated according to plant population ($P$) and primary bud number ($N_{bud}$) with default value 1. The unit of $P_{ms}$ is per square meter.
 $$
     P_{ms}=P \times N_{bud}
 $$
 
-Population of total stem ($P_{stem}$) is summed up 
-population of main stem ($P_{ms}$) and branches (($P_{branch}$)).
+Population of total stem ($P_{stem}$) is summed up population of main stem ($P_{ms}$) and branches (($P_{branch}$)).
 $$
     P_{stem} = P_{ms} + P_{branch}
 $$
+
+
+
+<div class="fig-output">
+```{r plant-popultion, fig.cap='The total population of main stem and all stems'}
+y_cols <- c('Wheat.Structure.MainStemPopn',
+            'Wheat.Structure.TotalStemPopn')
+x_var <- 'Wheat.Phenology.Stage'
+
+plot_report(
+    df %>% filter(Wheat.Phenology.Stage < 10),
+            x_var, y_cols, x_lab = 'Stage', y_lab = 'Total population of main stem and all stems')
+
+```
+</div>
+
+
+
+
+## Mortality
 
 Three factors are considered to reduce the population of total stem ($P_{stem}$), i.e.
 1) Plant mortality ($\Delta P$), 2) Drought($\Delta N_{drought}$), 
@@ -248,6 +249,41 @@ DroughtInducedBranchMortality and ShadeInducedBranchMortality, respectively.
 
 
 
+
+
+
+<div class="fig-output">
+```{r tiller-number-mo, fig.cap='The mortality of tillers'}
+y_cols <- c(
+    
+    'Wheat.Structure.BranchMortality',
+    
+    'Wheat.Structure.ProportionBranchMortality', 
+            'Wheat.Structure.ProportionPlantMortality')
+
+
+x_var <- 'Wheat.Phenology.Stage'
+
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Mortality of branching')
+
+```
+
+</div>
+
+
+
+As the primary bud number is equal to 1, the plant total node number and total primary node number are the same (Figure \@ref(fif:plant-node-number)). 
+
+<div class="fig-output">
+```{r plant-node-number, fig.cap='The fraction of nitrogen supply relative to nitrogen demand'}
+y_cols <- c('Wheat.Structure.PlantTotalNodeNo', 'Wheat.Structure.PrimaryBudTotalNodeNo')
+x_var <- 'Wheat.Phenology.Stage'
+
+plot_report(df,
+            x_var, y_cols, x_lab = 'Stage', y_lab = 'Ratio of nitrogen supply and demand')
+
+```
+</div>
 
 
 
