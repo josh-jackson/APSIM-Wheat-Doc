@@ -14,6 +14,9 @@ description: "Documentation of APSIM-Wheat"
 
 # Introduction
 
+```{block, type = 'rmdimportant', echo=TRUE}
+This documentation is based on the current version of [APSIM-Wheat module](https://github.com/APSIMInitiative/ApsimX/blob/5937006840bcfcd663353378653598176262fe0a/Prototypes/Wheat/WheatValidation.apsimx) updated on 15-May-2016.
+```
 
 
 ```{block, type='rmdnote', echo=TRUE}
@@ -34,10 +37,18 @@ library(ggplot2)
 library(tidyr)
 library(xml2)
 library(DiagrammeR)
-source('utility.R')
+source('_utility.R')
+report <- read_csv('process_test/simulation.db.Report.csv')
+
+df <- report %>% 
+    filter(grepl('15TraitMod', Name),
+           Management == 'IHN',
+           Cultivar == 'hartog')
 
 pmf <- read_xml('wheat.xml')
 ```
+
+
 
 
 

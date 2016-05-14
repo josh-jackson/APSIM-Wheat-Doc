@@ -2,20 +2,31 @@
 
 
 
-```{r read_data}
-library(readr)
-library(dplyr)
-library(tidyr)
-library(xml2)
-source('utility.R')
-report <- read_csv('process_test/simulation.db.Report.csv')
-
-df <- report %>% 
-    filter(grepl('15TraitMod', Name),
-           Management == 'IHN',
-           Cultivar == 'hartog')
-
+```{r structure_setup, message=FALSE, echo=FALSE, warning=FALSE}
+# library(knitr)
+# opts_chunk$set(
+#     cache = TRUE, echo = FALSE, 
+#     out.width = '80%', fig.asp = .75,
+#     warning = FALSE, fig.align = 'center',
+#     message = FALSE) 
+# library(readr)
+# library(dplyr)
+# library(ggplot2)
+# library(tidyr)
+# library(xml2)
+# library(DiagrammeR)
+# source('utility.R')
+# report <- read_csv('process_test/simulation.db.Report.csv')
+# 
+# df <- report %>% 
+#     filter(grepl('15TraitMod', Name),
+#            Management == 'IHN',
+#            Cultivar == 'hartog')
+# 
+# pmf <- read_xml('wheat.xml')
 ```
+
+
 
 
 The Structure model predicts the development and mortality of phytomer and branch (tiller) according to plastochron and phyllochron. 

@@ -2,14 +2,15 @@
 [![Build Status](https://travis-ci.org/byzheng/APSIM-Wheat-Doc.svg?branch=master)](https://travis-ci.org/byzheng/APSIM-Wheat-Doc)
 
 
-
 # Documentation of APSIM-Wheat
 
-See the compiled documentation from [gh-pages](http://byzheng.github.io/APSIM-Wheat-Doc).
+This is a developing documentation for Wheat model in [next generation of APSIM](https://github.com/APSIMInitiative/ApsimX).
+
+- This documentation is based on the current version of [APSIM-Wheat module](https://github.com/APSIMInitiative/ApsimX/blob/5937006840bcfcd663353378653598176262fe0a/Prototypes/Wheat/WheatValidation.apsimx) updated on 15-May-2016.
+
+- See the compiled documentation from [gh-pages](http://byzheng.github.io/APSIM-Wheat-Doc).
 
 
-
-This is a developing documentation for Wheat model in [next generation of APSIM](https://github.com/APSIMInitiative/ApsimX). See the compiled documentation from here: byzheng.github.io/APSIM-Wheat-Doc/
 
 ## How to contribute?
 

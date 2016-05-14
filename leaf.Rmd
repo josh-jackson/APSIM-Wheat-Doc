@@ -1,6 +1,31 @@
 # Leaf {#cha:leaf}
 
 
+```{r setup_leaf, message=FALSE, echo=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(
+    cache = TRUE, echo = FALSE, 
+    out.width = '80%', fig.asp = .75,
+    warning = FALSE, fig.align = 'center',
+    message = FALSE) 
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(xml2)
+library(DiagrammeR)
+source('_utility.R')
+report <- read_csv('process_test/simulation.db.Report.csv')
+
+df <- report %>% 
+    filter(grepl('15TraitMod', Name),
+           Management == 'IHN',
+           Cultivar == 'hartog')
+
+pmf <- read_xml('wheat.xml')
+```
+
+
 
 Leaf cohort model is used in the ...
 
@@ -33,3 +58,20 @@ DiagrammeR("sequenceDiagram;
 ## leaf age
 
 The age of leaf...
+
+
+<div class="fig-output">
+```{r leaf-age, fig.cap='Age of leaf cohort as a function of stage or accumulated thermal time', fig.subcap=c('A', 'B')}
+y_cols <- c(
+    'Wheat.Leaf.CohortAge')
+x_var <- 'Wheat.Phenology.Stage'
+plot_report_vector(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Age of leaf cohort')
+
+x_var <- 'Wheat.Phenology.AccumulateThermalTime'
+plot_report_vector(df, x_var, y_cols, x_lab = 'Accumulated thermal time', y_lab = 'Age of leaf cohort')
+
+```
+</div>
+
+
+
