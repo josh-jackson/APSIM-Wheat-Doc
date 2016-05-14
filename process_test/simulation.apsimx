@@ -2806,6 +2806,7 @@ The EarLive composite biomass object includes the Live pools of all organs withi
           <VariableNames>
             <string>[Clock].Today</string>
             <string>Wheat.Phenology.DaysAfterSowing</string>
+            <string>Wheat.Phenology.ThermalTime.Value as Wheat.Phenology.ThermalTime</string>
             <string>Wheat.Phenology.AccumulateThermalTime.Value as Wheat.Phenology.AccumulateThermalTime</string>
             <string>Wheat.Phenology.CurrentPhaseName</string>
             <string>Wheat.Phenology.CurrentStageName</string>
