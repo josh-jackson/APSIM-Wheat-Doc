@@ -6,7 +6,7 @@ git clone --branch=gh-pages \
   book-output
 cd book-output
 git pull --no-edit origin master
-Rscript generate-gh-pages.R
+Rscript _generate-gh-pages.R
 git add *
 git commit -m "Update the book"
 git push
