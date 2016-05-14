@@ -1,10 +1,12 @@
 # Structure {#cha-structure}
 
 
+
 ```{r read_data}
 library(readr)
 library(dplyr)
 library(tidyr)
+library(xml2)
 source('utility.R')
 report <- read_csv('process_test/simulation.db.Report.csv')
 
@@ -61,9 +63,9 @@ where, $\Delta TT_{t}$ is the daily thermal time, which calculates from paramete
 
 
 
-<div class="alert alert-danger"><p>
+```{block, type='rmdimportant', echo=TRUE}
 The daily delta primodia number is not a output variable.
-</p></div>
+```
 
 
 
@@ -106,10 +108,9 @@ plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Primordia or node numbe
 
 ## Tillering
 
-<div class="alert alert-danger"><p>
+```{block, type='rmdimportant', echo=TRUE}
 The tiller number is too sensitive to WSC stress (x = [0.1, 0.2]; y = [0, 1]). This feature is disabled in all analysis
-</p></div>
-
+```
 
 
 In [next generation APSIM](https://github.com/APSIMInitiative/ApsimX), tillering for wheat is referred as branching. New tillers are initialised when increase of the node number in 
@@ -165,11 +166,9 @@ plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Branch number or branch
 </div>
 
 
-
-<div class="alert alert-danger"><p>
+```{block, type='rmdimportant', echo=TRUE}
 It seems PMF uses the branching rate one day before to calculate the branch number.
-</p></div>
-
+```
 
 
 <div class="fig-output">
