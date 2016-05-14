@@ -3,4 +3,4 @@ Sys.setenv(RMARKDOWN_MATHJAX_PATH="C:/Program Files/RStudio/resources/mathjax-23
 library(bookdown)
 unlink('_bookdown_files', recursive = TRUE)
 
-render_book('.')
+tryCatch(bookdown::render_book('.'), error= function(e) stop(e))
