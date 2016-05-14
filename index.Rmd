@@ -16,7 +16,7 @@ description: "Documentation of APSIM-Wheat"
 
 
 
-```{block, type='rmdnote'}
+```{block, type='rmdnote', echo=TRUE}
 A simulation is setup to demo the relationship among traits based on the cv. Hartog with high nitrogen and irrigation management under 15TraitMod experiment. The values in the figures below could be variable in other environments.</p>
 ```
 
