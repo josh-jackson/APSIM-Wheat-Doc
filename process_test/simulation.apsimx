@@ -2669,6 +2669,7 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Structure.MeanTillerGrowthRate.Value as Wheat.Structure.MeanTillerGrowthRate</string>
             <string>Wheat.Arbitrator.FN</string>
             <string>Wheat.Arbitrator.DMSupply</string>
+            <string>Wheat.Leaf.CohortAge[1:10]</string>
           </VariableNames>
           <EventNames>
             <string>[Clock].DoReport</string>
