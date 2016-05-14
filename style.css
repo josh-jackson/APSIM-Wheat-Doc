@@ -27,7 +27,7 @@ pre code {
 	padding: 5px 10px 5px 10px;
 	border-radius: 10px;
 	font-size: 80%;
-	float: left;
+	/* float: left; */
 	font-weight: bold;
 }
 
@@ -44,7 +44,7 @@ pre code {
 	padding: 5px 15px 5px 15px;
 	border-radius: 10px;
 	font-size: 80%;
-	float: left;
+	/* float: left; */
 	font-weight: bold;
 }
 
