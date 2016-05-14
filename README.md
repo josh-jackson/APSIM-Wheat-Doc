@@ -1,3 +1,8 @@
+
+[![Build Status](https://travis-ci.org/byzheng/APSIM-Wheat-Doc.svg?branch=master)](https://travis-ci.org/byzheng/APSIM-Wheat-Doc)
+
+
+
 # Documentation of APSIM-Wheat
 
 See the compiled documentation from [gh-pages](http://byzheng.github.io/APSIM-Wheat-Doc).
