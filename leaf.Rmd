@@ -75,3 +75,42 @@ plot_report_vector(df, x_var, y_cols, x_lab = 'Accumulated thermal time', y_lab 
 
 
 
+<div class="fig-output">
+```{r leaf-lai, fig.cap='Leaf area index', fig.subcap=c('Stage', 'Thermal time')}
+y_cols <- c(
+    'Wheat.Leaf.LAI', 
+'Wheat.Leaf.LAIDead',
+'Wheat.Leaf.LAITotal')
+x_var <- 'Wheat.Phenology.Stage'
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Leaf area index')
+
+
+x_var <- 'Wheat.Phenology.AccumulateThermalTime'
+plot_report(df, x_var, y_cols, x_lab = 'Accumulated thermal time', 
+            y_lab = 'Leaf area index')
+
+```
+</div>
+
+
+<div class="fig-output">
+```{r leaf-cover, fig.cap='Coverage', fig.subcap=c('Stage', 'Thermal time')}
+y_cols <- c(
+'Wheat.Leaf.CoverDead',
+'Wheat.Leaf.CoverGreen',
+'Wheat.Leaf.CoverTotal')
+x_var <- 'Wheat.Phenology.Stage'
+plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Coverage')
+
+
+x_var <- 'Wheat.Phenology.AccumulateThermalTime'
+plot_report(df, x_var, y_cols, x_lab = 'Accumulated thermal time', 
+            y_lab = 'Coverage')
+
+```
+</div>
+
+
+
+
+
