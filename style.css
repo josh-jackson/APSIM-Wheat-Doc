@@ -79,3 +79,9 @@ pre code {
 .rmdwarning {
   background-image: url("images/warning.png");
 }
+
+
+#fork-me {
+	z-index: 4;
+}
+
