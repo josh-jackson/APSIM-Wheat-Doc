@@ -2811,8 +2811,6 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Phenology.CurrentPhaseName</string>
             <string>Wheat.Phenology.CurrentStageName</string>
             <string>Wheat.Phenology.Stage</string>
-            <string>Wheat.Leaf.AppearedCohortNo</string>
-            <string>Wheat.Leaf.InitialisedCohortNo</string>
             <string>Wheat.Structure.MainStemPrimordiaNo</string>
             <string>Wheat.Structure.MainStemNodeNo</string>
             <string>Wheat.Structure.PlantTotalNodeNo</string>
@@ -2834,6 +2832,14 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Arbitrator.FN</string>
             <string>Wheat.Arbitrator.DMSupply</string>
             <string>Wheat.Leaf.CohortAge[1:10]</string>
+            <string>Wheat.Leaf.AppearedCohortNo</string>
+            <string>Wheat.Leaf.InitialisedCohortNo</string>
+            <string>Wheat.Leaf.LAI</string>
+            <string>Wheat.Leaf.LAIDead</string>
+            <string>Wheat.Leaf.LAITotal</string>
+            <string>Wheat.Leaf.CoverDead</string>
+            <string>Wheat.Leaf.CoverGreen</string>
+            <string>Wheat.Leaf.CoverTotal</string>
           </VariableNames>
           <EventNames>
             <string>[Clock].DoReport</string>
