@@ -1,3 +1,5 @@
+#!/bin/bash
+set -e
 # configure your name and email if you have not done so
 git config --global user.email "zheng.bangyou@gmail.com"
 git config --global user.name "Bangyou Zheng"
