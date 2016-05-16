@@ -3,43 +3,67 @@
 # * Copyright: AS IS
 
 
+new_breaks <- function(x) {
+    if (max(x) < 11) {
+        breaks <- seq(1, 10, by = 1)
+    } else {
+        breaks <- seq(0, 2500, by = 500)
+    }
+    names(breaks) <- attr(breaks,"labels")
+    breaks
+}
 
 
 plot_report <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value',
                         panel = FALSE) {
     library(ggplot2)
-    x_var_name <- gsub('.*\\.(.*)', '\\1', x_var)
-    x_var_n <- list()
-    x_var_n[[x_var_name]] <- x_var
+    # x_var_name <- gsub('.*\\.(.*)', '\\1', x_var)
+    # x_var_n <- list()
+    # x_var_n[[x_var_name]] <- x_var
     pd <- df %>%
         select_(.dots = c(x_var, y_cols)) %>%
-        gather_(key_col = 'Trait', value_col = 'Value', gather_cols = y_cols) %>%
+        gather_(key_col = 'Trait', value_col = 'YValue', gather_cols = y_cols) %>%
+        gather_(key_col = 'XVar', value_col = 'XValue', gather_cols = x_var) %>%
         mutate(Trait = gsub('.*\\.(.*)', '\\1', Trait)) %>%
-        rename_(.dots = x_var_n)
-#
+        mutate(XVar = gsub('.*\\.(.*)', '\\1', XVar))
+    x_var_name <- gsub('.*\\.(.*)', '\\1', x_var)
+    y_cols_name <- gsub('.*\\.(.*)', '\\1', y_cols)
+    pd <- pd %>%
+        mutate(Trait = factor(Trait, levels = y_cols_name),
+               XVar = factor(XVar, levels = x_var_name))
+
+
+    #
 #     ggvis(pd, x = as.name(x_var_name), y = ~Value, stroke = ~Trait) %>%
 #         layer_lines() %>%
 #         add_legend("stroke", title = "") %>%
 #         add_tooltip(function(df) paste0('Stage: ', df[[x_var_name]], '\nValue: ', df$Value))
 #
-    p <- ggplot(pd)
+    p <- ggplot(pd, aes(XValue, YValue))
     if (panel) {
         p <- p +
-            geom_line(aes_string(x_var_name, 'Value')) +
-            geom_point(aes_string(x_var_name, 'Value')) +
-            facet_wrap(~Trait, scales = 'free_y', ncol = 1)
+            geom_line() +
+            geom_point()
+        if (length(x_var) == 1) {
+            p <- p + facet_wrap(~Trait, scales = 'free_y', ncol = 1)
+        } else {
+            p <- p + facet_grid(Trait~XVar, scales = 'free')
+        }
     } else {
         p <- p +
-            geom_line(aes_string(x_var_name, 'Value', colour = 'Trait')) +
-            geom_point(aes_string(x_var_name, 'Value', colour = 'Trait'))
+            geom_line(aes(colour = Trait)) +
+            geom_point(aes(colour = Trait))
+        if (length(x_var) > 1) {
+            p <- p + facet_wrap(~XVar, scales = 'free_x', ncol = 1)
+        }
     }
     p <- p + theme_bw() +
         theme(legend.position = 'bottom') +
         xlab(x_lab) + ylab(y_lab) +
         guides(colour = guide_legend(title = '', ncol = 1))
     if (length(grep('Stage', x_var)) > 0) {
-        p <- p +
-            scale_x_continuous(breaks = seq(1, 10))
+
+        p <- p + scale_x_continuous(breaks = new_breaks)
     }
     p
 }
@@ -50,9 +74,9 @@ plot_report <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value',
 plot_report_vector <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value',
                         panel = FALSE) {
     library(ggplot2)
-    x_var_name <- gsub('.*\\.(.*)', '\\1', x_var)
-    x_var_n <- list()
-    x_var_n[[x_var_name]] <- x_var
+    # x_var_name <- gsub('.*\\.(.*)', '\\1', x_var)
+    # x_var_n <- list()
+    # x_var_n[[x_var_name]] <- x_var
 
     col_names <- grepl(y_cols, names(df)) | (names(df) %in% x_var)
     pd <- df[,col_names]
@@ -68,25 +92,30 @@ plot_report_vector <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value'
             Trait = gsub('(.*)\\d+_\\d+_(\\d+)_', '\\1', Trait),
             Index = factor(as.numeric(as.character(Index)))
             ) %>%
-        rename_(.dots = x_var_n)
-    #
-    #     ggvis(pd, x = as.name(x_var_name), y = ~Value, stroke = ~Trait) %>%
-    #         layer_lines() %>%
-    #         add_legend("stroke", title = "") %>%
-    #         add_tooltip(function(df) paste0('Stage: ', df[[x_var_name]], '\nValue: ', df$Value))
-    #
-    p <- ggplot(pd) +
-        geom_line(aes_string(x_var_name, 'Value', colour = 'Index')) +
-        geom_point(aes_string(x_var_name, 'Value', colour = 'Index')) +
+        gather_(key_col = 'XVar', value_col = 'XValue', gather_cols = x_var) %>%
+        mutate(XVar = gsub('.*\\.(.*)', '\\1', XVar))
+    x_var_name <- gsub('.*\\.(.*)', '\\1', x_var)
+    pd <- pd %>%
+        mutate(XVar = factor(XVar, levels = x_var_name))
+
+
+    p <- ggplot(pd, aes(XValue, Value, colour = Index)) +
+        geom_line() +
+        geom_point() +
         theme_bw() +
         theme(legend.position = 'bottom') +
         xlab(x_lab) + ylab(y_lab) +
         guides(colour = guide_legend(title = ''))
+    if (length(x_var) > 1) {
+        p <- p + facet_wrap(~XVar, scales = 'free_x', ncol = 1)
+    }
+
     if (length(grep('Stage', x_var)) > 0) {
         p <- p +
-            scale_x_continuous(breaks = seq(1, 10))
+            scale_x_continuous(breaks = new_breaks)
     }
     p
+
 }
 
 

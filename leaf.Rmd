@@ -23,6 +23,12 @@ df <- report %>%
            Cultivar == 'hartog')
 
 pmf <- read_xml('wheat.xml')
+
+
+x_var <- c(
+    'Wheat.Phenology.Stage',
+    'Wheat.Phenology.AccumulateThermalTime')
+x_lab <- 'Accumulated thermal time, stage'
 ```
 
 
@@ -61,14 +67,29 @@ The age of leaf...
 
 
 <div class="fig-output">
+```{r leaf-cohort-number, fig.cap='Initialized, appeared and expanding cohort number'}
+y_cols <- c(
+            'Wheat.Leaf.ExpandingCohortNo',
+            'Wheat.Leaf.InitialisedCohortNo',
+            'Wheat.Leaf.AppearedCohortNo')
+
+plot_report(df, x_var, y_cols, x_lab = x_lab, 
+            y_lab = 'Cohort number')
+
+
+```
+</div>
+
+
+
+<div class="fig-output">
 ```{r leaf-age, fig.cap='Age of leaf cohort as a function of stage or accumulated thermal time', fig.subcap=c('A', 'B')}
 y_cols <- c(
     'Wheat.Leaf.CohortAge')
-x_var <- 'Wheat.Phenology.Stage'
-plot_report_vector(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Age of leaf cohort')
+plot_report_vector(
+    df, x_var, y_cols, x_lab = x_lab, 
+    y_lab = 'Age of leaf cohort')
 
-x_var <- 'Wheat.Phenology.AccumulateThermalTime'
-plot_report_vector(df, x_var, y_cols, x_lab = 'Accumulated thermal time', y_lab = 'Age of leaf cohort')
 
 ```
 </div>
@@ -81,13 +102,7 @@ y_cols <- c(
     'Wheat.Leaf.LAI', 
 'Wheat.Leaf.LAIDead',
 'Wheat.Leaf.LAITotal')
-x_var <- 'Wheat.Phenology.Stage'
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Leaf area index')
-
-
-x_var <- 'Wheat.Phenology.AccumulateThermalTime'
-plot_report(df, x_var, y_cols, x_lab = 'Accumulated thermal time', 
-            y_lab = 'Leaf area index')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Leaf area index')
 
 ```
 </div>
@@ -96,16 +111,10 @@ plot_report(df, x_var, y_cols, x_lab = 'Accumulated thermal time',
 <div class="fig-output">
 ```{r leaf-cover, fig.cap='Coverage', fig.subcap=c('Stage', 'Thermal time')}
 y_cols <- c(
-'Wheat.Leaf.CoverDead',
-'Wheat.Leaf.CoverGreen',
-'Wheat.Leaf.CoverTotal')
-x_var <- 'Wheat.Phenology.Stage'
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Coverage')
-
-
-x_var <- 'Wheat.Phenology.AccumulateThermalTime'
-plot_report(df, x_var, y_cols, x_lab = 'Accumulated thermal time', 
-            y_lab = 'Coverage')
+    'Wheat.Leaf.CoverGreen',
+    'Wheat.Leaf.CoverDead',
+    'Wheat.Leaf.CoverTotal')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Coverage')
 
 ```
 </div>

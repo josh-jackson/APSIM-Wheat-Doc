@@ -51,9 +51,8 @@ The total leaf number in the main stem (MainStemFinalNodeNumber, Section \@ref(o
 
 y_cols <- c(
     'Wheat.Structure.MainStemFinalNodeNumber')
-x_var <- 'Wheat.Phenology.Stage'
 
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Final node number in main stem')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Final node number in main stem')
 
 ```
 </div>
@@ -83,9 +82,8 @@ The daily delta primodia number is not a output variable.
 <div class="fig-output">
 ```{r delta-node, fig.cap='Daily increase of node number in main stem'}
 y_cols <- c('Wheat.Structure.DeltaNodeNumber')
-x_var <- 'Wheat.Phenology.Stage'
 
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Daily increase of node number in main stem')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Daily increase of node number in main stem')
 ```
 </div>
 
@@ -109,9 +107,8 @@ where, $T_{0}$ is day of plant initialisation which is set by Leaf model (Emerge
 y_cols <- c(
     'Wheat.Structure.MainStemNodeNo', 
     'Wheat.Structure.MainStemPrimordiaNo')
-x_var <- 'Wheat.Phenology.Stage'
 
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Primordia or node number in main stem')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Primordia or node number in main stem')
 
 ```
 </div>
@@ -139,7 +136,7 @@ The branching rate is defined by potential branching rate and stresses (nitrogen
 
 
 <div class="fig-input">
-```{r branching-rate, fig.cap='Branching rate of APSIM-Wheat as a function of appreared cohort number'}
+```{r branching-rate, fig.asp = 0.75, fig.cap='Branching rate of APSIM-Wheat as a function of appreared cohort number'}
 xpath <- '//Name[text()="PotentialBranchingRate"]'
 plot_xypair(pmf, xpath, x_lab = 'Number of appeared cohorts', y_lab = 'Branching rate')
 
@@ -153,7 +150,7 @@ The nitrogen stress is calculated as a function of fraction of nitrogen supply r
 
 
 <div class="fig-input">
-```{r branching-rate-nstress, fig.cap='Nitrogen stress on branching rate as a function of fraction of nitrogen supply relative to nitrogen demand'}
+```{r branching-rate-nstress, fig.asp=0.75, fig.cap='Nitrogen stress on branching rate as a function of fraction of nitrogen supply relative to nitrogen demand'}
 xpath <- '//Name[text()="Nitrogen"]'
 plot_xypair(pmf, xpath, x_lab = 'Fraction of nitrogen supply relative to nitrogen demand', y_lab = 'Effect of nitrogen stress on branching rate')
 
@@ -169,9 +166,8 @@ Figure \@ref(fig:tiller-number) shows the branching rate and total branching num
 ```{r tiller-number, fig.cap='The branching rate and branch number for wheat'}
 y_cols <- c('Wheat.Structure.BranchNumber', 
             'Wheat.Structure.BranchingRate')
-x_var <- 'Wheat.Phenology.Stage'
 
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Branch number or branching rate')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Branch number or branching rate')
 
 ```
 </div>
@@ -185,11 +181,10 @@ It seems PMF uses the branching rate one day before to calculate the branch numb
 <div class="fig-output">
 ```{r nitrogen-fn, fig.cap='The fraction of nitrogen supply relative to nitrogen demand'}
 y_cols <- c('Wheat.Arbitrator.FN')
-x_var <- 'Wheat.Phenology.Stage'
 
 p <- plot_report(
     df %>% filter(Wheat.Phenology.Stage < 10),
-            x_var, y_cols, x_lab = 'Stage', y_lab = 'Ratio of nitrogen supply and demand')
+            x_var, y_cols, x_lab = x_lab, y_lab = 'Ratio of nitrogen supply and demand')
 p + geom_hline(yintercept = 1.5)
 
 ```
@@ -223,11 +218,10 @@ In the test simulation, the plant density ($P$) is 150 plants m^2^, so populatio
 ```{r plant-population, fig.cap='The total population of main stem and all stems'}
 y_cols <- c('Wheat.Structure.MainStemPopn',
             'Wheat.Structure.TotalStemPopn')
-x_var <- 'Wheat.Phenology.Stage'
 
 plot_report(
     df %>% filter(Wheat.Phenology.Stage < 10),
-            x_var, y_cols, x_lab = 'Stage', y_lab = 'Total population of main stem and all stems')
+            x_var, y_cols, x_lab = x_lab, y_lab = 'Total population of main stem and all stems')
 
 ```
 </div>
@@ -242,7 +236,7 @@ Branching mortality starts from the Terminal Spikelet until Flowering which defi
 
 
 <div class="fig-input">
-```{r mortality-growth-rate, fig.cap='Tiller mortality as a function of moving mean tiller growth rate'}
+```{r mortality-growth-rate, fig.asp=0.75, fig.cap='Tiller mortality as a function of moving mean tiller growth rate'}
 xpath <- '//Name[text()="Mortality"]'
 plot_xypair(pmf, xpath, x_lab = 'Moving mean tiller growth rate', y_lab = 'Branch motality')
 ```
@@ -257,8 +251,7 @@ Figure \@ref(fig:tiller-growth-rate-factor) and \@ref(fig:tiller-growth-rate) sh
 ```{r tiller-growth-rate, fig.cap='The moving tiller growth rate'}
 y_cols <- c(
     'Wheat.Structure.MeanTillerGrowthRate')
-x_var <- 'Wheat.Phenology.Stage'
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Moving tiller growth rate')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Moving tiller growth rate')
 
 ```
 </div>
@@ -271,8 +264,7 @@ y_cols <- c(
     'Wheat.Arbitrator.DMSupply',
     'Wheat.Phenology.ThermalTime',
     'Wheat.Structure.TotalStemPopn')
-x_var <- 'Wheat.Phenology.Stage'
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Three factors to calculate the tiller growth rate.',
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Three factors to calculate the tiller growth rate.',
             panel = TRUE)
 
 ```
@@ -288,8 +280,7 @@ y_cols <- c(
     'Wheat.Structure.BranchMortality',
     'Wheat.Structure.ProportionBranchMortality', 
             'Wheat.Structure.ProportionPlantMortality')
-x_var <- 'Wheat.Phenology.Stage'
-plot_report(df, x_var, y_cols, x_lab = 'Stage', y_lab = 'Mortality of branching')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Mortality of branching')
 
 ```
 </div>
@@ -301,10 +292,9 @@ As the primary bud number is equal to 1, the plant total node number and total p
 <div class="fig-output">
 ```{r plant-node-number, fig.cap='Total plant node number'}
 y_cols <- c('Wheat.Structure.PlantTotalNodeNo', 'Wheat.Structure.PrimaryBudTotalNodeNo')
-x_var <- 'Wheat.Phenology.Stage'
 
 plot_report(df,
-            x_var, y_cols, x_lab = 'Stage', y_lab = 'Total plant node number')
+            x_var, y_cols, x_lab = x_lab, y_lab = 'Total plant node number')
 
 ```
 </div>
