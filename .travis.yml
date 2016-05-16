@@ -10,6 +10,11 @@ r_packages:
 r_github_packages:
   - rstudio/bookdown
 
+notifications:
+  slack:
+    on_success: always
+    on_failure: always
+
 install:
    - Rscript -e "if (!require('ggplot2')) install.packages('ggplot2')"
    - Rscript -e "if (!require('devtools')) install.packages('devtools')"
