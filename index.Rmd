@@ -45,7 +45,7 @@ df <- report %>%
            Management == 'IHN',
            Cultivar == 'hartog')
 
-pmf <- read_xml('wheat.xml')
+pmf <- read_xml('process_test/simulation.apsimx')
 
 # Configuration of x axis
 x_var <- c(
