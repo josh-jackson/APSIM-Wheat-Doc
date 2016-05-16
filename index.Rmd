@@ -28,7 +28,7 @@ A simulation is setup to demo the relationship among traits based on the cv. Har
 library(knitr)
 opts_chunk$set(
     cache = FALSE, echo = FALSE, 
-    out.width = '80%', fig.asp = .75,
+    out.width = '80%', fig.asp = 1.2,
     warning = FALSE, fig.align = 'center',
     message = FALSE) 
 library(readr)
@@ -46,6 +46,14 @@ df <- report %>%
            Cultivar == 'hartog')
 
 pmf <- read_xml('wheat.xml')
+
+# Configuration of x axis
+x_var <- c(
+    'Wheat.Phenology.Stage',
+    'Wheat.Phenology.AccumulateThermalTime')
+x_lab <- 'Accumulated thermal time or stage'
+
+
 ```
 
 
