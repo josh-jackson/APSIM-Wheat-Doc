@@ -11,7 +11,9 @@ r_github_packages:
   - rstudio/bookdown
 
 notifications:
-  slack:
+  email:
+    recipients:
+      - zheng.bangyou@gmail.com
     on_success: always
     on_failure: always
 
