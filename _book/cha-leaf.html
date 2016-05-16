@@ -138,33 +138,41 @@ MathJax.Hub.Config({
 <div id="life-growth-cycle" class="section level2">
 <h2><span class="header-section-number">5.1</span> Life growth cycle</h2>
 <p>In the leaf cohort model, the leaf growth cycle is divided into 7 stages.</p>
-<div id="htmlwidget-2412" style="width:100%;height:504px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2412">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n\tInitialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5218" style="width:100%;height:504px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5218">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n\tInitialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="leaf-age" class="section level2">
 <h2><span class="header-section-number">5.2</span> leaf age</h2>
 <p>The age of leaf…</p>
 <div class="fig-output">
-<div class="figure" style="text-align: center"><span id="fig:leaf-age"></span>
-<img src="APSIM-Wheat_files/figure-html/leaf-age-1.png" alt="Age of leaf cohort as a function of stage or accumulated thermal time" width="80%" /><img src="APSIM-Wheat_files/figure-html/leaf-age-2.png" alt="Age of leaf cohort as a function of stage or accumulated thermal time" width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:leaf-cohort-number"></span>
+<img src="APSIM-Wheat_files/figure-html/leaf-cohort-number-1.png" alt="Initialized, appeared and expanding cohort number" width="80%" />
 <p class="caption">
-Figure 5.1: Age of leaf cohort as a function of stage or accumulated thermal time
+Figure 5.1: Initialized, appeared and expanding cohort number
+</p>
+</div>
+</div>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:leaf-age"></span>
+<img src="APSIM-Wheat_files/figure-html/leaf-age-1.png" alt="Age of leaf cohort as a function of stage or accumulated thermal time" width="80%" />
+<p class="caption">
+Figure 5.2: Age of leaf cohort as a function of stage or accumulated thermal time
 </p>
 </div>
 </div>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-lai"></span>
-<img src="APSIM-Wheat_files/figure-html/leaf-lai-1.png" alt="Leaf area index" width="80%" /><img src="APSIM-Wheat_files/figure-html/leaf-lai-2.png" alt="Leaf area index" width="80%" />
+<img src="APSIM-Wheat_files/figure-html/leaf-lai-1.png" alt="Leaf area index" width="80%" />
 <p class="caption">
-Figure 5.2: Leaf area index
+Figure 5.3: Leaf area index
 </p>
 </div>
 </div>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-cover"></span>
-<img src="APSIM-Wheat_files/figure-html/leaf-cover-1.png" alt="Coverage" width="80%" /><img src="APSIM-Wheat_files/figure-html/leaf-cover-2.png" alt="Coverage" width="80%" />
+<img src="APSIM-Wheat_files/figure-html/leaf-cover-1.png" alt="Coverage" width="80%" />
 <p class="caption">
-Figure 5.3: Coverage
+Figure 5.4: Coverage
 </p>
 </div>
 </div>
