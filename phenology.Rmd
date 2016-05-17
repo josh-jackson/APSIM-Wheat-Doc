@@ -49,3 +49,29 @@ A plastochron is defined as the time interval between two successive recurring e
 
 Based on [@jamieson_sirius_1998], leaf appearace could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves < 2 and 130% of base phyllochron for leaves > 7. The base phyllochron set as 100 <sup>o</sup>Cd.
 
+
+
+
+<div class="fig-output">
+
+```{r leaf-tt-stage, fig.asp=1, fig.cap='The growthing stage as a function of accumulated thermal  time '}
+y_cols <- c('Wheat.Structure.MainStemNodeNo',
+            'Wheat.Leaf.AppearedCohortNo')
+
+plot_report(
+    df, 
+    x_var = 'Wheat.Phenology.AccumulateThermalTime', 
+    y_cols = 'Wheat.Phenology.Stage', 
+    x_lab = 'Accumulated thermal time (oCd)', 
+    y_lab = 'Stage') +
+    scale_y_continuous(breaks = seq(1, 10))
+
+```
+</div>
+
+
+```{block, type='rmdimportant', echo=TRUE}
+The changing growthing stage in during period 4 looks strange as there are big jump at the start and end of period.
+```
+
+

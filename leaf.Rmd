@@ -5,7 +5,7 @@
 library(knitr)
 opts_chunk$set(
     cache = FALSE, echo = FALSE, 
-    out.width = '80%', fig.asp = .75,
+    out.width = '80%', fig.asp = 1.2,
     warning = FALSE, fig.align = 'center',
     message = FALSE) 
 library(readr)
@@ -61,28 +61,43 @@ DiagrammeR("sequenceDiagram;
 ")
 ```
 
-## leaf age
+## Leaf initialization
 
-The age of leaf...
-
-```{block, type='rmdimportant', echo=TRUE}
-The actual unit for PlantAppearedLeafNo is per square meter ([#842](https://github.com/APSIMInitiative/ApsimX/issues/842)).
-
-```
+A new leaf is initialized when the node number is increased by 1 at the main stem. Consequently, the total leaf cohort number is equal to total primordia number. The initialized rate of leaf cohort is equal to plastrochron.
 
 <div class="fig-output">
-```{r leaf-number, fig.asp = 1.3, fig.cap='Appeared number of green, senesced and total leaves'}
-y_cols <- c(
-    'Wheat.Leaf.PlantAppearedLeafNo',
-    'Wheat.Leaf.PlantAppearedGreenLeafNo',
-    'Wheat.Leaf.PlantsenescedLeafNo')
+
+```{r leaf-init-number, fig.cap='The primordia number in the main stem and initialised cohort number'}
+y_cols <- c('Wheat.Structure.MainStemPrimordiaNo',
+            'Wheat.Leaf.InitialisedCohortNo')
 
 plot_report(df, x_var, y_cols, x_lab = x_lab, 
-            y_lab = 'Leaf number')
-
+            y_lab = 'Number')
 
 ```
 </div>
+
+
+
+```{block, type='rmdimportant', echo=TRUE}
+Actually, the total leaf primordia number is slightly less than the total cohort number.
+```
+
+## Leaf appearance 
+Leaf appearance rate  
+
+<div class="fig-output">
+
+```{r leaf-appear-number, fig.cap='The node number in the main stem and appeared cohort number'}
+y_cols <- c('Wheat.Structure.MainStemNodeNo',
+            'Wheat.Leaf.AppearedCohortNo')
+
+plot_report(df, x_var, y_cols, x_lab = x_lab, 
+            y_lab = 'Number')
+
+```
+</div>
+
 
 
 
@@ -103,6 +118,12 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 </div>
 
 
+## leaf age
+- The leaf appearance rate equals to phyllochron which defined in Phenology parts.
+- 
+
+The age of leaf cohort is defined as the thermal time after appearance. 
+
 
 <div class="fig-output">
 ```{r leaf-age, fig.cap='Age of leaf cohort as a function of stage or accumulated thermal time', fig.subcap=c('A', 'B')}
@@ -110,13 +131,31 @@ y_cols <- c(
     'Wheat.Leaf.CohortAge')
 plot_report_vector(
     df, x_var, y_cols, x_lab = x_lab, 
-    y_lab = 'Age of leaf cohort')
+    y_lab = 'Age of leaf cohort (oCd)')
+
+```
+</div>
+
+
+
+
+<div class="fig-output">
+```{r leaf-number, fig.asp = 1.3, fig.cap='Appeared number of green, senesced and total leaves'}
+y_cols <- c(
+    'Wheat.Leaf.PlantAppearedLeafNo',
+    'Wheat.Leaf.PlantAppearedGreenLeafNo',
+    'Wheat.Leaf.PlantsenescedLeafNo')
+
+plot_report(df, x_var, y_cols, x_lab = x_lab, 
+            y_lab = 'Leaf number')
 
 
 ```
 </div>
 
 
+
+## Leaf area index and coverage
 
 <div class="fig-output">
 ```{r leaf-lai, fig.cap='Leaf area index', fig.subcap=c('Stage', 'Thermal time')}
