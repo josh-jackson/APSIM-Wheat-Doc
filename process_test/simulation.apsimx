@@ -1547,6 +1547,7 @@ The model consists of:
         <FRGR>0</FRGR>
         <PotentialEP>0</PotentialEP>
         <KDead>0.3</KDead>
+        <MaximumMainStemLeafNumber>30</MaximumMainStemLeafNumber>
         <FractionDied>0</FractionDied>
       </Leaf>
       <GenericAboveGroundOrgan>

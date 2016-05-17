@@ -4,7 +4,7 @@
 ```{r setup_leaf, message=FALSE, echo=FALSE, warning=FALSE}
 library(knitr)
 opts_chunk$set(
-    cache = TRUE, echo = FALSE, 
+    cache = FALSE, echo = FALSE, 
     out.width = '80%', fig.asp = .75,
     warning = FALSE, fig.align = 'center',
     message = FALSE) 
