@@ -15,14 +15,14 @@ library(tidyr)
 library(xml2)
 library(DiagrammeR)
 source('_utility.R')
-report <- read_csv('process_test/simulation.db.Report.csv')
+report <- read_csv('simulation/simulation.db.Report.csv')
 
 df <- report %>% 
     filter(grepl('15TraitMod', Name),
            Management == 'IHN',
            Cultivar == 'hartog')
 
-pmf <- read_xml('process_test/simulation.apsimx')
+pmf <- read_xml('simulation/simulation.apsimx')
 
 
 x_var <- c(
