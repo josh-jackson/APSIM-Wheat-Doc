@@ -32,13 +32,6 @@ plot_report <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value',
         mutate(Trait = factor(Trait, levels = y_cols_name),
                XVar = factor(XVar, levels = x_var_name))
 
-
-    #
-#     ggvis(pd, x = as.name(x_var_name), y = ~Value, stroke = ~Trait) %>%
-#         layer_lines() %>%
-#         add_legend("stroke", title = "") %>%
-#         add_tooltip(function(df) paste0('Stage: ', df[[x_var_name]], '\nValue: ', df$Value))
-#
     p <- ggplot(pd, aes(XValue, YValue))
     if (panel) {
         p <- p +
