@@ -33,13 +33,16 @@ x_lab <- 'Accumulated thermal time, stage'
 
 
 
-Leaf cohort model is used in the ...
+Leaf cohort model is used in the APSIM-Wheat.
 
 ## Life growth cycle
 
-In the leaf cohort model, the leaf growth cycle is divided into 7 stages.
+The growth cycle of leaf cohort is divided into 7 stages and 6 periods from `Initialized` to `Detached`. The length of each period depends on the `plastrochron` and `phylochron` for initialization and appearance and is configured by `CohortParameters` for others.
 
-```{r leaf-life-cycle, out.width='100%'}
+Several status variables are defined for each leaf cohort, which can be used in other modules to describe the current status of leaf cohort, i.e. `IsNotAppeared`, `IsGrowing`, `IsAlive`, `IsGreen`, `IsNotSenescing`, `Senescing`, `isFullyExpanded`, `ShouldBeDead`, `IsAppeared` and `IsInitialised`. 
+
+<div class="fig-input">
+```{r leaf-life-cycle, out.width='100%', fig.asp=0.7, fig.cap='The life cycle of a leaf cohort.'}
 library(DiagrammeR)
 DiagrammeR("sequenceDiagram;
 	Initialized->>Appeared: Appearance 
@@ -48,7 +51,8 @@ DiagrammeR("sequenceDiagram;
 	Senescing->>Senesced: SenescenceDuration
 	Senesced->>Detaching: DetachmentLagDuration
 	Detaching->>Detached: DetachmentDuration
-	Initialized->Expanded: IsGrowing
+    Initialized->Appeared: IsNotAppeared
+    Initialized->Expanded: IsGrowing
 	Initialized->>Senesced: IsAlive
 	Initialized->>Senesced: IsGreen
 	Initialized->>Senescing: IsNotSenescing
@@ -60,10 +64,29 @@ DiagrammeR("sequenceDiagram;
 	Initialized->>Detached: IsInitialised
 ")
 ```
+</div>
 
-## Leaf initialization
 
-A new leaf is initialized when the node number is increased by 1 at the main stem. Consequently, the total leaf cohort number is equal to total primordia number. The initialized rate of leaf cohort is equal to plastrochron.
+
+### leaf age
+
+The age of leaf cohort is defined as the thermal time after appearance, (i.e. keep zero after initialization). As the default values of `DetachmentLagDuration` and `DetachmentDuration` are set as `1000000` <sup>o</sup>Cd, the cohort age keeps increasing until stage `ReadyForHarvesting`.
+
+<div class="fig-output">
+```{r leaf-age, fig.cap='Age of leaf cohort as a function of stage or accumulated thermal time'}
+y_cols <- c(
+    'Wheat.Leaf.CohortAge')
+plot_report_vector(
+    df, x_var, y_cols, x_lab = x_lab, 
+    y_lab = 'Age of leaf cohort (oCd)')
+
+```
+</div>
+
+
+### Leaf initialization
+
+A new leaf is initialized when the primordia number is increased by 1 at the main stem. Consequently, the total leaf cohort number is equal to total primordia number. The initialized rate of leaf cohort is equal to plastrochron.
 
 <div class="fig-output">
 
@@ -83,8 +106,9 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 Actually, the total leaf primordia number is slightly less than the total cohort number.
 ```
 
-## Leaf appearance 
-Leaf appearance rate  
+### Leaf appearance 
+A new leaf is appeared when the node number is increased by 1 at the main stem. Consequently, the appearance rate of leaf cohort is equal to phyllochron.
+
 
 <div class="fig-output">
 
@@ -98,7 +122,18 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 ```
 </div>
 
+## Other periods
 
+* Growth duration is defined as a phyllochron.
+* Lag duration is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort apeared during stem alongtation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage `FlagLeaf` to stage `EndGrainFill` minus 3 phyllochron (`senescence duration`).
+
+```{block, type='rmdnote'}
+It could be only for flag leaf for extra longer lag duration.
+
+```
+
+* Senescence duration is defined as 3 phyllochrons.
+* Detachment lag and dutachment duration are set as a big value `1000000` which assumes no detachment in wheat.
 
 
 <div class="fig-output">
@@ -113,25 +148,6 @@ y_cols <- c(
 plot_report(df, x_var, y_cols, x_lab = x_lab, 
             y_lab = 'Cohort number')
 
-
-```
-</div>
-
-
-## leaf age
-- The leaf appearance rate equals to phyllochron which defined in Phenology parts.
-- 
-
-The age of leaf cohort is defined as the thermal time after appearance. 
-
-
-<div class="fig-output">
-```{r leaf-age, fig.cap='Age of leaf cohort as a function of stage or accumulated thermal time', fig.subcap=c('A', 'B')}
-y_cols <- c(
-    'Wheat.Leaf.CohortAge')
-plot_report_vector(
-    df, x_var, y_cols, x_lab = x_lab, 
-    y_lab = 'Age of leaf cohort (oCd)')
 
 ```
 </div>

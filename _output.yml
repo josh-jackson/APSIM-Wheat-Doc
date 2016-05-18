@@ -5,6 +5,7 @@ bookdown::gitbook:
   css: _includes/style.css
   config:
     toc:
+      collapse: section
       before: |
         <li><a href="./">Documentation of ASPIM-Wheat</a></li>
       after: |
