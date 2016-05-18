@@ -54,9 +54,7 @@ Based on [@jamieson_sirius_1998], leaf appearace could be described by a base ph
 
 <div class="fig-output">
 
-```{r leaf-tt-stage, fig.asp=1, fig.cap='The growthing stage as a function of accumulated thermal  time '}
-y_cols <- c('Wheat.Structure.MainStemNodeNo',
-            'Wheat.Leaf.AppearedCohortNo')
+```{r leaf-tt-stage, fig.asp=0.75, fig.cap='The growthing stage as a function of accumulated thermal  time '}
 
 plot_report(
     df, 
