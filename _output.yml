@@ -24,8 +24,7 @@ bookdown::gitbook:
       all: no
 bookdown::pdf_book:
   includes:
-    in_header: preamble.tex
+    in_header: _includes/preamble.tex
   keep_tex: yes
   latex_engine: xelatex
   citation_package: natbib
-bookdown::epub_book: default
