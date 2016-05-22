@@ -42,8 +42,8 @@ The growth cycle of leaf cohort is divided into 7 stages and 6 periods from `Ini
 Several status variables are defined for each leaf cohort, which can be used in other modules to describe the current status of leaf cohort, i.e. `IsNotAppeared`, `IsGrowing`, `IsAlive`, `IsGreen`, `IsNotSenescing`, `Senescing`, `isFullyExpanded`, `ShouldBeDead`, `IsAppeared` and `IsInitialised`. 
 
 <div class="fig-input">
-```{r leaf-life-cycle, out.width='100%', fig.asp=0.7, fig.cap='The life cycle of a leaf cohort.'}
-library(DiagrammeR)
+```{r leaf-life-cycle, out.width='95%', fig.asp=0.7, fig.cap='The life cycle of a leaf cohort.'}
+
 DiagrammeR("sequenceDiagram;
 	Initialized->>Appeared: Appearance 
 	Appeared->>Expanded: GrowthDuration
