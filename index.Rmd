@@ -70,8 +70,11 @@ The main contents include
 
 
 ## Authors
+<!--
+Bangyou Zheng <bangyou.zheng@csiro.au>
+Karine Chenu <karine.chenu@uq.edu.au>
 
-
+-->
 
 ## How to contribute?
 
