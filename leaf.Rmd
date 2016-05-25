@@ -179,6 +179,8 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 </div>
 
 
+## Photosynthesis
+
 
 ## Leaf area index and coverage
 
