@@ -37,7 +37,7 @@ MathJax.Hub.Config({
   
   
 <link rel="prev" href="cha-structure.html">
-<link rel="next" href="cha-arbitrator.html">
+<link rel="next" href="cha-biomass-production.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -100,6 +100,7 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="4.2" data-path="cha-structure.html"><a href="cha-structure.html#tillering"><i class="fa fa-check"></i><b>4.2</b> Tillering</a></li>
 <li class="chapter" data-level="4.3" data-path="cha-structure.html"><a href="cha-structure.html#population"><i class="fa fa-check"></i><b>4.3</b> Population</a></li>
 <li class="chapter" data-level="4.4" data-path="cha-structure.html"><a href="cha-structure.html#mortality"><i class="fa fa-check"></i><b>4.4</b> Mortality</a></li>
+<li class="chapter" data-level="4.5" data-path="cha-structure.html"><a href="cha-structure.html#canopy-height"><i class="fa fa-check"></i><b>4.5</b> Canopy height</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="cha-leaf.html"><a href="cha-leaf.html"><i class="fa fa-check"></i><b>5</b> Leaf</a><ul>
 <li class="chapter" data-level="5.1" data-path="cha-leaf.html"><a href="cha-leaf.html#life-growth-cycle"><i class="fa fa-check"></i><b>5.1</b> Life growth cycle</a><ul>
@@ -108,13 +109,16 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="5.1.3" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-appearance"><i class="fa fa-check"></i><b>5.1.3</b> Leaf appearance</a></li>
 <li class="chapter" data-level="5.1.4" data-path="cha-leaf.html"><a href="cha-leaf.html#other-periods"><i class="fa fa-check"></i><b>5.1.4</b> Other periods</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="cha-leaf.html"><a href="cha-leaf.html#photosynthesis"><i class="fa fa-check"></i><b>5.2</b> Photosynthesis</a></li>
-<li class="chapter" data-level="5.3" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-area-index-and-coverage"><i class="fa fa-check"></i><b>5.3</b> Leaf area index and coverage</a></li>
+<li class="chapter" data-level="5.2" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-area-index"><i class="fa fa-check"></i><b>5.2</b> Leaf area index</a></li>
+<li class="chapter" data-level="5.3" data-path="cha-leaf.html"><a href="cha-leaf.html#ground-coverage"><i class="fa fa-check"></i><b>5.3</b> Ground coverage</a></li>
+<li class="chapter" data-level="5.4" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-biomass"><i class="fa fa-check"></i><b>5.4</b> Leaf biomass</a></li>
+<li class="chapter" data-level="5.5" data-path="cha-leaf.html"><a href="cha-leaf.html#frost-impact"><i class="fa fa-check"></i><b>5.5</b> Frost impact</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="cha-arbitrator.html"><a href="cha-arbitrator.html"><i class="fa fa-check"></i><b>6</b> Arbitrator</a></li>
-<li class="chapter" data-level="7" data-path="cha-output.html"><a href="cha-output.html"><i class="fa fa-check"></i><b>7</b> Output</a><ul>
-<li class="chapter" data-level="7.1" data-path="cha-output.html"><a href="cha-output.html#phenology"><i class="fa fa-check"></i><b>7.1</b> Phenology</a></li>
-<li class="chapter" data-level="7.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>7.2</b> Structure</a></li>
+<li class="chapter" data-level="6" data-path="cha-biomass-production.html"><a href="cha-biomass-production.html"><i class="fa fa-check"></i><b>6</b> Biomass production</a></li>
+<li class="chapter" data-level="7" data-path="cha-arbitrator.html"><a href="cha-arbitrator.html"><i class="fa fa-check"></i><b>7</b> Arbitrator</a></li>
+<li class="chapter" data-level="8" data-path="cha-output.html"><a href="cha-output.html"><i class="fa fa-check"></i><b>8</b> Output</a><ul>
+<li class="chapter" data-level="8.1" data-path="cha-output.html"><a href="cha-output.html#phenology"><i class="fa fa-check"></i><b>8.1</b> Phenology</a></li>
+<li class="chapter" data-level="8.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>8.2</b> Structure</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://byzheng.github.io/APSIM-Wheat-Sens" target="blank">Sensitivity analysis</a></li>
@@ -147,8 +151,8 @@ MathJax.Hub.Config({
 <p>The growth cycle of leaf cohort is divided into 7 stages and 6 periods from <code>Initialized</code> to <code>Detached</code>. The length of each period depends on the <code>plastrochron</code> and <code>phylochron</code> for initialization and appearance and is configured by <code>CohortParameters</code> for others.</p>
 <p>Several status variables are defined for each leaf cohort, which can be used in other modules to describe the current status of leaf cohort, i.e. <code>IsNotAppeared</code>, <code>IsGrowing</code>, <code>IsAlive</code>, <code>IsGreen</code>, <code>IsNotSenescing</code>, <code>Senescing</code>, <code>isFullyExpanded</code>, <code>ShouldBeDead</code>, <code>IsAppeared</code> and <code>IsInitialised</code>.</p>
 <div class="fig-input">
-<div id="htmlwidget-950" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-950">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8948" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8948">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="leaf-age" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> leaf age</h3>
@@ -201,9 +205,16 @@ Figure 5.3: The node number in the main stem and appeared cohort number
 <p>The lengths of other periods are determined when a new leaf initialized.</p>
 <ul>
 <li>Growth duration is defined as a phyllochron.</li>
-<li><p>Lag duration is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort apeared during stem alongtation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage <code>FlagLeaf</code> to stage <code>EndGrainFill</code> minus 3 phyllochron (<code>senescence duration</code>).</p></li>
+<li>Lag duration is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort apeared during stem alongtation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage <code>FlagLeaf</code> to stage <code>EndGrainFill</code> minus 3 phyllochron (<code>senescence duration</code>).</li>
+</ul>
+<div class="rmdnote">
+<p>
+It could be only for flag leaf for extra longer lag duration. Need to check.
+</p>
+</div>
+<ul>
 <li>Senescence duration is defined as 3 phyllochrons.</li>
-<li><p>Detachment lag and dutachment duration are set as a big value <code>1000000</code> which assumes no detachment in wheat. Actually all leaves are detached at <code>Harvesting</code> event.</p></li>
+<li>Detachment lag and dutachment duration are set as a big value <code>1000000</code> which assumes no detachment in wheat. Actually all leaves are detached at <code>Harvesting</code> event.</li>
 </ul>
 <p>Figure <a href="cha-leaf.html#fig:leaf-cohort-number">5.4</a> shows the number of leaf cohort for expanding, initilised, appeared, senescing and dead cohort.</p>
 <div class="fig-output">
@@ -223,24 +234,59 @@ Figure 5.5: Appeared number of green, senesced and total leaves
 </p>
 </div>
 </div>
+<p>The fraction of final leaf is set as 1, but return the actual fraction of the final leaf if the last leaf has appeared.</p>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:final-leaf-fraction"></span>
+<img src="APSIM-Wheat_files/figure-html/final-leaf-fraction-1.png" alt="Fraction of final leaf" width="80%" />
+<p class="caption">
+Figure 5.6: Fraction of final leaf
+</p>
 </div>
 </div>
-<div id="photosynthesis" class="section level2">
-<h2><span class="header-section-number">5.2</span> Photosynthesis</h2>
-<p>Radiation use efficiency (RUE) model is used to calculate the daily photosynthesis.</p>
+<div class="rmdwarning">
+<p>
+Not sure about the main point of final leaf fraction. The fraction is not integer as the final node number is not an integer.
+</p>
 </div>
-<div id="leaf-area-index-and-coverage" class="section level2">
-<h2><span class="header-section-number">5.3</span> Leaf area index and coverage</h2>
-<p>Leaf area index (LAI) and coverage are calculated for green leaf (<span class="math inline">\(\text{LAI}_{g}\)</span> and <span class="math inline">\(C_g\)</span>), dead leaf (<span class="math inline">\(\text{LAI}_{d}\)</span> and <span class="math inline">\(C_d\)</span>), and total leaf (<span class="math inline">\(\text{LAI}_{t}\)</span> and <span class="math inline">\(C_t\)</span>).</p>
+</div>
+</div>
+<div id="leaf-area-index" class="section level2">
+<h2><span class="header-section-number">5.2</span> Leaf area index</h2>
+<p>Leaf area index (LAI) are calculated for green leaf (<span class="math inline">\(\text{LAI}_{g}\)</span>), dead leaf (<span class="math inline">\(\text{LAI}_{d}\)</span>), and total leaf (<span class="math inline">\(\text{LAI}_{t}\)</span>).</p>
+<p>The maximum leaf area of each leaf cohort is determined when leaf cohort is appeared. The profile of maximum leaf area by rank is specified by two paramters the maximum leaf area in all leaves (<code>AreaLargestLeaves</code> with default value 2600 mm<sup>2</sup>) and an age factor (Figure <a href="cha-leaf.html#fig:maximum-area-age">5.7</a>). The age factor is assumed all leaves appeared after stage <code>Terminal Spikelet</code> have the same maximum leaf size.</p>
+<div class="rmdwarning">
+<p>
+Actually, in the test simualtion, the maximum leaf area of flag leaf doesn’t equal to the parameter <code>AreaLargestLeaves</code> as the final leaf fraction is not equal to 1.
+</p>
+</div>
+<div class="fig-input">
+<div class="figure" style="text-align: center"><span id="fig:maximum-area-age"></span>
+<img src="APSIM-Wheat_files/figure-html/maximum-area-age-1.png" alt="Multiplier of maximum leaf area as a function of growthing stage" width="80%" />
+<p class="caption">
+Figure 5.7: Multiplier of maximum leaf area as a function of growthing stage
+</p>
+</div>
+</div>
+<div class="rmpimportant">
+<p>
+In the previous version of APSIM-Wheat model, the x-value of leaf area profile is <code>RelativeNodeAppearance</code>. However <code>RelativeNodeAppearance</code> is suddently increased at stage <code>Terminal Spikelet</code> which is caused by resetting of final node number (Figure <span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(fig:relative-node-number)).
+</p>
+<p>
+TODO: Need to check how leaf cohort model uses the maximum leaf area.
+</p>
+</div>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-lai"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-lai-1.png" alt="Leaf area index" width="80%" />
 <p class="caption">
-Figure 5.6: Leaf area index
+Figure 5.8: Leaf area index
 </p>
 </div>
 </div>
-<p>The coverages are calculated from LAI and extinction coefficient for green leaf (<span class="math inline">\(k_{g}\)</span>) and dead leaf (<span class="math inline">\(k_{d}\)</span>).</p>
+</div>
+<div id="ground-coverage" class="section level2">
+<h2><span class="header-section-number">5.3</span> Ground coverage</h2>
+<p>and coverage are calculated for green leaf (<span class="math inline">\(C_g\)</span>), dead leaf (<span class="math inline">\(C_d\)</span>), and total leaf (<span class="math inline">\(C_t\)</span>) from LAI and extinction coefficient for green leaf (<span class="math inline">\(k_{g}\)</span>) and dead leaf (<span class="math inline">\(k_{d}\)</span>).</p>
 <p><span class="math display">\[
 C_{g}=C_{max}(1-\exp(-k_{g}\frac{\text{LAI}_{g}}{C_{max}}))
 \]</span></p>
@@ -256,19 +302,25 @@ C_{d}=1-\exp(-k_{d}\text{LAI}_{d})
 \]</span></p>
 <p>The extinction coefficient for dead leaf (<span class="math inline">\(k_{d}\)</span>) is defined as 0.3. The extinction coefficient for green leaf (<span class="math inline">\(k_{g}\)</span>) is calculated by parameter <code>ExtinctionCoeff</code> which is depending on LAI and water stress.</p>
 <p>In the current version of APSIM-Wheat, extinction coefficient is set as 0.5 without variation as leaf area index.</p>
+<div class="rmdnote">
+<p>
+Extinction coefficient of dead leaf (<span class="math inline"><em>k</em><sub><em>d</em></sub></span>) is not setable in the APSIM User Interface which is defined in the xml file.
+</p>
+</div>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:k-lai"></span>
 <img src="APSIM-Wheat_files/figure-html/k-lai-1.png" alt="Extinction coefficient as a function of leaf area index (LAI)" width="80%" />
 <p class="caption">
-Figure 5.7: Extinction coefficient as a function of leaf area index (LAI)
+Figure 5.9: Extinction coefficient as a function of leaf area index (LAI)
 </p>
 </div>
 </div>
+<p>The extinction coefficient of green leaf is adjusted by water stress which is the ratio of water supply and demand. No adjustment is applied to extinction coefficient if water supply is more than water demand. However, extinction coefficient is reduced when water supply is less than water demand (Figure <a href="cha-leaf.html#fig:k-water-stress">5.10</a>, i.e. <span class="math inline">\(k\)</span> = 0.25 when no water supply).</p>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:k-water-stress"></span>
-<img src="APSIM-Wheat_files/figure-html/k-water-stress-1.png" alt="Extinction coefficient as a function of water stress" width="80%" />
+<img src="APSIM-Wheat_files/figure-html/k-water-stress-1.png" alt="Multiplier of extinction coefficient as a function of water stress" width="80%" />
 <p class="caption">
-Figure 5.8: Extinction coefficient as a function of water stress
+Figure 5.10: Multiplier of extinction coefficient as a function of water stress
 </p>
 </div>
 </div>
@@ -276,10 +328,33 @@ Figure 5.8: Extinction coefficient as a function of water stress
 <div class="figure" style="text-align: center"><span id="fig:leaf-cover"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-cover-1.png" alt="Coverage" width="80%" />
 <p class="caption">
-Figure 5.9: Coverage
+Figure 5.11: Coverage
 </p>
 </div>
 </div>
+</div>
+<div id="leaf-biomass" class="section level2">
+<h2><span class="header-section-number">5.4</span> Leaf biomass</h2>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:leaf-biomass"></span>
+<img src="APSIM-Wheat_files/figure-html/leaf-biomass-1.png" alt="Leaf biomass" width="80%" />
+<p class="caption">
+Figure 5.12: Leaf biomass
+</p>
+</div>
+</div>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:leaf-specific-leaf-area"></span>
+<img src="APSIM-Wheat_files/figure-html/leaf-specific-leaf-area-1.png" alt="Specific leaf area" width="80%" />
+<p class="caption">
+Figure 5.13: Specific leaf area
+</p>
+</div>
+</div>
+</div>
+<div id="frost-impact" class="section level2">
+<h2><span class="header-section-number">5.5</span> Frost impact</h2>
+<p>Kill a fraction in all leaves …</p>
 
 </div>
 </div>
@@ -289,7 +364,7 @@ Figure 5.9: Coverage
         </div>
       </div>
 <a href="cha-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cha-arbitrator.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="cha-biomass-production.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>

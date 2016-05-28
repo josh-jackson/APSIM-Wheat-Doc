@@ -100,6 +100,7 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="4.2" data-path="cha-structure.html"><a href="cha-structure.html#tillering"><i class="fa fa-check"></i><b>4.2</b> Tillering</a></li>
 <li class="chapter" data-level="4.3" data-path="cha-structure.html"><a href="cha-structure.html#population"><i class="fa fa-check"></i><b>4.3</b> Population</a></li>
 <li class="chapter" data-level="4.4" data-path="cha-structure.html"><a href="cha-structure.html#mortality"><i class="fa fa-check"></i><b>4.4</b> Mortality</a></li>
+<li class="chapter" data-level="4.5" data-path="cha-structure.html"><a href="cha-structure.html#canopy-height"><i class="fa fa-check"></i><b>4.5</b> Canopy height</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="cha-leaf.html"><a href="cha-leaf.html"><i class="fa fa-check"></i><b>5</b> Leaf</a><ul>
 <li class="chapter" data-level="5.1" data-path="cha-leaf.html"><a href="cha-leaf.html#life-growth-cycle"><i class="fa fa-check"></i><b>5.1</b> Life growth cycle</a><ul>
@@ -108,13 +109,16 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="5.1.3" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-appearance"><i class="fa fa-check"></i><b>5.1.3</b> Leaf appearance</a></li>
 <li class="chapter" data-level="5.1.4" data-path="cha-leaf.html"><a href="cha-leaf.html#other-periods"><i class="fa fa-check"></i><b>5.1.4</b> Other periods</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="cha-leaf.html"><a href="cha-leaf.html#photosynthesis"><i class="fa fa-check"></i><b>5.2</b> Photosynthesis</a></li>
-<li class="chapter" data-level="5.3" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-area-index-and-coverage"><i class="fa fa-check"></i><b>5.3</b> Leaf area index and coverage</a></li>
+<li class="chapter" data-level="5.2" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-area-index"><i class="fa fa-check"></i><b>5.2</b> Leaf area index</a></li>
+<li class="chapter" data-level="5.3" data-path="cha-leaf.html"><a href="cha-leaf.html#ground-coverage"><i class="fa fa-check"></i><b>5.3</b> Ground coverage</a></li>
+<li class="chapter" data-level="5.4" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-biomass"><i class="fa fa-check"></i><b>5.4</b> Leaf biomass</a></li>
+<li class="chapter" data-level="5.5" data-path="cha-leaf.html"><a href="cha-leaf.html#frost-impact"><i class="fa fa-check"></i><b>5.5</b> Frost impact</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="cha-arbitrator.html"><a href="cha-arbitrator.html"><i class="fa fa-check"></i><b>6</b> Arbitrator</a></li>
-<li class="chapter" data-level="7" data-path="cha-output.html"><a href="cha-output.html"><i class="fa fa-check"></i><b>7</b> Output</a><ul>
-<li class="chapter" data-level="7.1" data-path="cha-output.html"><a href="cha-output.html#phenology"><i class="fa fa-check"></i><b>7.1</b> Phenology</a></li>
-<li class="chapter" data-level="7.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>7.2</b> Structure</a></li>
+<li class="chapter" data-level="6" data-path="cha-biomass-production.html"><a href="cha-biomass-production.html"><i class="fa fa-check"></i><b>6</b> Biomass production</a></li>
+<li class="chapter" data-level="7" data-path="cha-arbitrator.html"><a href="cha-arbitrator.html"><i class="fa fa-check"></i><b>7</b> Arbitrator</a></li>
+<li class="chapter" data-level="8" data-path="cha-output.html"><a href="cha-output.html"><i class="fa fa-check"></i><b>8</b> Output</a><ul>
+<li class="chapter" data-level="8.1" data-path="cha-output.html"><a href="cha-output.html#phenology"><i class="fa fa-check"></i><b>8.1</b> Phenology</a></li>
+<li class="chapter" data-level="8.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>8.2</b> Structure</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://byzheng.github.io/APSIM-Wheat-Sens" target="blank">Sensitivity analysis</a></li>
@@ -154,6 +158,11 @@ Figure 4.1: Final node number in main stem
 </p>
 </div>
 </div>
+<div class="rmdwarning">
+<p>
+In the test simulations, the final node number is not an integer (i.e. 10.853).
+</p>
+</div>
 <p>Daily changes of primordia (<span class="math inline">\(\Delta N_{pri}\)</span>) and node (leaf) (<span class="math inline">\(\Delta N_{node}\)</span>) number in main stem are calculated using plastochron (<span class="math inline">\(P_{pla}\)</span>) and phyllochron (<span class="math inline">\(P_{phy}\)</span>), respectively, after plant stage Emergence (Section <a href="cha-phenology.html#stage-period">3.2</a> and Figure <a href="cha-structure.html#fig:delta-node">4.2</a>).</p>
 <p><span class="math display">\[
  \Delta N_{pri}=rac{\Delta TT_{d}}{P_{pla}}
@@ -191,6 +200,20 @@ Figure 4.3: Primordia and node number in main stem
 </p>
 </div>
 </div>
+<p>The relative appeared node number (<code>RelativeNodeAppearance</code>) is calculated as the fraction of appeared node number on the final node number. As the final node number is initialized as 30 as reset to promodia number at the stage <code>Terminal Spikelet</code>, the output variable <code>RelativeNodeAppearance</code> is suddenly increased at stage <code>Terminal Spikelet</code> (Figure <a href="cha-structure.html#fig:relative-node-number">4.4</a>).</p>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:relative-node-number"></span>
+<img src="APSIM-Wheat_files/figure-html/relative-node-number-1.png" alt="The fraction of appeared node nubmer on the final node number" width="80%" />
+<p class="caption">
+Figure 4.4: The fraction of appeared node nubmer on the final node number
+</p>
+</div>
+</div>
+<div class="rmdwarning">
+<p>
+<code>Wheat.Structure.RelativeNodeAppearance</code> is not a good indicater for progress of node/leaf development, which should be avoided to use in other components.
+</p>
+</div>
 </div>
 <div id="tillering" class="section level2">
 <h2><span class="header-section-number">4.2</span> Tillering</h2>
@@ -199,35 +222,35 @@ Figure 4.3: Primordia and node number in main stem
 The tiller number is too sensitive to WSC stress (x = [0.1, 0.2]; y = [0, 1]). This feature is disabled in all analysis
 </p>
 </div>
-<p>In <a href="https://github.com/APSIMInitiative/ApsimX">next generation APSIM</a>, tillering for wheat is referred as branching. New tillers are initialised when increase of the node number in main stem (<span class="math inline">\(\Delta N_{node}\)</span>) is more than 1 although the branching rate (<span class="math inline">\(\Delta N_{branch}\)</span>) is calculate everyday (Figure <a href="cha-structure.html#fig:tiller-number">4.6</a>).</p>
+<p>In <a href="https://github.com/APSIMInitiative/ApsimX">next generation APSIM</a>, tillering for wheat is referred as branching. New tillers are initialised when increase of the node number in main stem (<span class="math inline">\(\Delta N_{node}\)</span>) is more than 1 although the branching rate (<span class="math inline">\(\Delta N_{branch}\)</span>) is calculate everyday (Figure <a href="cha-structure.html#fig:tiller-number">4.7</a>).</p>
 <p>The new branch number for each plant is specified by parameter BranchingRate (<span class="math inline">\(\Delta N_{branch}\)</span>), which could be a function of branch number on leaf rank in main stem. <span class="math display">\[
      P_{branch} = P \times \sum_{t=T_{0}}^{T}\Delta N_{branch}
 \]</span></p>
-<p>The branching rate is defined by potential branching rate and stresses (nitrogen and WSC). From stage Emergence to Terminal Spikelet (Section <a href="cha-phenology.html#stage-period">3.2</a>), the potential branching rate is defined as a function of number of appreared cohorts in the main stem (Figure <a href="cha-structure.html#fig:branching-rate">4.4</a>). Beyond this period, the branching rate is set as zero.</p>
+<p>The branching rate is defined by potential branching rate and stresses (nitrogen and WSC). From stage Emergence to Terminal Spikelet (Section <a href="cha-phenology.html#stage-period">3.2</a>), the potential branching rate is defined as a function of number of appreared cohorts in the main stem (Figure <a href="cha-structure.html#fig:branching-rate">4.5</a>). Beyond this period, the branching rate is set as zero.</p>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:branching-rate"></span>
 <img src="APSIM-Wheat_files/figure-html/branching-rate-1.png" alt="Branching rate of APSIM-Wheat as a function of appreared cohort number" width="80%" />
 <p class="caption">
-Figure 4.4: Branching rate of APSIM-Wheat as a function of appreared cohort number
+Figure 4.5: Branching rate of APSIM-Wheat as a function of appreared cohort number
 </p>
 </div>
 </div>
 <p>Two stresses are defined in the APSIM-Wheat inclduing nitrogen and WSC. A simple sensitivity analysis indicates the branching rate is too sensitive to WSC with default values (x = [0.1, 0.2]; y = [0, 1]). So, this feature is disabled for further analysis.</p>
-<p>The nitrogen stress is calculated as a function of fraction of nitrogen supply relative to nitrogen demand which is exported from the Arbitrator module (Chaptor <a href="cha-arbitrator.html#cha:arbitrator">6</a>). Wheat module assumes no nitrogen stress when the nitrogen supply is bigger than 1.5 times of nitrogen demand (Figure <a href="cha-structure.html#fig:branching-rate-nstress">4.5</a>). Nitreogen stress linearly recreases when supply/demand ratio less then 1.5 (<font color="red">Reference required.</font>)</p>
+<p>The nitrogen stress is calculated as a function of fraction of nitrogen supply relative to nitrogen demand which is exported from the Arbitrator module (Chaptor <a href="cha-arbitrator.html#cha:arbitrator">7</a>). Wheat module assumes no nitrogen stress when the nitrogen supply is bigger than 1.5 times of nitrogen demand (Figure <a href="cha-structure.html#fig:branching-rate-nstress">4.6</a>). Nitreogen stress linearly recreases when supply/demand ratio less then 1.5 (<font color="red">Reference required.</font>)</p>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:branching-rate-nstress"></span>
 <img src="APSIM-Wheat_files/figure-html/branching-rate-nstress-1.png" alt="Nitrogen stress on branching rate as a function of fraction of nitrogen supply relative to nitrogen demand" width="80%" />
 <p class="caption">
-Figure 4.5: Nitrogen stress on branching rate as a function of fraction of nitrogen supply relative to nitrogen demand
+Figure 4.6: Nitrogen stress on branching rate as a function of fraction of nitrogen supply relative to nitrogen demand
 </p>
 </div>
 </div>
-<p>Figure <a href="cha-structure.html#fig:tiller-number">4.6</a> shows the branching rate and total branching number in the test simulation without nitrogen stress on branching rate during branching period (from Emergence to Terminal Spikelet, Figure <a href="cha-structure.html#fig:nitrogen-fn">4.7</a>).</p>
+<p>Figure <a href="cha-structure.html#fig:tiller-number">4.7</a> shows the branching rate and total branching number in the test simulation without nitrogen stress on branching rate during branching period (from Emergence to Terminal Spikelet, Figure <a href="cha-structure.html#fig:nitrogen-fn">4.8</a>).</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:tiller-number"></span>
 <img src="APSIM-Wheat_files/figure-html/tiller-number-1.png" alt="The branching rate and branch number for wheat" width="80%" />
 <p class="caption">
-Figure 4.6: The branching rate and branch number for wheat
+Figure 4.7: The branching rate and branch number for wheat
 </p>
 </div>
 </div>
@@ -240,7 +263,7 @@ It seems PMF uses the branching rate one day before to calculate the branch numb
 <div class="figure" style="text-align: center"><span id="fig:nitrogen-fn"></span>
 <img src="APSIM-Wheat_files/figure-html/nitrogen-fn-1.png" alt="The fraction of nitrogen supply relative to nitrogen demand" width="80%" />
 <p class="caption">
-Figure 4.7: The fraction of nitrogen supply relative to nitrogen demand
+Figure 4.8: The fraction of nitrogen supply relative to nitrogen demand
 </p>
 </div>
 </div>
@@ -257,33 +280,33 @@ Figure 4.7: The fraction of nitrogen supply relative to nitrogen demand
 <p>Population of total stem (<span class="math inline">\(P_{stem}\)</span>) is summed up population of main stem (<span class="math inline">\(P_{ms}\)</span>) and branches ((<span class="math inline">\(P_{branch}\)</span>)). <span class="math display">\[
     P_{stem} = P_{ms} + P_{branch}
 \]</span></p>
-<p>In the test simulation, the plant density (<span class="math inline">\(P\)</span>) is 150 plants m<sup>2</sup>, so population of main stem (<span class="math inline">\(P_{ms}\)</span>) equals to plant density (Figure <a href="cha-structure.html#fig:plant-population">4.8</a>). From Emergence to terminal spikelet, the population of total stem (<span class="math inline">\(P_{stem}\)</span>) multiply by stem number and plant density (Figure <a href="cha-structure.html#fig:tiller-number">4.6</a>).</p>
+<p>In the test simulation, the plant density (<span class="math inline">\(P\)</span>) is 150 plants m<sup>2</sup>, so population of main stem (<span class="math inline">\(P_{ms}\)</span>) equals to plant density (Figure <a href="cha-structure.html#fig:plant-population">4.9</a>). From Emergence to terminal spikelet, the population of total stem (<span class="math inline">\(P_{stem}\)</span>) multiply by stem number and plant density (Figure <a href="cha-structure.html#fig:tiller-number">4.7</a>).</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:plant-population"></span>
 <img src="APSIM-Wheat_files/figure-html/plant-population-1.png" alt="The total population of main stem and all stems" width="80%" />
 <p class="caption">
-Figure 4.8: The total population of main stem and all stems
+Figure 4.9: The total population of main stem and all stems
 </p>
 </div>
 </div>
 </div>
 <div id="mortality" class="section level2">
 <h2><span class="header-section-number">4.4</span> Mortality</h2>
-<p>Branching mortality starts from the Terminal Spikelet until Flowering which defines as a function of moving mean tiller growth rate (Figure <a href="cha-structure.html#fig:mortality-growth-rate">4.9</a>. The mean tiller growth rate is calculated as the 5 days moving means of tiller growth rate, which is calculated by the daily biomass supply divides thermal time and total stem population. <font color="red">Reference required.</font></p>
+<p>Branching mortality starts from the Terminal Spikelet until Flowering which defines as a function of moving mean tiller growth rate (Figure <a href="cha-structure.html#fig:mortality-growth-rate">4.10</a>. The mean tiller growth rate is calculated as the 5 days moving means of tiller growth rate, which is calculated by the daily biomass supply divides thermal time and total stem population. <font color="red">Reference required.</font></p>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:mortality-growth-rate"></span>
 <img src="APSIM-Wheat_files/figure-html/mortality-growth-rate-1.png" alt="Tiller mortality as a function of moving mean tiller growth rate" width="80%" />
 <p class="caption">
-Figure 4.9: Tiller mortality as a function of moving mean tiller growth rate
+Figure 4.10: Tiller mortality as a function of moving mean tiller growth rate
 </p>
 </div>
 </div>
-<p>Figure <a href="cha-structure.html#fig:tiller-growth-rate-factor">4.11</a> and <a href="cha-structure.html#fig:tiller-growth-rate">4.10</a> show the mean tiller growth rate and the three factors to calculate it in the test simulation.</p>
+<p>Figure <a href="cha-structure.html#fig:tiller-growth-rate-factor">4.12</a> and <a href="cha-structure.html#fig:tiller-growth-rate">4.11</a> show the mean tiller growth rate and the three factors to calculate it in the test simulation.</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:tiller-growth-rate"></span>
 <img src="APSIM-Wheat_files/figure-html/tiller-growth-rate-1.png" alt="The moving tiller growth rate" width="80%" />
 <p class="caption">
-Figure 4.10: The moving tiller growth rate
+Figure 4.11: The moving tiller growth rate
 </p>
 </div>
 </div>
@@ -291,7 +314,7 @@ Figure 4.10: The moving tiller growth rate
 <div class="figure" style="text-align: center"><span id="fig:tiller-growth-rate-factor"></span>
 <img src="APSIM-Wheat_files/figure-html/tiller-growth-rate-factor-1.png" alt="Three factors to calculate the tiller growth rate" width="80%" />
 <p class="caption">
-Figure 4.11: Three factors to calculate the tiller growth rate
+Figure 4.12: Three factors to calculate the tiller growth rate
 </p>
 </div>
 </div>
@@ -299,19 +322,23 @@ Figure 4.11: Three factors to calculate the tiller growth rate
 <div class="figure" style="text-align: center"><span id="fig:tiller-number-mo"></span>
 <img src="APSIM-Wheat_files/figure-html/tiller-number-mo-1.png" alt="The mortality of tillers" width="80%" />
 <p class="caption">
-Figure 4.12: The mortality of tillers
+Figure 4.13: The mortality of tillers
 </p>
 </div>
 </div>
-<p>As the primary bud number is equal to 1, the plant total node number and total primary node number are the same (Figure <a href="cha-structure.html#fig:plant-node-number">4.13</a>). Figure <a href="cha-structure.html#fig:plant-node-number">4.13</a> show the total node number as the results of tiller appearing and mortality.</p>
+<p>As the primary bud number is equal to 1, the plant total node number and total primary node number are the same (Figure <a href="cha-structure.html#fig:plant-node-number">4.14</a>). Figure <a href="cha-structure.html#fig:plant-node-number">4.14</a> show the total node number as the results of tiller appearing and mortality.</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:plant-node-number"></span>
 <img src="APSIM-Wheat_files/figure-html/plant-node-number-1.png" alt="Total plant node number" width="80%" />
 <p class="caption">
-Figure 4.13: Total plant node number
+Figure 4.14: Total plant node number
 </p>
 </div>
 </div>
+</div>
+<div id="canopy-height" class="section level2">
+<h2><span class="header-section-number">4.5</span> Canopy height</h2>
+<p>…</p>
 
 </div>
 </div>
