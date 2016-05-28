@@ -147,8 +147,8 @@ MathJax.Hub.Config({
 <p>The growth cycle of leaf cohort is divided into 7 stages and 6 periods from <code>Initialized</code> to <code>Detached</code>. The length of each period depends on the <code>plastrochron</code> and <code>phylochron</code> for initialization and appearance and is configured by <code>CohortParameters</code> for others.</p>
 <p>Several status variables are defined for each leaf cohort, which can be used in other modules to describe the current status of leaf cohort, i.e. <code>IsNotAppeared</code>, <code>IsGrowing</code>, <code>IsAlive</code>, <code>IsGreen</code>, <code>IsNotSenescing</code>, <code>Senescing</code>, <code>isFullyExpanded</code>, <code>ShouldBeDead</code>, <code>IsAppeared</code> and <code>IsInitialised</code>.</p>
 <div class="fig-input">
-<div id="htmlwidget-462" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-462">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-950" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-950">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="leaf-age" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> leaf age</h3>
@@ -227,9 +227,11 @@ Figure 5.5: Appeared number of green, senesced and total leaves
 </div>
 <div id="photosynthesis" class="section level2">
 <h2><span class="header-section-number">5.2</span> Photosynthesis</h2>
+<p>Radiation use efficiency (RUE) model is used to calculate the daily photosynthesis.</p>
 </div>
 <div id="leaf-area-index-and-coverage" class="section level2">
 <h2><span class="header-section-number">5.3</span> Leaf area index and coverage</h2>
+<p>Leaf area index (LAI) and coverage are calculated for green leaf (<span class="math inline">\(\text{LAI}_{g}\)</span> and <span class="math inline">\(C_g\)</span>), dead leaf (<span class="math inline">\(\text{LAI}_{d}\)</span> and <span class="math inline">\(C_d\)</span>), and total leaf (<span class="math inline">\(\text{LAI}_{t}\)</span> and <span class="math inline">\(C_t\)</span>).</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-lai"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-lai-1.png" alt="Leaf area index" width="80%" />
@@ -238,11 +240,43 @@ Figure 5.6: Leaf area index
 </p>
 </div>
 </div>
+<p>The coverages are calculated from LAI and extinction coefficient for green leaf (<span class="math inline">\(k_{g}\)</span>) and dead leaf (<span class="math inline">\(k_{d}\)</span>).</p>
+<p><span class="math display">\[
+C_{g}=C_{max}(1-\exp(-k_{g}\frac{\text{LAI}_{g}}{C_{max}}))
+\]</span></p>
+<p>As the default value of maximum coverage (<span class="math inline">\(C_{max}\)</span>) is 1, the function is reduced to <span class="math display">\[
+C_{g}=1-\exp(-k_{g}\text{LAI}_{g})
+\]</span></p>
+<p>The similar equation is used for dead coverage.</p>
+<p><span class="math display">\[
+C_{d}=1-\exp(-k_{d}\text{LAI}_{d})
+\]</span></p>
+<p>Total coverage (<span class="math inline">\(C_t\)</span>) is calculated from coverage of green and dead leaves. <span class="math display">\[
+    C_{t} = 1 - (1 - C_{g})(1 - C_{d})
+\]</span></p>
+<p>The extinction coefficient for dead leaf (<span class="math inline">\(k_{d}\)</span>) is defined as 0.3. The extinction coefficient for green leaf (<span class="math inline">\(k_{g}\)</span>) is calculated by parameter <code>ExtinctionCoeff</code> which is depending on LAI and water stress.</p>
+<p>In the current version of APSIM-Wheat, extinction coefficient is set as 0.5 without variation as leaf area index.</p>
+<div class="fig-input">
+<div class="figure" style="text-align: center"><span id="fig:k-lai"></span>
+<img src="APSIM-Wheat_files/figure-html/k-lai-1.png" alt="Extinction coefficient as a function of leaf area index (LAI)" width="80%" />
+<p class="caption">
+Figure 5.7: Extinction coefficient as a function of leaf area index (LAI)
+</p>
+</div>
+</div>
+<div class="fig-input">
+<div class="figure" style="text-align: center"><span id="fig:k-water-stress"></span>
+<img src="APSIM-Wheat_files/figure-html/k-water-stress-1.png" alt="Extinction coefficient as a function of water stress" width="80%" />
+<p class="caption">
+Figure 5.8: Extinction coefficient as a function of water stress
+</p>
+</div>
+</div>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-cover"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-cover-1.png" alt="Coverage" width="80%" />
 <p class="caption">
-Figure 5.7: Coverage
+Figure 5.9: Coverage
 </p>
 </div>
 </div>
