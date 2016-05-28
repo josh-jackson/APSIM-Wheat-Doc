@@ -156,8 +156,6 @@ y_cols <- c(
 
 plot_report(df, x_var, y_cols, x_lab = x_lab, 
             y_lab = 'Cohort number')
-
-
 ```
 </div>
 
@@ -173,16 +171,19 @@ y_cols <- c(
 
 plot_report(df, x_var, y_cols, x_lab = x_lab, 
             y_lab = 'Leaf number')
-
-
 ```
 </div>
 
 
 ## Photosynthesis
 
+Radiation use efficiency (RUE) model is used to calculate the daily photosynthesis. 
 
 ## Leaf area index and coverage
+
+Leaf area index (LAI) and coverage are calculated for green leaf ($\text{LAI}_{g}$ and $C_g$), dead leaf ($\text{LAI}_{d}$ and $C_d$), and total leaf ($\text{LAI}_{t}$ and $C_t$).
+
+
 
 <div class="fig-output">
 ```{r leaf-lai, fig.cap='Leaf area index'}
@@ -194,6 +195,56 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Leaf area index')
 
 ```
 </div>
+
+
+The coverages are calculated from LAI and extinction coefficient for green leaf ($k_{g}$) and dead leaf ($k_{d}$). 
+
+$$
+C_{g}=C_{max}(1-\exp(-k_{g}\frac{\text{LAI}_{g}}{C_{max}}))
+$$
+
+As the default value of maximum coverage ($C_{max}$) is 1, the function is reduced to
+$$
+C_{g}=1-\exp(-k_{g}\text{LAI}_{g})
+$$
+
+The similar equation is used for dead coverage.
+
+$$
+C_{d}=1-\exp(-k_{d}\text{LAI}_{d})
+$$
+
+Total coverage ($C_t$) is calculated from coverage of green and dead leaves.
+$$
+    C_{t} = 1 - (1 - C_{g})(1 - C_{d})
+$$
+
+The extinction coefficient for dead leaf ($k_{d}$) is defined as 0.3. The extinction coefficient for green leaf ($k_{g}$) is calculated by parameter `ExtinctionCoeff` which is depending on LAI and water stress.  
+
+In the current version of APSIM-Wheat, extinction coefficient is set as 0.5 without variation as leaf area index. 
+
+<div class="fig-input">
+```{r k-lai, fig.asp = 0.75, fig.cap='Extinction coefficient as a function of leaf area index (LAI)'}
+xpath <- '//Name[text()="PotentialExtinctionCoeff"]'
+plot_xypair(pmf, xpath, x_lab = 'Leaf area index', y_lab = 'Extinction coefficient')
+
+```
+</div>
+
+
+
+
+<div class="fig-input">
+```{r k-water-stress, fig.asp = 0.75, fig.cap='Extinction coefficient as a function of water stress'}
+xpath <- '//MultiplyFunction[Name="ExtinctionCoeff"]/LinearInterpolationFunction/Name[text()="WaterStress"]'
+plot_xypair(pmf, xpath, x_lab = 'Ratio of water supply and demand', y_lab = 'Extinction coefficient')
+
+```
+</div>
+
+
+
+
 
 
 <div class="fig-output">
