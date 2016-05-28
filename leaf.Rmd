@@ -135,7 +135,7 @@ The lengths of other periods are determined when a new leaf initialized.
 * Growth duration is defined as a phyllochron.
 * Lag duration is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort apeared during stem alongtation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage `FlagLeaf` to stage `EndGrainFill` minus 3 phyllochron (`senescence duration`). 
 
-```{block, type='rmdnote'}
+```{block, type='rmdnote', echo=TRUE}
 It could be only for flag leaf for extra longer lag duration. Need to check.
 
 ```
@@ -175,13 +175,49 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 </div>
 
 
-## Photosynthesis
+The fraction of final leaf is set as 1, but return the actual fraction of the final leaf if the last leaf has appeared. 
 
-Radiation use efficiency (RUE) model is used to calculate the daily photosynthesis. 
+<div class="fig-output">
+```{r final-leaf-fraction, fig.cap='Fraction of final leaf'}
+y_cols <- c(
+    'Wheat.Leaf.FinalLeafFraction')
 
-## Leaf area index and coverage
+plot_report(df, x_var, y_cols, x_lab = x_lab, 
+            y_lab = 'Fraction of final leaf')
+```
+</div>
 
-Leaf area index (LAI) and coverage are calculated for green leaf ($\text{LAI}_{g}$ and $C_g$), dead leaf ($\text{LAI}_{d}$ and $C_d$), and total leaf ($\text{LAI}_{t}$ and $C_t$).
+
+```{block, type='rmdwarning', echo=TRUE}
+Not sure about the main point of final leaf fraction. The fraction is not integer as the final node number  is not an integer.
+```
+
+
+## Leaf area index
+
+Leaf area index (LAI) are calculated for green leaf ($\text{LAI}_{g}$), dead leaf ($\text{LAI}_{d}$), and total leaf ($\text{LAI}_{t}$).
+
+The maximum leaf area of each leaf cohort is determined when leaf cohort is appeared. The profile of maximum leaf area by rank is specified by two paramters the maximum leaf area in all leaves (`AreaLargestLeaves` with default value 2600 mm^2^) and an age factor (Figure \@ref(fig:maximum-area-age)). The age factor is assumed all leaves appeared after stage `Terminal Spikelet` have the same maximum leaf size.
+
+```{block, type='rmdwarning', echo=TRUE}
+Actually, in the test simualtion, the maximum leaf area of flag leaf doesn't equal to the parameter `AreaLargestLeaves` as the final leaf fraction is not equal to 1.
+```
+
+
+<div class="fig-input">
+```{r maximum-area-age, fig.asp = 0.75, fig.cap='Multiplier of maximum leaf area as a function of growthing stage'}
+xpath <- '//Name[text()="AgeFactor"]'
+plot_xypair(pmf, xpath, x_lab = 'Growthing stage', y_lab = 'Multiplier of maximum leaf area')
+
+```
+</div>
+
+
+```{block, type="rmpimportant", echo=TRUE}
+In the previous version of APSIM-Wheat model,  the x-value of leaf area profile is `RelativeNodeAppearance`. However `RelativeNodeAppearance` is suddently increased at stage `Terminal Spikelet` which is caused by resetting of final node number (Figure \@ref(fig:relative-node-number)). 
+
+TODO: Need to check how leaf cohort model uses the maximum leaf area.
+```
 
 
 
@@ -197,7 +233,9 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Leaf area index')
 </div>
 
 
-The coverages are calculated from LAI and extinction coefficient for green leaf ($k_{g}$) and dead leaf ($k_{d}$). 
+## Ground coverage
+
+and coverage are calculated for green leaf ($C_g$), dead leaf ($C_d$), and total leaf ($C_t$) from LAI and extinction coefficient for green leaf ($k_{g}$) and dead leaf ($k_{d}$). 
 
 $$
 C_{g}=C_{max}(1-\exp(-k_{g}\frac{\text{LAI}_{g}}{C_{max}}))
@@ -223,6 +261,11 @@ The extinction coefficient for dead leaf ($k_{d}$) is defined as 0.3. The extinc
 
 In the current version of APSIM-Wheat, extinction coefficient is set as 0.5 without variation as leaf area index. 
 
+```{block, type='rmdnote', echo=TRUE}
+Extinction coefficient of dead leaf ($k_{d}$) is not setable in the APSIM User Interface which is defined in the xml file. 
+```
+
+
 <div class="fig-input">
 ```{r k-lai, fig.asp = 0.75, fig.cap='Extinction coefficient as a function of leaf area index (LAI)'}
 xpath <- '//Name[text()="PotentialExtinctionCoeff"]'
@@ -231,11 +274,10 @@ plot_xypair(pmf, xpath, x_lab = 'Leaf area index', y_lab = 'Extinction coefficie
 ```
 </div>
 
-
-
+The extinction coefficient of green leaf is adjusted by water stress which is the ratio of water supply and demand. No adjustment is applied to extinction coefficient if water supply is more than water demand. However, extinction coefficient is reduced when water supply is less than water demand (Figure \@ref(fig:k-water-stress), i.e. $k$ = 0.25 when no water supply).
 
 <div class="fig-input">
-```{r k-water-stress, fig.asp = 0.75, fig.cap='Extinction coefficient as a function of water stress'}
+```{r k-water-stress, fig.asp = 0.75, fig.cap='Multiplier of extinction coefficient as a function of water stress'}
 xpath <- '//MultiplyFunction[Name="ExtinctionCoeff"]/LinearInterpolationFunction/Name[text()="WaterStress"]'
 plot_xypair(pmf, xpath, x_lab = 'Ratio of water supply and demand', y_lab = 'Extinction coefficient')
 
@@ -261,4 +303,29 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Coverage')
 
 
 
+## Leaf biomass
 
+<div class="fig-output">
+```{r leaf-biomass, fig.cap='Leaf biomass'}
+y_cols <- c(
+    'Wheat.Leaf.LiveWeight', 
+'Wheat.Leaf.DeadWeight')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Leaf biomass (g/m2)')
+
+```
+</div>
+
+
+
+<div class="fig-output">
+```{r leaf-specific-leaf-area, fig.cap='Specific leaf area'}
+y_cols <- c('Wheat.Leaf.SpecificArea')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g)')
+
+```
+</div>
+
+
+## Frost impact 
+
+Kill a fraction in all leaves ...
