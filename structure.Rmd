@@ -58,6 +58,9 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Final node number in main
 </div>
 
 
+```{block, type='rmdwarning', echo=TRUE}
+In the test simulations, the final node number  is not an integer (i.e. 10.853).
+```
 
 Daily changes of primordia ($\Delta N_{pri}$) and node (leaf) ($\Delta N_{node}$) number in main stem are calculated using plastochron ($P_{pla}$) and phyllochron ($P_{phy}$), respectively, after plant stage Emergence (Section \@ref(stage-period) and Figure \@ref(fig:delta-node)).
 
@@ -113,6 +116,22 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Primordia or node number 
 ```
 </div>
 
+
+The relative appeared node number (`RelativeNodeAppearance`) is calculated as the fraction  of appeared node number on the final node number. As the final node number is initialized as 30 as reset to promodia number at the stage `Terminal Spikelet`, the output variable `RelativeNodeAppearance` is suddenly increased at stage `Terminal Spikelet` (Figure \@ref(fig:relative-node-number)).
+
+<div class="fig-output">
+```{r relative-node-number, fig.cap='The fraction of appeared node nubmer on the final node number'}
+y_cols <- c(
+    'Wheat.Structure.RelativeNodeApperance')
+
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Relative appeared node number')
+
+```
+</div>
+
+```{block, type='rmdwarning', echo=TRUE}
+`Wheat.Structure.RelativeNodeAppearance` is not a good indicater for progress of node/leaf development, which should be avoided to use in other components.
+```
 
 ## Tillering
 
@@ -301,4 +320,6 @@ plot_report(df,
 
 
 
+## Canopy height
 
+...

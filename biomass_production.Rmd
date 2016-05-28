@@ -1,0 +1,3 @@
+# Biomass production {#cha:biomass-production}
+
+Radiation use efficiency (RUE) model is used to calculate the daily photosynthesis. 
