@@ -40,10 +40,7 @@ library(DiagrammeR)
 source('_utility.R')
 report <- read_csv('simulation/simulation.db.Report.csv')
 
-df <- report %>% 
-    filter(grepl('15TraitMod', Name),
-           Management == 'IHN',
-           Cultivar == 'hartog')
+df <- report 
 
 pmf <- read_xml('simulation/simulation.apsimx')
 

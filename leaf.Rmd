@@ -17,11 +17,7 @@ library(DiagrammeR)
 source('_utility.R')
 report <- read_csv('simulation/simulation.db.Report.csv')
 
-df <- report %>% 
-    filter(grepl('15TraitMod', Name),
-           Management == 'IHN',
-           Cultivar == 'hartog')
-
+df <- report 
 pmf <- read_xml('simulation/simulation.apsimx')
 
 
@@ -218,6 +214,20 @@ In the previous version of APSIM-Wheat model,  the x-value of leaf area profile 
 
 TODO: Need to check how leaf cohort model uses the maximum leaf area.
 ```
+
+
+
+<div class="fig-output">
+```{r leaf-cohort-max-area, fig.cap='Maximum area of leaf cohort as a function of stage or accumulated thermal time'}
+y_cols <- c(
+    'Wheat.Leaf.MaxLeafArea')
+plot_report_vector(
+    df, x_var, y_cols, x_lab = x_lab, 
+    y_lab = 'Maximum leaf area (mm2)')
+
+```
+</div>
+
 
 
 

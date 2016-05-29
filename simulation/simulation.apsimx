@@ -1105,6 +1105,10 @@ The model consists of:
                   <double>1</double>
                 </Y>
               </XYPairs>
+              <Constant>
+                <Name>DMReallocationFactor</Name>
+                <Value>0</Value>
+              </Constant>
               <XProperty>[Wheat].Leaf.Fn</XProperty>
             </LinearInterpolationFunction>
           </MinimumFunction>
@@ -2254,134 +2258,14 @@ The EarLive composite biomass object includes the Live pools of all organs withi
       <Factor>
         <Name>Cultivar</Name>
         <Operations>
-          <Name>ega_gregory</Name>
-          <Operation>
-            <Date>2015-05-21T00:00:00</Date>
-            <Action>[wheat].Sow(cultivar:"egagregory", population:150, depth:40, rowSpacing:250);</Action>
-          </Operation>
-        </Operations>
-        <Operations>
           <Name>hartog</Name>
           <Operation>
             <Date>2015-05-21T00:00:00</Date>
             <Action>[wheat].Sow(cultivar:"hartog", population:150, depth:40, rowSpacing:250);</Action>
           </Operation>
         </Operations>
-        <Operations>
-          <Name>suntop</Name>
-          <Operation>
-            <Date>2015-05-21T00:00:00</Date>
-            <Action>[wheat].Sow(cultivar:"suntop", population:150, depth:40, rowSpacing:250);</Action>
-          </Operation>
-        </Operations>
         <Specifications>
           <string>[Sowing]</string>
-        </Specifications>
-      </Factor>
-      <Factor>
-        <Name>Management</Name>
-        <Operations>
-          <Name>IHN</Name>
-          <Operation>
-            <Date>2015-05-21T00:00:00</Date>
-            <Action> [Fertiliser].Apply(Amount: 205, Type: Fertiliser.Types.Urea);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-05-22T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:24);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-06-26T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-07-14T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:26);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-07-31T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:26);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-08-14T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-08-26T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-09-09T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-        </Operations>
-        <Operations>
-          <Name>ILN</Name>
-          <Operation>
-            <Date>2015-05-21T00:00:00</Date>
-            <Action> [Fertiliser].Apply(Amount: 50, Type: Fertiliser.Types.Urea);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-05-22T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:24);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-06-26T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-07-14T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:26);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-07-31T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:26);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-08-14T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-08-26T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-09-09T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-        </Operations>
-        <Operations>
-          <Name>RHN</Name>
-          <Operation>
-            <Date>2015-05-21T00:00:00</Date>
-            <Action> [Fertiliser].Apply(Amount: 205, Type: Fertiliser.Types.Urea);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-05-22T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:24);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-06-26T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-        </Operations>
-        <Operations>
-          <Name>RLN</Name>
-          <Operation>
-            <Date>2015-05-21T00:00:00</Date>
-            <Action> [Fertiliser].Apply(Amount: 50, Type: Fertiliser.Types.Urea);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-05-22T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:24);</Action>
-          </Operation>
-          <Operation>
-            <Date>2015-06-26T00:00:00</Date>
-            <Action> [Irrigation].Apply(amount:25);</Action>
-          </Operation>
-        </Operations>
-        <Specifications>
-          <string>[Management]</string>
         </Specifications>
       </Factor>
     </Factors>
@@ -2743,7 +2627,7 @@ The EarLive composite biomass object includes the Live pools of all organs withi
           <Name>Sowing</Name>
           <Operation>
             <Date>2015-05-21T00:00:00</Date>
-            <Action>[wheat].Sow(cultivar:"hartog", population:150, depth:50, rowSpacing:250);</Action>
+            <Action>[wheat].Sow(cultivar:"hartog", population:150, depth:40, rowSpacing:250);</Action>
           </Operation>
         </Operations>
         <MicroClimate>
@@ -2833,7 +2717,9 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Structure.RelativeNodeApperance</string>
             <string>Wheat.Arbitrator.FN</string>
             <string>Wheat.Arbitrator.DMSupply</string>
-            <string>Wheat.Leaf.CohortAge[1:10]</string>
+            <string>Wheat.Leaf.CohortAge[1:11]</string>
+            <string>Wheat.Leaf.MaxLeafArea[1:11]</string>
+            <string />
             <string>Wheat.Leaf.AppearedCohortNo</string>
             <string>Wheat.Leaf.InitialisedCohortNo</string>
             <string>Wheat.Leaf.ExpandingCohortNo</string>
@@ -2866,47 +2752,6 @@ The EarLive composite biomass object includes the Live pools of all organs withi
       <Area>0</Area>
       <Slope>0</Slope>
     </Simulation>
-    <Graph>
-      <Name>Graph</Name>
-      <Series>
-        <Name>Series</Name>
-        <Type>Scatter</Type>
-        <XAxis>Bottom</XAxis>
-        <YAxis>Left</YAxis>
-        <ColourArgb>0</ColourArgb>
-        <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
-        <FactorIndexToVaryMarkers>0</FactorIndexToVaryMarkers>
-        <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
-        <Marker>None</Marker>
-        <MarkerSize>Normal</MarkerSize>
-        <Line>Solid</Line>
-        <LineThickness>Normal</LineThickness>
-        <TableName>Report</TableName>
-        <XFieldName>Clock.Today</XFieldName>
-        <YFieldName>Wheat.Phenology.Stage</YFieldName>
-        <ShowInLegend>false</ShowInLegend>
-        <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
-        <Cumulative>false</Cumulative>
-        <CumulativeX>false</CumulativeX>
-      </Series>
-      <Axis>
-        <Type>Bottom</Type>
-        <Inverted>false</Inverted>
-        <Minimum>NaN</Minimum>
-        <Maximum>NaN</Maximum>
-        <Interval>NaN</Interval>
-      </Axis>
-      <Axis>
-        <Type>Left</Type>
-        <Inverted>false</Inverted>
-        <Minimum>NaN</Minimum>
-        <Maximum>NaN</Maximum>
-        <Interval>NaN</Interval>
-      </Axis>
-      <LegendPosition>TopLeft</LegendPosition>
-      <DisabledSeries />
-      <IncludeInDocumentation>false</IncludeInDocumentation>
-    </Graph>
   </Experiment>
   <ExplorerWidth>355</ExplorerWidth>
 </Simulations>
