@@ -1,34 +1,6 @@
 # Structure {#cha-structure}
 
 
-
-```{r structure_setup, message=FALSE, echo=FALSE, warning=FALSE}
-# library(knitr)
-# opts_chunk$set(
-#     cache = TRUE, echo = FALSE, 
-#     out.width = '80%', fig.asp = .75,
-#     warning = FALSE, fig.align = 'center',
-#     message = FALSE) 
-# library(readr)
-# library(dplyr)
-# library(ggplot2)
-# library(tidyr)
-# library(xml2)
-# library(DiagrammeR)
-# source('utility.R')
-# report <- read_csv('process_test/simulation.db.Report.csv')
-# 
-# df <- report %>% 
-#     filter(grepl('15TraitMod', Name),
-#            Management == 'IHN',
-#            Cultivar == 'hartog')
-# 
-# pmf <- read_xml('wheat.xml')
-```
-
-
-
-
 The Structure model predicts the development and mortality of phytomer and branch (tiller) according to plastochron and phyllochron. 
 
 
@@ -111,7 +83,8 @@ y_cols <- c(
     'Wheat.Structure.MainStemNodeNo', 
     'Wheat.Structure.MainStemPrimordiaNo')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Primordia or node number in main stem')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Primordia or node number in main stem') +
+    scale_y_continuous(breaks = seq(1, 15))
 
 ```
 </div>
@@ -186,7 +159,8 @@ Figure \@ref(fig:tiller-number) shows the branching rate and total branching num
 y_cols <- c('Wheat.Structure.BranchNumber', 
             'Wheat.Structure.BranchingRate')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Branch number or branching rate')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Branch number or branching rate') +
+    scale_y_continuous(breaks = seq(1, 10))
 
 ```
 </div>
