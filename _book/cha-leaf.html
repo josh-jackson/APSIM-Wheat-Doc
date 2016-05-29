@@ -151,8 +151,8 @@ MathJax.Hub.Config({
 <p>The growth cycle of leaf cohort is divided into 7 stages and 6 periods from <code>Initialized</code> to <code>Detached</code>. The length of each period depends on the <code>plastrochron</code> and <code>phylochron</code> for initialization and appearance and is configured by <code>CohortParameters</code> for others.</p>
 <p>Several status variables are defined for each leaf cohort, which can be used in other modules to describe the current status of leaf cohort, i.e. <code>IsNotAppeared</code>, <code>IsGrowing</code>, <code>IsAlive</code>, <code>IsGreen</code>, <code>IsNotSenescing</code>, <code>Senescing</code>, <code>isFullyExpanded</code>, <code>ShouldBeDead</code>, <code>IsAppeared</code> and <code>IsInitialised</code>.</p>
 <div class="fig-input">
-<div id="htmlwidget-8948" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8948">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3925" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3925">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="leaf-age" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> leaf age</h3>
@@ -276,10 +276,18 @@ TODO: Need to check how leaf cohort model uses the maximum leaf area.
 </p>
 </div>
 <div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:leaf-cohort-max-area"></span>
+<img src="APSIM-Wheat_files/figure-html/leaf-cohort-max-area-1.png" alt="Maximum area of leaf cohort as a function of stage or accumulated thermal time" width="80%" />
+<p class="caption">
+Figure 5.8: Maximum area of leaf cohort as a function of stage or accumulated thermal time
+</p>
+</div>
+</div>
+<div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-lai"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-lai-1.png" alt="Leaf area index" width="80%" />
 <p class="caption">
-Figure 5.8: Leaf area index
+Figure 5.9: Leaf area index
 </p>
 </div>
 </div>
@@ -311,16 +319,16 @@ Extinction coefficient of dead leaf (<span class="math inline"><em>k</em><sub><e
 <div class="figure" style="text-align: center"><span id="fig:k-lai"></span>
 <img src="APSIM-Wheat_files/figure-html/k-lai-1.png" alt="Extinction coefficient as a function of leaf area index (LAI)" width="80%" />
 <p class="caption">
-Figure 5.9: Extinction coefficient as a function of leaf area index (LAI)
+Figure 5.10: Extinction coefficient as a function of leaf area index (LAI)
 </p>
 </div>
 </div>
-<p>The extinction coefficient of green leaf is adjusted by water stress which is the ratio of water supply and demand. No adjustment is applied to extinction coefficient if water supply is more than water demand. However, extinction coefficient is reduced when water supply is less than water demand (Figure <a href="cha-leaf.html#fig:k-water-stress">5.10</a>, i.e. <span class="math inline">\(k\)</span> = 0.25 when no water supply).</p>
+<p>The extinction coefficient of green leaf is adjusted by water stress which is the ratio of water supply and demand. No adjustment is applied to extinction coefficient if water supply is more than water demand. However, extinction coefficient is reduced when water supply is less than water demand (Figure <a href="cha-leaf.html#fig:k-water-stress">5.11</a>, i.e. <span class="math inline">\(k\)</span> = 0.25 when no water supply).</p>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:k-water-stress"></span>
 <img src="APSIM-Wheat_files/figure-html/k-water-stress-1.png" alt="Multiplier of extinction coefficient as a function of water stress" width="80%" />
 <p class="caption">
-Figure 5.10: Multiplier of extinction coefficient as a function of water stress
+Figure 5.11: Multiplier of extinction coefficient as a function of water stress
 </p>
 </div>
 </div>
@@ -328,7 +336,7 @@ Figure 5.10: Multiplier of extinction coefficient as a function of water stress
 <div class="figure" style="text-align: center"><span id="fig:leaf-cover"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-cover-1.png" alt="Coverage" width="80%" />
 <p class="caption">
-Figure 5.11: Coverage
+Figure 5.12: Coverage
 </p>
 </div>
 </div>
@@ -339,7 +347,7 @@ Figure 5.11: Coverage
 <div class="figure" style="text-align: center"><span id="fig:leaf-biomass"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-biomass-1.png" alt="Leaf biomass" width="80%" />
 <p class="caption">
-Figure 5.12: Leaf biomass
+Figure 5.13: Leaf biomass
 </p>
 </div>
 </div>
@@ -347,7 +355,7 @@ Figure 5.12: Leaf biomass
 <div class="figure" style="text-align: center"><span id="fig:leaf-specific-leaf-area"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-specific-leaf-area-1.png" alt="Specific leaf area" width="80%" />
 <p class="caption">
-Figure 5.13: Specific leaf area
+Figure 5.14: Specific leaf area
 </p>
 </div>
 </div>
