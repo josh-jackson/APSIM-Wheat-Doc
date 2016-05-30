@@ -115,10 +115,12 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="5.5" data-path="cha-leaf.html"><a href="cha-leaf.html#frost-impact"><i class="fa fa-check"></i><b>5.5</b> Frost impact</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="cha-biomass-production.html"><a href="cha-biomass-production.html"><i class="fa fa-check"></i><b>6</b> Biomass production</a></li>
-<li class="chapter" data-level="7" data-path="cha-arbitrator.html"><a href="cha-arbitrator.html"><i class="fa fa-check"></i><b>7</b> Arbitrator</a></li>
-<li class="chapter" data-level="8" data-path="cha-output.html"><a href="cha-output.html"><i class="fa fa-check"></i><b>8</b> Output</a><ul>
-<li class="chapter" data-level="8.1" data-path="cha-output.html"><a href="cha-output.html#phenology"><i class="fa fa-check"></i><b>8.1</b> Phenology</a></li>
-<li class="chapter" data-level="8.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>8.2</b> Structure</a></li>
+<li class="chapter" data-level="7" data-path="cha-water.html"><a href="cha-water.html"><i class="fa fa-check"></i><b>7</b> Water</a></li>
+<li class="chapter" data-level="8" data-path="cha-nitrogen.html"><a href="cha-nitrogen.html"><i class="fa fa-check"></i><b>8</b> Nitrogen</a></li>
+<li class="chapter" data-level="9" data-path="cha-arbitrator.html"><a href="cha-arbitrator.html"><i class="fa fa-check"></i><b>9</b> Arbitrator</a></li>
+<li class="chapter" data-level="10" data-path="cha-output.html"><a href="cha-output.html"><i class="fa fa-check"></i><b>10</b> Output</a><ul>
+<li class="chapter" data-level="10.1" data-path="cha-output.html"><a href="cha-output.html#phenology"><i class="fa fa-check"></i><b>10.1</b> Phenology</a></li>
+<li class="chapter" data-level="10.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>10.2</b> Structure</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://byzheng.github.io/APSIM-Wheat-Sens" target="blank">Sensitivity analysis</a></li>
@@ -151,8 +153,8 @@ MathJax.Hub.Config({
 <p>The growth cycle of leaf cohort is divided into 7 stages and 6 periods from <code>Initialized</code> to <code>Detached</code>. The length of each period depends on the <code>plastrochron</code> and <code>phylochron</code> for initialization and appearance and is configured by <code>CohortParameters</code> for others.</p>
 <p>Several status variables are defined for each leaf cohort, which can be used in other modules to describe the current status of leaf cohort, i.e. <code>IsNotAppeared</code>, <code>IsGrowing</code>, <code>IsAlive</code>, <code>IsGreen</code>, <code>IsNotSenescing</code>, <code>Senescing</code>, <code>isFullyExpanded</code>, <code>ShouldBeDead</code>, <code>IsAppeared</code> and <code>IsInitialised</code>.</p>
 <div class="fig-input">
-<div id="htmlwidget-3925" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3925">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3292" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3292">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="leaf-age" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> leaf age</h3>
@@ -253,12 +255,7 @@ Not sure about the main point of final leaf fraction. The fraction is not intege
 <div id="leaf-area-index" class="section level2">
 <h2><span class="header-section-number">5.2</span> Leaf area index</h2>
 <p>Leaf area index (LAI) are calculated for green leaf (<span class="math inline">\(\text{LAI}_{g}\)</span>), dead leaf (<span class="math inline">\(\text{LAI}_{d}\)</span>), and total leaf (<span class="math inline">\(\text{LAI}_{t}\)</span>).</p>
-<p>The maximum leaf area of each leaf cohort is determined when leaf cohort is appeared. The profile of maximum leaf area by rank is specified by two paramters the maximum leaf area in all leaves (<code>AreaLargestLeaves</code> with default value 2600 mm<sup>2</sup>) and an age factor (Figure <a href="cha-leaf.html#fig:maximum-area-age">5.7</a>). The age factor is assumed all leaves appeared after stage <code>Terminal Spikelet</code> have the same maximum leaf size.</p>
-<div class="rmdwarning">
-<p>
-Actually, in the test simualtion, the maximum leaf area of flag leaf doesn’t equal to the parameter <code>AreaLargestLeaves</code> as the final leaf fraction is not equal to 1.
-</p>
-</div>
+<p>The maximum leaf area of each leaf cohort is determined by potential maximum leaf area and reduced by cell division stress and final leaf fraction when leaf cohort is appeared. The potential maximum leaf areas by rank are specified by two paramters the maximum leaf area in all leaves (<code>AreaLargestLeaves</code> with default value 2600 mm<sup>2</sup>) and an age factor (Figure <a href="cha-leaf.html#fig:maximum-area-age">5.7</a>). The age factor is assumed leaf areas are linearly increasing from stage <code>Emergence</code> to <code>Terminal spikelet</code>, and all leaves appeared after stage <code>Terminal Spikelet</code> have the same maximum leaf area (the last three leaves in the current configuration of plastochron and phyllochron, Figure <a href="cha-structure.html#fig:node-number">4.3</a>).</p>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:maximum-area-age"></span>
 <img src="APSIM-Wheat_files/figure-html/maximum-area-age-1.png" alt="Multiplier of maximum leaf area as a function of growthing stage" width="80%" />
@@ -267,14 +264,13 @@ Figure 5.7: Multiplier of maximum leaf area as a function of growthing stage
 </p>
 </div>
 </div>
-<div class="rmpimportant">
+<div class="rmdimportant">
 <p>
-In the previous version of APSIM-Wheat model, the x-value of leaf area profile is <code>RelativeNodeAppearance</code>. However <code>RelativeNodeAppearance</code> is suddently increased at stage <code>Terminal Spikelet</code> which is caused by resetting of final node number (Figure <span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(fig:relative-node-number)).
-</p>
-<p>
-TODO: Need to check how leaf cohort model uses the maximum leaf area.
+In the previous version of APSIM-Wheat model, the x-value of leaf area profile is <code>RelativeNodeAppearance</code>. However <code>RelativeNodeAppearance</code> is suddently increased at stage <code>Terminal Spikelet</code> which is caused by resetting of final node number.
 </p>
 </div>
+<p>The stress factor of cell division is determined by water (Figure <a href="cha-water.html#fig:water-supply-demand-ratio">7.1</a>) and nitrogen stresses (Figure <a href="cha-nitrogen.html#fig:nitrogen-functional-nitrogen">8.1</a>).</p>
+<p>In the test simulation, the maximum leaf areas are increasing from Rank 1 to Rank 9, then decreasing to flag leaf (Figure <a href="cha-leaf.html#fig:leaf-cohort-max-area">5.8</a>), which is caused by nitrogen stress after terminal spikelet (Figure <a href="cha-nitrogen.html#fig:nitrogen-functional-nitrogen">8.1</a>).</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-cohort-max-area"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-cohort-max-area-1.png" alt="Maximum area of leaf cohort as a function of stage or accumulated thermal time" width="80%" />

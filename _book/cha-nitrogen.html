@@ -36,8 +36,8 @@ MathJax.Hub.Config({
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="cha-terminology.html">
-<link rel="next" href="cha-structure.html">
+<link rel="prev" href="cha-water.html">
+<link rel="next" href="cha-arbitrator.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -145,206 +145,25 @@ MathJax.Hub.Config({
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cha-phenology" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Phenology</h1>
-<div id="thermal-time" class="section level2">
-<h2><span class="header-section-number">3.1</span> Thermal time</h2>
-<p>The daily thermal time is calculated using daily records of maximum and minimum temperature. Before the terminal spikelet stage, the soil temperature is estimated using soil model in APSIM and used to calcualte the thermal time. After terminal spikelet stage, the air temperature is directly used.</p>
-</div>
-<div id="stage-period" class="section level2">
-<h2><span class="header-section-number">3.2</span> Stages and periods</h2>
-<p>The growth cycle of wheat is started from sowing and finished at harvest ripe.The whole cycle is separated into 10 stages and 10 phases. Wheat jumps into next stage or phase when certian conditions are statisfied (earliness “per se”, vernalization and photoperiod).</p>
-<table style="width:106%;">
-<colgroup>
-<col width="8%" />
-<col width="36%" />
-<col width="61%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Stage</th>
-<th align="left">Name</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">1</td>
-<td align="left">Sowing</td>
-<td align="left">Sow seeds into field</td>
-</tr>
-<tr class="even">
-<td align="left">2</td>
-<td align="left">Germination</td>
-<td align="left">Germination begins when the seed imbibes water from the soil and reaches 35 to 45 percent moisture on a dry weight basis</td>
-</tr>
-<tr class="odd">
-<td align="left">3</td>
-<td align="left">Emergence</td>
-<td align="left">The coleoptile extends to the soil surface</td>
-</tr>
-<tr class="even">
-<td align="left">4</td>
-<td align="left">TerminalSpikelet</td>
-<td align="left">The terminal spikelet initial is formed</td>
-</tr>
-<tr class="odd">
-<td align="left">5</td>
-<td align="left">FlagLeaf</td>
-<td align="left">The appearance of flag leaf tip or ligule (??)</td>
-</tr>
-<tr class="even">
-<td align="left">6</td>
-<td align="left">Flowering</td>
-<td align="left">The 50% plants are flowering in the field</td>
-</tr>
-<tr class="odd">
-<td align="left">7</td>
-<td align="left">StartGrainFill</td>
-<td align="left">Grain filling follows anthesis and refers to the period during which the kernel matures or ripens</td>
-</tr>
-<tr class="even">
-<td align="left">8</td>
-<td align="left">EndGrainFill</td>
-<td align="left">Grain filling follows anthesis and refers to the period during which the kernel matures or ripens</td>
-</tr>
-<tr class="odd">
-<td align="left">9</td>
-<td align="left">Maturity</td>
-<td align="left">Grain dry weight reaches its maximum which is correlated to the absence of green color in the chaff or kernels</td>
-</tr>
-<tr class="even">
-<td align="left">10</td>
-<td align="left">HarvestRipe</td>
-<td align="left">Wheat is ready for harvest</td>
-</tr>
-</tbody>
-</table>
-<p>Each phase has a targer thermal time (earliness <em>per se</em>) and several impact factors to extend the growing period including vernalization, photoperiod, water, nitrogen stresses.</p>
-<table style="width:158%;">
-<colgroup>
-<col width="36%" />
-<col width="25%" />
-<col width="19%" />
-<col width="16%" />
-<col width="61%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Name</th>
-<th align="left">Earliness per se</th>
-<th align="left">Vernalization</th>
-<th align="left">Photoperiod</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Germinating</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">Depending on soil water in top layer</td>
-</tr>
-<tr class="even">
-<td align="left">Emerging</td>
-<td align="left"><span class="math inline">\(Lag + Rate*depth\)</span></td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">Depending on the sowing depth</td>
-</tr>
-<tr class="odd">
-<td align="left">Vegetative</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">StemElongation</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">EarlyReproductive</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">GrainDevelopment</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">GrainFilling</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">Maturing</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">Ripening</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">ReadyForHarvesting</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="plastochron-phyllochron" class="section level2">
-<h2><span class="header-section-number">3.3</span> Plastochron and phyllochron</h2>
-<p>A plastochron is defined as the time interval between two successive recurring events during the growth of plant shoots, such as leaf initiation. The phyllochron is the intervening period between the sequential emergence of leaves on the main stem of a plant.</p>
-<p>Based on <span class="citation">(Jamieson et al. <a href="#ref-jamieson_sirius_1998">1998</a>)</span>, leaf appearace could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves &lt; 2 and 130% of base phyllochron for leaves &gt; 7. The base phyllochron set as 100 <sup>o</sup>Cd.</p>
+<div id="cha:nitrogen" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Nitrogen</h1>
 <div class="fig-output">
-<div class="figure" style="text-align: center"><span id="fig:leaf-tt-stage"></span>
-<img src="APSIM-Wheat_files/figure-html/leaf-tt-stage-1.png" alt="The growthing stage as a function of accumulated thermal  time " width="80%" />
+<div class="figure" style="text-align: center"><span id="fig:nitrogen-functional-nitrogen"></span>
+<img src="APSIM-Wheat_files/figure-html/nitrogen-functional-nitrogen-1.png" alt="Coverage" width="80%" />
 <p class="caption">
-Figure 3.1: The growthing stage as a function of accumulated thermal time
+Figure 8.1: Coverage
 </p>
 </div>
-</div>
-<div class="rmdimportant">
-<p>
-The changing growthing stage in during period 4 looks strange as there are big jump at the start and end of period.
-</p>
 </div>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-jamieson_sirius_1998">
-<p>Jamieson, P. D., M. A. Semenov, I. R. Brooking, and G. S. Francis. 1998. “Sirius: A Mechanistic Model of Wheat Response to Environmental Variation.” <em>European Journal of Agronomy</em> 8 (3): 161–79. doi:<a href="https://doi.org/16/S1161-0301(98)00020-3">16/S1161-0301(98)00020-3</a>.</p>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="cha-terminology.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cha-structure.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="cha-water.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cha-arbitrator.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -371,7 +190,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/byzheng/APSIM-Wheat-Doc/edit/master/phenology.Rmd",
+"link": "https://github.com/byzheng/APSIM-Wheat-Doc/edit/master/nitrogen.Rmd",
 "text": null
 },
 "download": null,
