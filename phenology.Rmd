@@ -46,7 +46,7 @@ ReadyForHarvesting        | NA                 | NA            | NA          | N
 A plastochron is defined as the time interval between two successive recurring events during the growth of plant shoots, such as leaf initiation. The phyllochron is the intervening period between the sequential emergence of leaves on the main stem of a plant.
 
 
-Based on [@jamieson_sirius_1998], leaf appearace could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves < 2 and 130% of base phyllochron for leaves > 7. The base phyllochron set as 100 <sup>o</sup>Cd.
+Based on [@jamieson_sirius:_1998], leaf appearace could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves < 2 and 130% of base phyllochron for leaves > 7. The base phyllochron set as 100 <sup>o</sup>Cd.
 
 
 

@@ -2719,6 +2719,8 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Arbitrator.DMSupply</string>
             <string>Wheat.Leaf.CohortAge[1:11]</string>
             <string>Wheat.Leaf.MaxLeafArea[1:11]</string>
+            <string>Wheat.Leaf.CohortArea[1:11]</string>
+            <string>Wheat.Leaf.CohortSize[1:11]</string>
             <string />
             <string>Wheat.Leaf.AppearedCohortNo</string>
             <string>Wheat.Leaf.InitialisedCohortNo</string>
