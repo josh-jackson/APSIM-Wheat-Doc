@@ -2741,6 +2741,9 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Leaf.CohortLive.Wt as Wheat.Leaf.LiveWeight</string>
             <string>Wheat.Leaf.CohortDead.Wt as Wheat.Leaf.DeadWeight</string>
             <string>Wheat.Leaf.SpecificArea</string>
+            <string>Wheat.Leaf.Fn</string>
+            <string />
+            <string>Wheat.WaterSupplyDemandRatio</string>
           </VariableNames>
           <EventNames>
             <string>[Clock].DoReport</string>
