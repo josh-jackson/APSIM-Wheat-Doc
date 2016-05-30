@@ -193,11 +193,7 @@ Not sure about the main point of final leaf fraction. The fraction is not intege
 
 Leaf area index (LAI) are calculated for green leaf ($\text{LAI}_{g}$), dead leaf ($\text{LAI}_{d}$), and total leaf ($\text{LAI}_{t}$).
 
-The maximum leaf area of each leaf cohort is determined when leaf cohort is appeared. The profile of maximum leaf area by rank is specified by two paramters the maximum leaf area in all leaves (`AreaLargestLeaves` with default value 2600 mm^2^) and an age factor (Figure \@ref(fig:maximum-area-age)). The age factor is assumed all leaves appeared after stage `Terminal Spikelet` have the same maximum leaf size.
-
-```{block, type='rmdwarning', echo=TRUE}
-Actually, in the test simualtion, the maximum leaf area of flag leaf doesn't equal to the parameter `AreaLargestLeaves` as the final leaf fraction is not equal to 1.
-```
+The maximum leaf area of each leaf cohort is determined by potential maximum leaf area and reduced by cell division stress and final leaf fraction when leaf cohort is appeared. The potential maximum leaf areas by rank are specified by two paramters the maximum leaf area in all leaves (`AreaLargestLeaves` with default value 2600 mm^2^) and an age factor (Figure \@ref(fig:maximum-area-age)). The age factor is assumed leaf areas are linearly increasing from stage `Emergence` to `Terminal spikelet`, and all leaves appeared after stage `Terminal Spikelet` have the same maximum leaf area (the last three leaves in the current configuration of plastochron and phyllochron, Figure \@ref(fig:node-number)).
 
 
 <div class="fig-input">
@@ -209,13 +205,16 @@ plot_xypair(pmf, xpath, x_lab = 'Growthing stage', y_lab = 'Multiplier of maximu
 </div>
 
 
-```{block, type="rmpimportant", echo=TRUE}
-In the previous version of APSIM-Wheat model,  the x-value of leaf area profile is `RelativeNodeAppearance`. However `RelativeNodeAppearance` is suddently increased at stage `Terminal Spikelet` which is caused by resetting of final node number (Figure \@ref(fig:relative-node-number)). 
-
-TODO: Need to check how leaf cohort model uses the maximum leaf area.
+```{block, type="rmdimportant", echo=TRUE}
+In the previous version of APSIM-Wheat model,  the x-value of leaf area profile is `RelativeNodeAppearance`. However `RelativeNodeAppearance` is suddently increased at stage `Terminal Spikelet` which is caused by resetting of final node number. 
 ```
 
 
+The stress factor of cell division is determined by water (Figure \@ref(fig:water-supply-demand-ratio)) and nitrogen stresses (Figure \@ref(fig:nitrogen-functional-nitrogen)).
+
+
+
+In the test simulation, the maximum leaf areas are increasing from Rank 1 to Rank 9, then decreasing to flag leaf (Figure \@ref(fig:leaf-cohort-max-area)), which is caused by nitrogen stress after terminal spikelet (Figure \@ref(fig:nitrogen-functional-nitrogen)). 
 
 <div class="fig-output">
 ```{r leaf-cohort-max-area, fig.cap='Maximum area of leaf cohort as a function of stage or accumulated thermal time'}
