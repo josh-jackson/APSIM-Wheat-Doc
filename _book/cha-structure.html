@@ -165,11 +165,6 @@ Figure 4.1: Final node number in main stem
 </p>
 </div>
 </div>
-<div class="rmdwarning">
-<p>
-In the test simulations, the final node number is not an integer (i.e. 10.853).
-</p>
-</div>
 <p>Daily changes of primordia (<span class="math inline">\(\Delta N_{pri}\)</span>) and node (leaf) (<span class="math inline">\(\Delta N_{node}\)</span>) number in main stem are calculated using plastochron (<span class="math inline">\(P_{pla}\)</span>) and phyllochron (<span class="math inline">\(P_{phy}\)</span>), respectively, after plant stage Emergence (Section <a href="cha-phenology.html#stage-period">3.2</a> and Figure <a href="cha-structure.html#fig:delta-node">4.2</a>).</p>
 <p><span class="math display">\[
  \Delta N_{pri}=rac{\Delta TT_{d}}{P_{pla}}
@@ -206,6 +201,11 @@ Figure 4.2: Daily increase of node number in main stem
 Figure 4.3: Primordia and node number in main stem
 </p>
 </div>
+</div>
+<div class="rmdimportant">
+<p>
+The primordia and node numbers in the main stem are not necessary integar to simulate the variation of primordia number in the actual field. Consequently all attibutes of flag leaf are proportionally reduced (e.g. growth duration and maximum area).
+</p>
 </div>
 <p>The relative appeared node number (<code>RelativeNodeAppearance</code>) is calculated as the fraction of appeared node number on the final node number. As the final node number is initialized as 30 as reset to primordia number at the stage <code>Terminal Spikelet</code>, the output variable <code>RelativeNodeAppearance</code> is suddenly increased at stage <code>Terminal Spikelet</code> (Figure <a href="cha-structure.html#fig:relative-node-number">4.4</a>).</p>
 <div class="fig-output">

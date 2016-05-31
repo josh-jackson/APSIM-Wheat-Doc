@@ -158,8 +158,8 @@ MathJax.Hub.Config({
 <p>The growth cycle of leaf cohort is divided into 7 stages and 6 periods from <code>Initialized</code> to <code>Detached</code>. The length of each period depends on the <code>plastrochron</code> and <code>phylochron</code> for initialization and appearance and is configured by <code>CohortParameters</code> for others.</p>
 <p>Several status variables are defined for each leaf cohort, which can be used in other modules to describe the current status of leaf cohort, i.e. <code>IsNotAppeared</code>, <code>IsGrowing</code>, <code>IsAlive</code>, <code>IsGreen</code>, <code>IsNotSenescing</code>, <code>Senescing</code>, <code>isFullyExpanded</code>, <code>ShouldBeDead</code>, <code>IsAppeared</code> and <code>IsInitialised</code>.</p>
 <div class="fig-input">
-<div id="htmlwidget-6408" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6408">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5299" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5299">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="leaf-age" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> leaf age</h3>
@@ -211,34 +211,47 @@ Figure 5.3: The node number in the main stem and appeared cohort number
 <h3><span class="header-section-number">5.1.4</span> Other periods</h3>
 <p>The lengths of other periods are determined when a new leaf initialized.</p>
 <ul>
-<li><p>Growth duration is defined as a phyllochron. The growth duration of spring wheat is close to one phylochron under variable light and temperature conditions <span class="citation">(Bos and Neuteboom <a href="#ref-bos_growth_1998-1">1998</a>)</span>.</p></li>
-<li><p>Lag duration is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort appeared during stem elongation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage <code>FlagLeaf</code> to stage <code>EndGrainFill</code> minus 3 phyllochron (<code>senescence duration</code>).</p></li>
+<li>Growth duration is defined as a phyllochron. The growth duration of spring wheat is close to one phylochron under variable light and temperature conditions <span class="citation">(Bos and Neuteboom <a href="#ref-bos_growth_1998-1">1998</a>)</span>.</li>
 </ul>
-<div class="rmdnote">
-<p>
-It could be only for flag leaf for extra longer lag duration. Need to check.
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:leaf-growth-duration"></span>
+<img src="APSIM-Wheat_files/figure-html/leaf-growth-duration-1.png" alt="Growth duration of leaf cohort which is determined at appearance of leaf cohort." width="80%" />
+<p class="caption">
+Figure 5.4: Growth duration of leaf cohort which is determined at appearance of leaf cohort.
 </p>
+</div>
+</div>
+<ul>
+<li>Lag duration is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort appeared during stem elongation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage <code>FlagLeaf</code> to stage <code>EndGrainFill</code> minus 3 phyllochron (<code>senescence duration</code>).</li>
+</ul>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:leaf-lag-duration"></span>
+<img src="APSIM-Wheat_files/figure-html/leaf-lag-duration-1.png" alt="Lag duration of leaf cohort which is determined at appearance of leaf cohort." width="80%" />
+<p class="caption">
+Figure 5.5: Lag duration of leaf cohort which is determined at appearance of leaf cohort.
+</p>
+</div>
 </div>
 <ul>
 <li>Senescence duration is defined as 3 phyllochrons.</li>
 <li>Detachment lag and detachment duration are set as a big value <code>1000000</code> which assumes no detachment in wheat. Actually all leaves are detached at <code>Harvesting</code> event.</li>
 </ul>
-<p>Figure <a href="cha-leaf.html#fig:leaf-cohort-number">5.4</a> shows the number of leaf cohort for expanding, initialized, appeared, senescing and dead cohort.</p>
+<p>Figure <a href="cha-leaf.html#fig:leaf-cohort-number">5.6</a> shows the number of leaf cohort for expanding, initialized, appeared, senescing and dead cohort.</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-cohort-number"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-cohort-number-1.png" alt="Initialized, appeared and expanding cohort number" width="80%" />
 <p class="caption">
-Figure 5.4: Initialized, appeared and expanding cohort number
+Figure 5.6: Initialized, appeared and expanding cohort number
 </p>
 </div>
 </div>
 <p>The cohort population is reudced by plant and stem mortality…</p>
-<p>The total leaf number is multiplied by leaf cohort number and stem number (Figure <a href="cha-leaf.html#fig:leaf-number">5.5</a>).</p>
+<p>The total leaf number is multiplied by leaf cohort number and stem number (Figure <a href="cha-leaf.html#fig:leaf-number">5.7</a>).</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-number"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-number-1.png" alt="Appeared number of green, senesced and total leaves" width="80%" />
 <p class="caption">
-Figure 5.5: Appeared number of green, senesced and total leaves
+Figure 5.7: Appeared number of green, senesced and total leaves
 </p>
 </div>
 </div>
@@ -247,7 +260,7 @@ Figure 5.5: Appeared number of green, senesced and total leaves
 <div class="figure" style="text-align: center"><span id="fig:final-leaf-fraction"></span>
 <img src="APSIM-Wheat_files/figure-html/final-leaf-fraction-1.png" alt="Fraction of final leaf" width="80%" />
 <p class="caption">
-Figure 5.6: Fraction of final leaf
+Figure 5.8: Fraction of final leaf
 </p>
 </div>
 </div>
@@ -268,12 +281,12 @@ Not sure about the main point of final leaf fraction. The fraction is not intege
 </div>
 <div id="maximum-leaf-area" class="section level3">
 <h3><span class="header-section-number">5.2.2</span> Maximum leaf area</h3>
-<p>The maximum leaf area of each leaf cohort is determined by potential maximum leaf area and reduced by cell division stress and final leaf fraction when leaf cohort is appeared. The potential maximum leaf areas by rank are specified by two parameters the maximum leaf area in all leaves (<code>AreaLargestLeaves</code> with default value 2600 mm<sup>2</sup>) and an age factor (Figure <a href="cha-leaf.html#fig:maximum-area-age">5.7</a>). The age factor is assumed leaf areas are linearly increasing from stage <code>Emergence</code> to <code>Terminal spikelet</code>, and all leaves appeared after stage <code>Terminal Spikelet</code> have the same maximum leaf area (the last three leaves in the current configuration of plastochron and phyllochron, Figure <a href="cha-structure.html#fig:node-number">4.3</a>).</p>
+<p>The maximum leaf area of each leaf cohort is determined by potential maximum leaf area and reduced by cell division stress and final leaf fraction when leaf cohort is appeared. The potential maximum leaf areas by rank are specified by two parameters the maximum leaf area in all leaves (<code>AreaLargestLeaves</code> with default value 2600 mm<sup>2</sup>) and an age factor (Figure <a href="cha-leaf.html#fig:maximum-area-age">5.9</a>). The age factor is assumed leaf areas are linearly increasing from stage <code>Emergence</code> to <code>Terminal spikelet</code>, and all leaves appeared after stage <code>Terminal Spikelet</code> have the same maximum leaf area (the last three leaves in the current configuration of plastochron and phyllochron, Figure <a href="cha-structure.html#fig:node-number">4.3</a>).</p>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:maximum-area-age"></span>
 <img src="APSIM-Wheat_files/figure-html/maximum-area-age-1.png" alt="Multiplier of maximum leaf area as a function of growthing stage" width="80%" />
 <p class="caption">
-Figure 5.7: Multiplier of maximum leaf area as a function of growthing stage
+Figure 5.9: Multiplier of maximum leaf area as a function of growthing stage
 </p>
 </div>
 </div>
@@ -284,12 +297,12 @@ In the previous version of APSIM-Wheat model, the x-value of leaf area profile i
 </div>
 <p>The stress factor of cell division is determined by water (Figure <a href="cha-water.html#fig:water-supply-demand-ratio">7.1</a>) and nitrogen stresses (Figure <a href="cha-nitrogen.html#fig:nitrogen-functional-nitrogen">8.1</a>).</p>
 <p>Stress of cell division is accumulated from initialization to appearance (average in actual …)</p>
-<p>In the test simulation, the maximum leaf areas are increasing from Rank 1 to Rank 9, then decreasing to flag leaf (Figure <a href="cha-leaf.html#fig:leaf-cohort-max-area">5.8</a>), which is caused by nitrogen stress after terminal spikelet (Figure <a href="cha-nitrogen.html#fig:nitrogen-functional-nitrogen">8.1</a>).</p>
+<p>In the test simulation, the maximum leaf areas are increasing from Rank 1 to Rank 9, then decreasing to flag leaf (Figure <a href="cha-leaf.html#fig:leaf-cohort-max-area">5.10</a>), which is caused by nitrogen stress after terminal spikelet (Figure <a href="cha-nitrogen.html#fig:nitrogen-functional-nitrogen">8.1</a>).</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-cohort-max-area"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-cohort-max-area-1.png" alt="Maximum area of leaf cohort as a function of stage or accumulated thermal time" width="80%" />
 <p class="caption">
-Figure 5.8: Maximum area of leaf cohort as a function of stage or accumulated thermal time
+Figure 5.10: Maximum area of leaf cohort as a function of stage or accumulated thermal time
 </p>
 </div>
 </div>
@@ -298,10 +311,18 @@ Figure 5.8: Maximum area of leaf cohort as a function of stage or accumulated th
 <div id="cohort-leaf-area" class="section level2">
 <h2><span class="header-section-number">5.3</span> Cohort leaf area</h2>
 <div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:leaf-water-area"></span>
+<img src="APSIM-Wheat_files/figure-html/leaf-water-area-1.png" alt="Delta of leaf area constrained by water and carbon." width="80%" />
+<p class="caption">
+Figure 5.11: Delta of leaf area constrained by water and carbon.
+</p>
+</div>
+</div>
+<div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-cohort-area"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-cohort-area-1.png" alt="Leaf area by leaf cohort" width="80%" />
 <p class="caption">
-Figure 5.9: Leaf area by leaf cohort
+Figure 5.12: Leaf area by leaf cohort
 </p>
 </div>
 </div>
@@ -310,7 +331,7 @@ Figure 5.9: Leaf area by leaf cohort
 <div class="figure" style="text-align: center"><span id="fig:leaf-cohort-size"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-cohort-size-1.png" alt="Leaf size by leaf cohort" width="80%" />
 <p class="caption">
-Figure 5.10: Leaf size by leaf cohort
+Figure 5.13: Leaf size by leaf cohort
 </p>
 </div>
 </div>
@@ -318,7 +339,7 @@ Figure 5.10: Leaf size by leaf cohort
 <div class="figure" style="text-align: center"><span id="fig:leaf-lai"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-lai-1.png" alt="Leaf area index" width="80%" />
 <p class="caption">
-Figure 5.11: Leaf area index
+Figure 5.14: Leaf area index
 </p>
 </div>
 </div>
@@ -350,16 +371,16 @@ Extinction coefficient of dead leaf (<span class="math inline"><em>k</em><sub><e
 <div class="figure" style="text-align: center"><span id="fig:k-lai"></span>
 <img src="APSIM-Wheat_files/figure-html/k-lai-1.png" alt="Extinction coefficient as a function of leaf area index (LAI)" width="80%" />
 <p class="caption">
-Figure 5.12: Extinction coefficient as a function of leaf area index (LAI)
+Figure 5.15: Extinction coefficient as a function of leaf area index (LAI)
 </p>
 </div>
 </div>
-<p>The extinction coefficient of green leaf is adjusted by water stress which is the ratio of water supply and demand. No adjustment is applied to extinction coefficient if water supply is more than water demand. However, extinction coefficient is reduced when water supply is less than water demand (Figure <a href="cha-leaf.html#fig:k-water-stress">5.13</a>, i.e. <span class="math inline">\(k\)</span> = 0.25 when no water supply).</p>
+<p>The extinction coefficient of green leaf is adjusted by water stress which is the ratio of water supply and demand. No adjustment is applied to extinction coefficient if water supply is more than water demand. However, extinction coefficient is reduced when water supply is less than water demand (Figure <a href="cha-leaf.html#fig:k-water-stress">5.16</a>, i.e. <span class="math inline">\(k\)</span> = 0.25 when no water supply).</p>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:k-water-stress"></span>
 <img src="APSIM-Wheat_files/figure-html/k-water-stress-1.png" alt="Multiplier of extinction coefficient as a function of water stress" width="80%" />
 <p class="caption">
-Figure 5.13: Multiplier of extinction coefficient as a function of water stress
+Figure 5.16: Multiplier of extinction coefficient as a function of water stress
 </p>
 </div>
 </div>
@@ -367,7 +388,7 @@ Figure 5.13: Multiplier of extinction coefficient as a function of water stress
 <div class="figure" style="text-align: center"><span id="fig:leaf-cover"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-cover-1.png" alt="Coverage" width="80%" />
 <p class="caption">
-Figure 5.14: Coverage
+Figure 5.17: Coverage
 </p>
 </div>
 </div>
@@ -378,7 +399,7 @@ Figure 5.14: Coverage
 <div class="figure" style="text-align: center"><span id="fig:leaf-biomass"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-biomass-1.png" alt="Leaf biomass" width="80%" />
 <p class="caption">
-Figure 5.15: Leaf biomass
+Figure 5.18: Leaf biomass
 </p>
 </div>
 </div>
@@ -386,7 +407,7 @@ Figure 5.15: Leaf biomass
 <div class="figure" style="text-align: center"><span id="fig:leaf-specific-leaf-area"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-specific-leaf-area-1.png" alt="Specific leaf area" width="80%" />
 <p class="caption">
-Figure 5.16: Specific leaf area
+Figure 5.19: Specific leaf area
 </p>
 </div>
 </div>
