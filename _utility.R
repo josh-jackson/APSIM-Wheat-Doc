@@ -71,7 +71,7 @@ plot_report_vector <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value'
     # x_var_n <- list()
     # x_var_n[[x_var_name]] <- x_var
 
-    col_names <- grepl(y_cols, names(df)) | (names(df) %in% x_var)
+    col_names <- grepl(paste(y_cols, collapse = '|'), names(df)) | (names(df) %in% x_var)
     pd <- df[,col_names]
     names(pd) <- gsub('\\:|\\(|\\)', '_', names(pd))
 
@@ -99,7 +99,9 @@ plot_report_vector <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value'
         theme(legend.position = 'bottom') +
         xlab(x_lab) + ylab(y_lab) +
         guides(colour = guide_legend(title = ''))
-    if (length(x_var) > 1) {
+    if (length(x_var) > 1 & length(y_cols) > 1) {
+        p <- p + facet_grid(Trait~XVar, scales = 'free_x')
+    } else if (length(x_var) > 1) {
         p <- p + facet_wrap(~XVar, scales = 'free_x', ncol = 1)
     }
 

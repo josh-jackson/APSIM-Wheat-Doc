@@ -130,12 +130,33 @@ The lengths of other periods are determined when a new leaf initialized.
 
 * Growth duration is defined as a phyllochron. The growth duration of spring wheat is close to one phylochron under variable light and temperature conditions [@bos_growth_1998-1].
 
-* Lag duration is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort appeared during stem elongation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage `FlagLeaf` to stage `EndGrainFill` minus 3 phyllochron (`senescence duration`). 
 
-```{block, type='rmdnote', echo=TRUE}
-It could be only for flag leaf for extra longer lag duration. Need to check.
+<div class="fig-output">
+```{r leaf-growth-duration, fig.cap='Growth duration of leaf cohort which is determined at appearance of leaf cohort.'}
+y_cols <- c(
+    'Wheat.Leaf.CohortGrowthDuration')
+plot_report_vector(
+    df, x_var, y_cols, x_lab = x_lab, 
+    y_lab = 'Growth duration of leaf cohort (oCd)')
 
 ```
+</div>
+
+
+* Lag duration is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort appeared during stem elongation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage `FlagLeaf` to stage `EndGrainFill` minus 3 phyllochron (`senescence duration`). 
+
+
+<div class="fig-output">
+```{r leaf-lag-duration, fig.cap='Lag duration of leaf cohort which is determined at appearance of leaf cohort.'}
+y_cols <- c(
+    'Wheat.Leaf.CohortLagDuration')
+plot_report_vector(
+    df, x_var, y_cols, x_lab = x_lab, 
+    y_lab = 'Lag duration of leaf cohort (oCd)')
+
+```
+</div>
+
 
 * Senescence duration is defined as 3 phyllochrons.
 * Detachment lag and detachment duration are set as a big value `1000000` which assumes no detachment in wheat. Actually all leaves are detached at `Harvesting` event.
@@ -199,6 +220,8 @@ Leaf area index (LAI) are calculated for green leaf ($\text{LAI}_{g}$), dead lea
 Leaf area is the minium value between carbon limitation and water limation...
 
 
+
+
 ### Leaf size 
 
 The logistic function is used to simulate leaf size...
@@ -245,6 +268,21 @@ plot_report_vector(
 
 
 ## Cohort leaf area
+
+
+<div class="fig-output">
+```{r leaf-water-area, fig.cap='Delta of leaf area constrained by water and carbon.'}
+y_cols <- c(
+    'Wheat.Leaf.CohortDeltaWaterConstrainedArea',
+    'Wheat.Leaf.CohortDeltaCarbonConstrainedArea')
+plot_report_vector(
+    df, x_var, y_cols, x_lab = x_lab, 
+    y_lab = 'Delta of leaf area (mm2)')
+
+```
+</div>
+
+
 
 
 <div class="fig-output">
