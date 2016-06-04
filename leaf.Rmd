@@ -4,7 +4,7 @@
 ```{r setup_leaf, message=FALSE, echo=FALSE, warning=FALSE}
 library(knitr)
 opts_chunk$set(
-    cache = FALSE, echo = FALSE, 
+    cache = TRUE, echo = FALSE, 
     out.width = '80%', fig.asp = 1.2,
     warning = FALSE, fig.align = 'center',
     message = FALSE) 
@@ -79,6 +79,11 @@ plot_report_vector(
 ```
 </div>
 
+```{block, type='rmdimportant', echo=TRUE}
+The age of first leaf cohort starts from  200 &deg;Cd.
+
+```
+
 
 ### Leaf initialization
 
@@ -95,12 +100,6 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 
 ```
 </div>
-
-
-
-```{block, type='rmdimportant', echo=TRUE}
-Actually, the total leaf primordia number is slightly less than the total cohort number.
-```
 
 
 ```{block, type='rmdimportant', echo=TRUE}
@@ -169,6 +168,7 @@ y_cols <- c(
             'Wheat.Leaf.ExpandingCohortNo',
             'Wheat.Leaf.InitialisedCohortNo',
             'Wheat.Leaf.AppearedCohortNo',
+            'Wheat.Leaf.ExpandedCohortNo',
             'Wheat.Leaf.SenescingCohortNo',
             'Wheat.Leaf.DeadCohortNo')
 
@@ -176,6 +176,13 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
             y_lab = 'Cohort number')
 ```
 </div>
+
+```{block, type='rmdimportant', echo=TRUE}
+The expanding leaves are jumping up and down.
+```
+
+## Cohort population
+
 
 The cohort population is reudced by plant and stem mortality...
 
@@ -194,6 +201,10 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 </div>
 
 
+```{block, type='rmdimportant', echo=TRUE}
+The tiller death is detached from plants, but leaf death isn't detached.
+```
+
 
 The fraction of final leaf is set as 1, but return the actual fraction of the final leaf if the last leaf has appeared. 
 
@@ -207,10 +218,6 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 ```
 </div>
 
-
-```{block, type='rmdwarning', echo=TRUE}
-Not sure about the main point of final leaf fraction. The fraction is not integer as the final node number  is not an integer.
-```
 
 
 ## Leaf area index
@@ -231,11 +238,15 @@ The logistic function is used to simulate leaf size...
 
 The maximum leaf area of each leaf cohort is determined by potential maximum leaf area and reduced by cell division stress and final leaf fraction when leaf cohort is appeared. The potential maximum leaf areas by rank are specified by two parameters the maximum leaf area in all leaves (`AreaLargestLeaves` with default value 2600 mm^2^) and an age factor (Figure \@ref(fig:maximum-area-age)). The age factor is assumed leaf areas are linearly increasing from stage `Emergence` to `Terminal spikelet`, and all leaves appeared after stage `Terminal Spikelet` have the same maximum leaf area (the last three leaves in the current configuration of plastochron and phyllochron, Figure \@ref(fig:node-number)).
 
+```{block, type='rmbimportant', echo=TRUE}
+The function of maximum leaf size is proposed to change. Documentation needs to update.  
+```
+
 
 <div class="fig-input">
 ```{r maximum-area-age, fig.asp = 0.75, fig.cap='Multiplier of maximum leaf area as a function of growthing stage'}
-xpath <- '//Name[text()="AgeFactor"]'
-plot_xypair(pmf, xpath, x_lab = 'Growthing stage', y_lab = 'Multiplier of maximum leaf area')
+# xpath <- '//Name[text()="AgeFactor"]'
+# plot_xypair(pmf, xpath, x_lab = 'Growthing stage', y_lab = 'Multiplier of maximum leaf area')
 
 ```
 </div>
@@ -248,7 +259,7 @@ In the previous version of APSIM-Wheat model,  the x-value of leaf area profile 
 
 The stress factor of cell division is determined by water (Figure \@ref(fig:water-supply-demand-ratio)) and nitrogen stresses (Figure \@ref(fig:nitrogen-functional-nitrogen)).
 
-Stress of cell division is accumulated from initialization to appearance (average in actual ...)
+Stress of cell division is averaged by cell division stress factors from initialization to appearance.
 
 In the test simulation, the maximum leaf areas are increasing from Rank 1 to Rank 9, then decreasing to flag leaf (Figure \@ref(fig:leaf-cohort-max-area)), which is caused by nitrogen stress after terminal spikelet (Figure \@ref(fig:nitrogen-functional-nitrogen)). 
 
@@ -268,7 +279,11 @@ plot_report_vector(
 
 
 ## Cohort leaf area
+During the growth duration of each cohort, the daily increase of leaf area is detemined by the minimum increase of water ($\Delta A_{water}$) and carbon ($\Delta A_{carbon}$) constrained leaf area. 
 
+### Water constrained leaf area
+
+### Carbon constrained leaf area
 
 <div class="fig-output">
 ```{r leaf-water-area, fig.cap='Delta of leaf area constrained by water and carbon.'}
@@ -419,6 +434,19 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g
 
 ```
 </div>
+
+
+<div class="fig-output">
+```{r leaf-cohortspecific-leaf-area, fig.cap='Specific leaf area by cohort'}
+y_cols <- c('Wheat.Leaf.CohortSLA')
+plot_report_vector(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g)')
+
+```
+</div>
+
+```{block, type='rmdwarning', echo=TRUE}
+Why does specific leaf area of flag leaf decrease after a few days of appearance.
+```
 
 
 ## Frost impact 

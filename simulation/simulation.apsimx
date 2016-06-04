@@ -556,7 +556,6 @@ The model consists of:
             <VariableName>[Structure].MainStemPrimordiaNo</VariableName>
           </VariableReference>
           <SetEvent>TerminalSpikelet</SetEvent>
-          <ReSetEvent />
         </OnEventFunction>
         <InitialiseStage>Emergence</InitialiseStage>
         <PrimaryBudNo>1</PrimaryBudNo>
@@ -1335,34 +1334,85 @@ The model consists of:
             <Name>LeafSizeShapeParameter</Name>
             <Value>0.3</Value>
           </Constant>
-          <MultiplyFunction>
-            <Name>MaxArea</Name>
-            <Constant>
-              <Name>AreaLargestLeaves</Name>
-              <Value>2600</Value>
-              <Units>mm^2</Units>
-            </Constant>
-            <LinearInterpolationFunction>
-              <Name>AgeFactor</Name>
-              <XYPairs>
-                <Name>XYPairs</Name>
-                <X>
-                  <double>3</double>
-                  <double>4</double>
-                </X>
-                <Y>
-                  <double>0.1</double>
-                  <double>1</double>
-                </Y>
-              </XYPairs>
-              <XProperty>[Phenology].Stage</XProperty>
-            </LinearInterpolationFunction>
-          </MultiplyFunction>
           <Constant>
             <Name>SenessingLeafRelativeSize</Name>
             <Value>0.1</Value>
             <Units>0-1</Units>
           </Constant>
+          <PhaseLookup>
+            <Name>MaxArea</Name>
+            <PhaseLookupValue>
+              <Name>VegetativeGrowth</Name>
+              <LinearInterpolationFunction>
+                <Name>MaxAreaVeg</Name>
+                <XYPairs>
+                  <Name>XYPairs</Name>
+                  <X>
+                    <double>1</double>
+                    <double>12</double>
+                  </X>
+                  <Y>
+                    <double>100</double>
+                    <double>5000</double>
+                  </Y>
+                </XYPairs>
+                <XProperty>[Structure].MainStemNodeNo</XProperty>
+              </LinearInterpolationFunction>
+              <Start>Emergence</Start>
+              <End>TerminalSpikelet</End>
+            </PhaseLookupValue>
+            <PhaseLookupValue>
+              <Name>StemElongation</Name>
+              <AddFunction>
+                <Name>MaxAreaStem</Name>
+                <LinearInterpolationFunction>
+                  <Name>MaxAreaVeg</Name>
+                  <XYPairs>
+                    <Name>XYPairs</Name>
+                    <X>
+                      <double>1</double>
+                      <double>3</double>
+                    </X>
+                    <Y>
+                      <double>1000</double>
+                      <double>1200</double>
+                    </Y>
+                  </XYPairs>
+                  <XProperty>[Leaf].CohortParameters.LeafRankAfterTerminalSpikelet.Value</XProperty>
+                </LinearInterpolationFunction>
+                <OnEventFunction>
+                  <Name>LeafSizeAtTerminalSpikelet</Name>
+                  <VariableReference>
+                    <Name>PreEventValue</Name>
+                    <VariableName>[Leaf].AreaLargestLeaf</VariableName>
+                  </VariableReference>
+                  <VariableReference>
+                    <Name>PostEventValue</Name>
+                    <VariableName>[Leaf].AreaLargestLeaf</VariableName>
+                  </VariableReference>
+                  <SetEvent>TerminalSpikelet</SetEvent>
+                </OnEventFunction>
+              </AddFunction>
+              <Start>TerminalSpikelet</Start>
+              <End>FlagLeaf</End>
+            </PhaseLookupValue>
+          </PhaseLookup>
+          <OnEventFunction>
+            <Name>LeafNumberAtTerminalSpikelet</Name>
+            <Constant>
+              <Name>PreEventValue</Name>
+              <Value>0</Value>
+            </Constant>
+            <VariableReference>
+              <Name>PostEventValue</Name>
+              <VariableName>[Structure].MainStemNodeNo</VariableName>
+            </VariableReference>
+            <SetEvent>TerminalSpikelet</SetEvent>
+          </OnEventFunction>
+          <ExpressionFunction>
+            <Name>LeafRankAfterTerminalSpikelet</Name>
+            <Expression>[Structure].MainStemNodeNo - [Leaf].CohortParameters.LeafNumberAtTerminalSpikelet.Value </Expression>
+          </ExpressionFunction>
         </LeafCohortParameters>
         <RUEModel>
           <Name>Photosynthesis</Name>
@@ -2727,6 +2777,7 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Leaf.MaxLeafArea[1:11]</string>
             <string>Wheat.Leaf.CohortArea[1:11]</string>
             <string>Wheat.Leaf.CohortSize[1:11]</string>
+            <string>Wheat.Leaf.CohortSLA[1:11]</string>
             <string>Wheat.Leaf.CohortLagDuration[1:11]</string>
             <string>Wheat.Leaf.CohortGrowthDuration[1:11]</string>
             <string>Wheat.Leaf.CohortDeltaWaterConstrainedArea[1:11]</string>
@@ -2738,6 +2789,7 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Leaf.GreenCohortNo</string>
             <string>Wheat.Leaf.SenescingCohortNo</string>
             <string>Wheat.Leaf.DeadCohortNo</string>
+            <string>Wheat.Leaf.ExpandedCohortNo</string>
             <string>Wheat.Leaf.PlantAppearedGreenLeafNo</string>
             <string>Wheat.Leaf.PlantAppearedLeafNo</string>
             <string>Wheat.Leaf.PlantsenescedLeafNo</string>
@@ -2756,6 +2808,8 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Leaf.Fn</string>
             <string />
             <string>Wheat.WaterSupplyDemandRatio</string>
+            <string>Wheat.Leaf.CohortParameters.LeafRankAfterTerminalSpikelet.Value</string>
+            <string>Wheat.Leaf.CohortParameters.LeafNumberAtTerminalSpikelet.Value</string>
           </VariableNames>
           <EventNames>
             <string>[Clock].DoReport</string>
@@ -2768,5 +2822,339 @@ The EarLive composite biomass object includes the Live pools of all organs withi
       <Slope>0</Slope>
     </Simulation>
   </Experiment>
+  <Graph>
+    <Name>Graph</Name>
+    <Series>
+      <Name>Series</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(1)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series1</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(10)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series11</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(11)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series12</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(2)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series121</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(4)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series122</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(3)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series123</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(5)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series124</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(6)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series125</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(7)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series126</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(8)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series127</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>0</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.MaxLeafArea1:11(9)</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Axis>
+      <Type>Bottom</Type>
+      <Inverted>false</Inverted>
+      <Minimum>NaN</Minimum>
+      <Maximum>NaN</Maximum>
+      <Interval>NaN</Interval>
+    </Axis>
+    <Axis>
+      <Type>Left</Type>
+      <Inverted>false</Inverted>
+      <Minimum>NaN</Minimum>
+      <Maximum>NaN</Maximum>
+      <Interval>NaN</Interval>
+    </Axis>
+    <LegendPosition>TopLeft</LegendPosition>
+    <DisabledSeries />
+    <IncludeInDocumentation>false</IncludeInDocumentation>
+  </Graph>
+  <Graph>
+    <Name>Graph1</Name>
+    <Series>
+      <Name>Series</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>-3376729</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Solid</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.CohortParameters.LeafRankAfterTerminalSpikelet.Value</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series1</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>-11094807</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>DashDot</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Leaf.CohortParameters.LeafNumberAtTerminalSpikelet.Value</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Series>
+      <Name>Series2</Name>
+      <Type>Scatter</Type>
+      <XAxis>Bottom</XAxis>
+      <YAxis>Left</YAxis>
+      <ColourArgb>-2793984</ColourArgb>
+      <FactorIndexToVaryColours>-1</FactorIndexToVaryColours>
+      <FactorIndexToVaryMarkers>-1</FactorIndexToVaryMarkers>
+      <FactorIndexToVaryLines>-1</FactorIndexToVaryLines>
+      <Marker>None</Marker>
+      <MarkerSize>Normal</MarkerSize>
+      <Line>Dash</Line>
+      <LineThickness>Normal</LineThickness>
+      <TableName>Report</TableName>
+      <XFieldName>Wheat.Phenology.DaysAfterSowing</XFieldName>
+      <YFieldName>Wheat.Structure.MainStemNodeNo</YFieldName>
+      <ShowInLegend>false</ShowInLegend>
+      <IncludeSeriesNameInLegend>false</IncludeSeriesNameInLegend>
+      <Cumulative>false</Cumulative>
+      <CumulativeX>false</CumulativeX>
+    </Series>
+    <Axis>
+      <Type>Bottom</Type>
+      <Inverted>false</Inverted>
+      <Minimum>NaN</Minimum>
+      <Maximum>NaN</Maximum>
+      <Interval>NaN</Interval>
+    </Axis>
+    <Axis>
+      <Type>Left</Type>
+      <Inverted>false</Inverted>
+      <Minimum>NaN</Minimum>
+      <Maximum>NaN</Maximum>
+      <Interval>NaN</Interval>
+    </Axis>
+    <LegendPosition>TopLeft</LegendPosition>
+    <DisabledSeries />
+    <IncludeInDocumentation>false</IncludeInDocumentation>
+  </Graph>
   <ExplorerWidth>355</ExplorerWidth>
 </Simulations>

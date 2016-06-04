@@ -27,7 +27,7 @@ A simulation is setup to demo the relationship among traits based on the cv. Har
 ```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
 library(knitr)
 opts_chunk$set(
-    cache = FALSE, echo = FALSE, 
+    cache = TRUE, echo = FALSE, 
     out.width = '80%', fig.asp = 1.2,
     warning = FALSE, fig.align = 'center',
     message = FALSE) 
