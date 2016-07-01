@@ -5,6 +5,30 @@ The Structure model predicts the development and mortality of phytomer and branc
 
 
 
+## Plastochron and phyllochron {#plastochron-phyllochron}
+
+A plastochron is defined as the time interval between two successive recurring events during the growth of plant shoots, such as leaf initiation. The phyllochron is the intervening period between the sequential emergence of leaves on the main stem of a plant [@mcmaster_re-examining_2003].
+
+Brown et al. [-@brown_integration_2013] showed final leaf number (FLN) could be estimated as 2.86 + HSTS * 1.1 where HSTS is the the Haun stage at terminal spikelet.  To caputre this in the wheat model we have set the initial number of primordia (determined by the number of initialleaf objects on the leaf class) to 3 and have set this function to produce primordia 10% faster than mainstem leaves.  Primordia are initiated until the therminal spikelet stage and then the number remains fixed, giving final leaf number.
+
+Although the the non-linear reponse of temperature on phyllchron were observed by Friend et al. [-@friend_leaf_1962]  and Cao and Moss [-@cao_temperature_1989]. A simple linear reponse of phyllochron to temperature is used as this model works surprusingly well in predicting phyllochron for most field conditions [@mcmaster_re-examining_2003]. The accuracy could be reduced in special conditions (e.g. shorter linear phase, linear phase not correlated with field temperatures, response to high temperatures differs, etc.) @mcmaster_re-examining_2003.
+
+
+Based on [@jamieson_sirius:_1998], leaf appearace could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves < 2 and 130% of base phyllochron for leaves > 7. The base phyllochron set as 100 <sup>o</sup>Cd.
+
+```{block, type='rmdimportant', echo=TRUE}
+I didn't find the description of phyllochorn in Jamieson (1998).
+```
+
+<div class="fig-input">
+```{r str-phyllochron, fig.asp = 0.75, fig.cap='Phyllochron of leaf cohort is depending on the rank on the main stem'}
+xpath <- '//Name[text()="LeafStageFactor"]'
+plot_xypair(pmf, xpath, x_lab = 'Node number on the main stem', y_lab = 'Mulitiplier of base phyllochron') +
+    scale_x_continuous(breaks = seq(1, 14))
+
+```
+
+</div>
 
 ## Promordia and node number
 
@@ -210,7 +234,7 @@ plot_report(
 
 
 
-## Mortality
+## Mortality {#sec-structure-mortality}
 
 Branching mortality starts from the Terminal Spikelet until Flowering which defines as a function of moving mean tiller growth rate (Figure \@ref(fig:mortality-growth-rate). The mean tiller growth rate is calculated as the 5 days moving means of tiller growth rate, which is calculated by the daily biomass supply divides thermal time and total stem population.  <font color="red">Reference required.</font>
 
