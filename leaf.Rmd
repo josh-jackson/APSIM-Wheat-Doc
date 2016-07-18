@@ -182,6 +182,30 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 The expanding leaves are jumping up and down which is caused by the strange duration of leaf growth. We should expect the same growth duration for Leaf 1 and Leaf 2, Leaf 3, 4 and 6.
 ```
 
+### Drought stress
+
+After appearance, leaf development is accelerated by the drought stress through increasing the daily thermal time, i.e. leaf age is accelerated by drought. The factor of acceleration depends on the ratio of water supply and demand (Figure \@ref(fig:water-supply-demand-ratio)). Daily thermal time is doubled when there is no water supply (i.e. Ratio of water supply and demand equals to zero), and no acceleration when ratio above 0.7 (The values in Figure \@ref(fig:leaf-development-drought) plus one).
+
+
+<div class="fig-input">
+```{r leaf-development-drought, fig.asp = 0.75, fig.cap='Drought stress accelerates leaf development. Daily thermal time is doubled when there is no water supply (i.e. Ratio of water supply and demand equals to zero), and no acceleration when ratio above 0.7.'}
+xpath <- '//AddFunction[Name="DroughtInducedSenAcceleration"]/MultiplyFunction[Name="Stress"]/LinearInterpolationFunction[Name="StressFactor"]'
+plot_xypair(pmf, xpath, x_lab = 'Ratio of water supply and demand', y_lab = 'Ratio of acceleration of thermal time')
+
+```
+</div>
+
+
+```csharp
+//Acellerate thermal time accumulation if crop is water stressed.
+double _ThermalTime;
+if ((LeafCohortParameters.DroughtInducedSenAcceleration != null) && (IsFullyExpanded))
+    _ThermalTime = TT * LeafCohortParameters.DroughtInducedSenAcceleration.Value;
+else _ThermalTime = TT;
+
+```
+
+
 ## Cohort population
 
 Cohort population is initialized as the total stem population at appearance of leaf cohort, and proportionally reduced by plant and stem mortalities (\@ref(#sec-structure-mortality)) at each day after appearance.
@@ -229,14 +253,12 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 
 
 
-## Leaf area index
+## Development of leaf size
 
-Leaf area index (LAI) are calculated for green leaf ($\text{LAI}_{g}$), dead leaf ($\text{LAI}_{d}$), and total leaf ($\text{LAI}_{t}$).
-
-Leaf area is the minium value between carbon limitation and water limation...
+During the growth duration of each cohort, the daily increase of leaf area is detemined by the minimum increase of water ($\Delta A_{water}$) and carbon ($\Delta A_{carbon}$) constrained leaf area. 
 
 
-### Maximum leaf area
+### Maximum (potential) leaf area
 
 The maximum leaf area of each leaf cohort is determined by potential maximum leaf area and reduced by cell division stress and final leaf fraction when leaf cohort is appeared. 
 
@@ -258,9 +280,7 @@ The function of maximum leaf size is proposed to change. Documentation needs to 
 
 
 
-The stress factor of cell division is determined by water (Figure \@ref(fig:water-supply-demand-ratio)) and nitrogen stresses (Figure \@ref(fig:nitrogen-functional-nitrogen)).
-
-Stress of cell division is averaged by cell division stress factors from initialization to appearance.
+The stress factor of cell division is determined by water (Figure \@ref(fig:water-supply-demand-ratio)) and nitrogen stresses (Figure \@ref(fig:nitrogen-functional-nitrogen)). Stress of cell division is averaged by cell division stress factors from initialization to appearance.
 
 In the test simulation, the maximum leaf areas are increasing from Rank 1 to Rank 9, then decreasing to flag leaf (Figure \@ref(fig:leaf-cohort-max-area)), which is caused by nitrogen stress after terminal spikelet (Figure \@ref(fig:nitrogen-functional-nitrogen)). 
 
@@ -277,13 +297,11 @@ plot_report_vector(
 
 
 
-## Cohort leaf area
-During the growth duration of each cohort, the daily increase of leaf area is detemined by the minimum increase of water ($\Delta A_{water}$) and carbon ($\Delta A_{carbon}$) constrained leaf area. 
+### Potential expansion of leaf cohort
 
-### Potential leaf area
 The potential leaf area is calculated by a logistic equation as a function of thermal time after leaf appearance. The shape of logistic equation is determiend by parameter `LeafSizeShapeParameter` with default value `0.3` (Fig. \@ref(fig:size-function)). 
 
-```{r size-function, fig.asp=-.75, fig.cap='The size function of leaf area development'}
+```{r size-function, fig.asp=0.75, fig.cap='The size function of leaf area development'}
 
 TT <- seq(0, 100, by = 1)
 MaxArea <- 1000
@@ -308,20 +326,6 @@ ggplot(leaf_size) +
 
 ```
 
-The daily potential increase of leaf area is calculated by changes of daily thermal time and leaf size function. 
-
-
-Drought accelates leaf development through accelating daily thermal time.  
-
-
-```csharp
-//Acellerate thermal time accumulation if crop is water stressed.
-double _ThermalTime;
-if ((LeafCohortParameters.DroughtInducedSenAcceleration != null) && (IsFullyExpanded))
-    _ThermalTime = TT * LeafCohortParameters.DroughtInducedSenAcceleration.Value;
-else _ThermalTime = TT;
-
-```
 
 
 ### Water constrained leaf area
@@ -376,6 +380,7 @@ plot_report_vector(
 
 
 
+Leaf area index (LAI) are calculated for green leaf ($\text{LAI}_{g}$), dead leaf ($\text{LAI}_{d}$), and total leaf ($\text{LAI}_{t}$). 
 
 
 <div class="fig-output">

@@ -119,7 +119,13 @@ plot_report_vector <- function(df, x_var, y_cols, x_lab = x_var, y_lab = 'Value'
 
 plot_xypair <- function(pmf, xpath, x_lab, y_lab) {
 
-    xypair <- xml_find_one(pmf, xpath = paste0(xpath, '/following-sibling::XYPairs'))
+    xypair <- xml_find_first(pmf, xpath = paste0(xpath, '/following-sibling::XYPairs'))
+    if (length(xypair) == 0) {
+        xypair <- xml_find_first(pmf, xpath = paste0(xpath, '/XYPairs'))
+    }
+    if (length(xypair) == 0) {
+        stop(paste0('Cannot find the xpath: ', xpath, '.'))
+    }
 
     x <- as.numeric(xml_text(xml_children(xml_children(xypair)[[2]])))
     y <- as.numeric(xml_text(xml_children(xml_children(xypair)[[3]])))
