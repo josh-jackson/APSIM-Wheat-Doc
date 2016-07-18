@@ -4,7 +4,7 @@
 ```{r setup_leaf, message=FALSE, echo=FALSE, warning=FALSE}
 library(knitr)
 opts_chunk$set(
-    cache = FALSE, echo = FALSE, 
+    cache = TRUE, echo = FALSE, 
     out.width = '80%', fig.asp = 1.2,
     warning = FALSE, fig.align = 'center',
     message = FALSE) 
@@ -66,7 +66,7 @@ DiagrammeR("sequenceDiagram;
 
 ### leaf age
 
-The age of leaf cohort is defined as the thermal time after appearance, (i.e. keep zero after initialization). As the default values of `DetachmentLagDuration` and `DetachmentDuration` are set as `1000000` <sup>&deg;</sup>Cd, the cohort age keeps increasing until stage `ReadyForHarvesting`.
+The age of leaf cohort is defined as the thermal time after appearance, (i.e. keep zero after initialization). As the default values of `DetachmentLagDuration` and `DetachmentDuration` are set as `1000000` <sup>&deg;</sup>Cd, the cohort age keeps increasing until growth stage `ReadyForHarvesting`.
 
 <div class="fig-output">
 ```{r leaf-age, fig.cap='Age of leaf cohort as a function of stage or accumulated thermal time'}
@@ -78,6 +78,11 @@ plot_report_vector(
 
 ```
 </div>
+
+```{block, type='rmdimportant', echo=TRUE}
+The age of first leaf cohort starts from  200 &deg;Cd.
+
+```
 
 
 ### Leaf initialization
@@ -97,19 +102,13 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 </div>
 
 
-
-```{block, type='rmdimportant', echo=TRUE}
-Actually, the total leaf primordia number is slightly less than the total cohort number.
-```
-
-
 ```{block, type='rmdimportant', echo=TRUE}
 The plastochron supposed to 1.1 times of phyllochron. However the slope of Figure \@ref(fig:leaf-init-number)B (plastochron) is constant which is contrast with the slope of \@ref(fig:leaf-appear-number)B (phyllochron).   
 ```
 
 
 ### Leaf appearance 
-A new leaf is appeared when the node number is increased by 1 at the main stem. Consequently, the appearance rate of leaf cohort is equal to phyllochron. Most of para,meters are determined at leaf appearance. 
+A new leaf is appeared when the node number is increased by 1 at the main stem. Consequently, the appearance rate of leaf cohort is equal to phyllochron. Most of parameters of leaf cohort are determined at leaf appearance. 
 
 
 <div class="fig-output">
@@ -124,12 +123,11 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 ```
 </div>
 
-### Other periods
+### Growth duration
 
-The lengths of other periods are determined when a new leaf initialized. 
+In APSIM-Wheat model, leaf expansion of cohort $i$ starts from appearance of leaf tip $i$, i.e. the expasion of leaf cohort in the sheath is ignored which does not contribute to green leaf or leaf area index. The growth duration of spring wheat is close to one phylochron as the synchronization of leaf blade and sheath   [@skinner_elongation_1995].
 
-* Growth duration is defined as a phyllochron. The growth duration of spring wheat is close to one phylochron under variable light and temperature conditions [@bos_growth_1998-1].
-
+As the variation of phyllochron (Fig. \@ref(fig:str-phyllochron)), the growth duration also changes by cohort rank. The growth duration of flag leaf is shorter than secondary leaf as the fraction of flag leaf (Fig. \@ref(fig:final-leaf-fraction).
 
 <div class="fig-output">
 ```{r leaf-growth-duration, fig.cap='Growth duration of leaf cohort which is determined at appearance of leaf cohort.'}
@@ -143,7 +141,9 @@ plot_report_vector(
 </div>
 
 
-* Lag duration is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort appeared during stem elongation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage `FlagLeaf` to stage `EndGrainFill` minus 3 phyllochron (`senescence duration`). 
+### Lag duration 
+
+Lag duration (full functional duration) is defined as 4 phyllochrons for leaf appeared during vegetative period (from emergence to terminal spikelet). For leaf cohort appeared during stem elongation period (from terminal spikelet to flag leaf), the lag duration equals to total length from stage `FlagLeaf` to stage `EndGrainFill` minus 3 phyllochron (`senescence duration`), i.e. flag leaf is completely death at the stage `EndGrainFill`. 
 
 
 <div class="fig-output">
@@ -157,9 +157,9 @@ plot_report_vector(
 ```
 </div>
 
+### Senescene and detachment duration
 
-* Senescence duration is defined as 3 phyllochrons.
-* Detachment lag and detachment duration are set as a big value `1000000` which assumes no detachment in wheat. Actually all leaves are detached at `Harvesting` event.
+Senescence duration is defined as 3 phyllochrons. Detachment lag and detachment duration are set as a big value `1000000` which assumes no detachment in wheat. Actually all leaves are detached at `Harvesting` event. 
 
 Figure \@ref(fig:leaf-cohort-number) shows the number of leaf cohort for expanding, initialized, appeared, senescing and dead cohort.
 
@@ -169,6 +169,7 @@ y_cols <- c(
             'Wheat.Leaf.ExpandingCohortNo',
             'Wheat.Leaf.InitialisedCohortNo',
             'Wheat.Leaf.AppearedCohortNo',
+            'Wheat.Leaf.ExpandedCohortNo',
             'Wheat.Leaf.SenescingCohortNo',
             'Wheat.Leaf.DeadCohortNo')
 
@@ -177,7 +178,45 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 ```
 </div>
 
-The cohort population is reudced by plant and stem mortality...
+```{block, type='rmdimportant', echo=TRUE}
+The expanding leaves are jumping up and down which is caused by the strange duration of leaf growth. We should expect the same growth duration for Leaf 1 and Leaf 2, Leaf 3, 4 and 6.
+```
+
+### Drought stress
+
+After appearance, leaf development is accelerated by the drought stress through increasing the daily thermal time, i.e. leaf age is accelerated by drought. The factor of acceleration depends on the ratio of water supply and demand (Figure \@ref(fig:water-supply-demand-ratio)). Daily thermal time is doubled when there is no water supply (i.e. Ratio of water supply and demand equals to zero), and no acceleration when ratio above 0.7 (The values in Figure \@ref(fig:leaf-development-drought) plus one).
+
+
+<div class="fig-input">
+```{r leaf-development-drought, fig.asp = 0.75, fig.cap='Drought stress accelerates leaf development. Daily thermal time is doubled when there is no water supply (i.e. Ratio of water supply and demand equals to zero), and no acceleration when ratio above 0.7.'}
+xpath <- '//AddFunction[Name="DroughtInducedSenAcceleration"]/MultiplyFunction[Name="Stress"]/LinearInterpolationFunction[Name="StressFactor"]'
+plot_xypair(pmf, xpath, x_lab = 'Ratio of water supply and demand', y_lab = 'Ratio of acceleration of thermal time')
+
+```
+</div>
+
+
+```csharp
+//Acellerate thermal time accumulation if crop is water stressed.
+double _ThermalTime;
+if ((LeafCohortParameters.DroughtInducedSenAcceleration != null) && (IsFullyExpanded))
+    _ThermalTime = TT * LeafCohortParameters.DroughtInducedSenAcceleration.Value;
+else _ThermalTime = TT;
+
+```
+
+
+## Cohort population
+
+Cohort population is initialized as the total stem population at appearance of leaf cohort, and proportionally reduced by plant and stem mortalities (\@ref(#sec-structure-mortality)) at each day after appearance.
+
+<div class='fig-output'>
+```{r live-population}
+y_cols <- c('Wheat.Leaf.CohortLivePopulation')
+plot_report_vector(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Live (cohort) population')
+
+```
+</div>
 
 The total leaf number is multiplied by leaf cohort number and stem number (Figure \@ref(fig:leaf-number)).
 
@@ -195,6 +234,11 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 
 
 
+```{block, type='rmdimportant', echo=TRUE}
+The tiller death is detached from plants, but leaf death isn't detached.
+```
+
+
 The fraction of final leaf is set as 1, but return the actual fraction of the final leaf if the last leaf has appeared. 
 
 <div class="fig-output">
@@ -208,47 +252,35 @@ plot_report(df, x_var, y_cols, x_lab = x_lab,
 </div>
 
 
-```{block, type='rmdwarning', echo=TRUE}
-Not sure about the main point of final leaf fraction. The fraction is not integer as the final node number  is not an integer.
+
+## Development of leaf size
+
+During the growth duration of each cohort, the daily increase of leaf area is detemined by the minimum increase of water ($\Delta A_{water}$) and carbon ($\Delta A_{carbon}$) constrained leaf area. 
+
+
+### Maximum (potential) leaf area
+
+The maximum leaf area of each leaf cohort is determined by potential maximum leaf area and reduced by cell division stress and final leaf fraction when leaf cohort is appeared. 
+
+
+The potential maximum leaf areas by rank are specified by two parameters the maximum leaf area in all leaves (`AreaLargestLeaves` with default value 2600 mm^2^) and an age factor (Figure \@ref(fig:maximum-area-age)). The age factor is assumed leaf areas are linearly increasing from stage `Emergence` to `Terminal spikelet`, and all leaves appeared after stage `Terminal Spikelet` have the same maximum leaf area (the last three leaves in the current configuration of plastochron and phyllochron, Figure \@ref(fig:node-number)).
+
+```{block, type='rmbimportant', echo=TRUE}
+The function of maximum leaf size is proposed to change. Documentation needs to update.  
 ```
-
-
-## Leaf area index
-
-Leaf area index (LAI) are calculated for green leaf ($\text{LAI}_{g}$), dead leaf ($\text{LAI}_{d}$), and total leaf ($\text{LAI}_{t}$).
-
-Leaf area is the minium value between carbon limitation and water limation...
-
-
-
-
-### Leaf size 
-
-The logistic function is used to simulate leaf size...
-
-
-### Maximum leaf area
-
-The maximum leaf area of each leaf cohort is determined by potential maximum leaf area and reduced by cell division stress and final leaf fraction when leaf cohort is appeared. The potential maximum leaf areas by rank are specified by two parameters the maximum leaf area in all leaves (`AreaLargestLeaves` with default value 2600 mm^2^) and an age factor (Figure \@ref(fig:maximum-area-age)). The age factor is assumed leaf areas are linearly increasing from stage `Emergence` to `Terminal spikelet`, and all leaves appeared after stage `Terminal Spikelet` have the same maximum leaf area (the last three leaves in the current configuration of plastochron and phyllochron, Figure \@ref(fig:node-number)).
 
 
 <div class="fig-input">
 ```{r maximum-area-age, fig.asp = 0.75, fig.cap='Multiplier of maximum leaf area as a function of growthing stage'}
-xpath <- '//Name[text()="AgeFactor"]'
-plot_xypair(pmf, xpath, x_lab = 'Growthing stage', y_lab = 'Multiplier of maximum leaf area')
+# xpath <- '//Name[text()="AgeFactor"]'
+# plot_xypair(pmf, xpath, x_lab = 'Growthing stage', y_lab = 'Multiplier of maximum leaf area')
 
 ```
 </div>
 
 
-```{block, type="rmdimportant", echo=TRUE}
-In the previous version of APSIM-Wheat model,  the x-value of leaf area profile is `RelativeNodeAppearance`. However `RelativeNodeAppearance` is suddenly increased at stage `Terminal Spikelet` which is caused by resetting of final node number. 
-```
 
-
-The stress factor of cell division is determined by water (Figure \@ref(fig:water-supply-demand-ratio)) and nitrogen stresses (Figure \@ref(fig:nitrogen-functional-nitrogen)).
-
-Stress of cell division is accumulated from initialization to appearance (average in actual ...)
+The stress factor of cell division is determined by water (Figure \@ref(fig:water-supply-demand-ratio)) and nitrogen stresses (Figure \@ref(fig:nitrogen-functional-nitrogen)). Stress of cell division is averaged by cell division stress factors from initialization to appearance.
 
 In the test simulation, the maximum leaf areas are increasing from Rank 1 to Rank 9, then decreasing to flag leaf (Figure \@ref(fig:leaf-cohort-max-area)), which is caused by nitrogen stress after terminal spikelet (Figure \@ref(fig:nitrogen-functional-nitrogen)). 
 
@@ -265,10 +297,44 @@ plot_report_vector(
 
 
 
+### Potential expansion of leaf cohort
+
+The potential leaf area is calculated by a logistic equation as a function of thermal time after leaf appearance. The shape of logistic equation is determiend by parameter `LeafSizeShapeParameter` with default value `0.3` (Fig. \@ref(fig:size-function)). 
+
+```{r size-function, fig.asp=0.75, fig.cap='The size function of leaf area development'}
+
+TT <- seq(0, 100, by = 1)
+MaxArea <- 1000
+LeafSizeShape <- 0.3
+GrowthDuration <- 100
+OneLessShape <- 1 - LeafSizeShape
+alpha <- -log((1 / OneLessShape - 1) / (MaxArea / (MaxArea * LeafSizeShape) - 1)) / GrowthDuration
+LeafSize <- MaxArea / (1 + (MaxArea / (MaxArea * LeafSizeShape) - 1) * exp(-alpha * TT))
+y0 <- MaxArea / (1 + (MaxArea / (MaxArea * LeafSizeShape) - 1) * exp(-alpha * 0))
+yDiffprop = y0 / (MaxArea/2)
+ScaledLeafSize = (LeafSize - y0) / (1 - yDiffprop)
+leaf_size <- data_frame(
+    TT = TT
+    , size = ScaledLeafSize
+)
+
+ggplot(leaf_size) + 
+    geom_line(aes(TT, size)) +
+    theme_bw() +
+    xlab('Thermal time since appearance (oCd)') +
+    ylab('Leaf area (mm2)')
+
+```
 
 
-## Cohort leaf area
 
+### Water constrained leaf area
+
+The potential increase of leaf area is reduced by `ExpansionStress` with default value 1
+
+
+
+### Carbon constrained leaf area
 
 <div class="fig-output">
 ```{r leaf-water-area, fig.cap='Delta of leaf area constrained by water and carbon.'}
@@ -314,6 +380,7 @@ plot_report_vector(
 
 
 
+Leaf area index (LAI) are calculated for green leaf ($\text{LAI}_{g}$), dead leaf ($\text{LAI}_{d}$), and total leaf ($\text{LAI}_{t}$). 
 
 
 <div class="fig-output">
@@ -421,17 +488,19 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g
 </div>
 
 
+<div class="fig-output">
+```{r leaf-cohortspecific-leaf-area, fig.cap='Specific leaf area by cohort'}
+y_cols <- c('Wheat.Leaf.CohortSLA')
+plot_report_vector(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g)')
+
+```
+</div>
+
+```{block, type='rmdwarning', echo=TRUE}
+Why does specific leaf area of flag leaf decrease after a few days of appearance.
+```
+
+
 ## Frost impact 
 
 Kill a fraction in all leaves ...
-
-## Drought 
-
-```csharp
-//Acellerate thermal time accumulation if crop is water stressed.
-double _ThermalTime;
-if ((LeafCohortParameters.DroughtInducedSenAcceleration != null) && (IsFullyExpanded))
-    _ThermalTime = TT * LeafCohortParameters.DroughtInducedSenAcceleration.Value;
-else _ThermalTime = TT;
-
-```

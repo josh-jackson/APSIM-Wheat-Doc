@@ -556,7 +556,6 @@ The model consists of:
             <VariableName>[Structure].MainStemPrimordiaNo</VariableName>
           </VariableReference>
           <SetEvent>TerminalSpikelet</SetEvent>
-          <ReSetEvent />
         </OnEventFunction>
         <InitialiseStage>Emergence</InitialiseStage>
         <PrimaryBudNo>1</PrimaryBudNo>
@@ -782,28 +781,38 @@ The model consists of:
           <Name>BiomassRemovalDefaults</Name>
           <OrganBiomassRemovalType>
             <Name>Harvest</Name>
-            <FractionRemoved>1</FractionRemoved>
-            <FractionToResidue>0</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Cut</Name>
-            <FractionRemoved>1</FractionRemoved>
-            <FractionToResidue>0</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Prune</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.8</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Graze</Name>
-            <FractionRemoved>0.6</FractionRemoved>
-            <FractionToResidue>0.2</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Thin</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.05</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
         </Folder>
         <RipeStage>Ripe</RipeStage>
@@ -937,28 +946,38 @@ The model consists of:
           <Name>BiomassRemovalDefaults</Name>
           <OrganBiomassRemovalType>
             <Name>Harvest</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.2</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Cut</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.3</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Prune</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.1</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Graze</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.15</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Thin</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.05</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
         </Folder>
         <LinearInterpolationFunction>
@@ -1008,8 +1027,16 @@ The model consists of:
           </XYPairs>
           <XProperty>[Root].RWC</XProperty>
         </LinearInterpolationFunction>
-        <InitialDM>0.2</InitialDM>
-        <SpecificRootLength>40000</SpecificRootLength>
+        <Constant>
+          <Name>InitialDM</Name>
+          <Value>0.2</Value>
+          <Units>g/plant</Units>
+        </Constant>
+        <Constant>
+          <Name>SpecificRootLength</Name>
+          <Value>40</Value>
+          <Units>m/g</Units>
+        </Constant>
         <NuptakeSupply>0</NuptakeSupply>
       </Root>
       <Leaf>
@@ -1335,34 +1362,85 @@ The model consists of:
             <Name>LeafSizeShapeParameter</Name>
             <Value>0.3</Value>
           </Constant>
-          <MultiplyFunction>
-            <Name>MaxArea</Name>
-            <Constant>
-              <Name>AreaLargestLeaves</Name>
-              <Value>2600</Value>
-              <Units>mm^2</Units>
-            </Constant>
-            <LinearInterpolationFunction>
-              <Name>AgeFactor</Name>
-              <XYPairs>
-                <Name>XYPairs</Name>
-                <X>
-                  <double>3</double>
-                  <double>4</double>
-                </X>
-                <Y>
-                  <double>0.1</double>
-                  <double>1</double>
-                </Y>
-              </XYPairs>
-              <XProperty>[Phenology].Stage</XProperty>
-            </LinearInterpolationFunction>
-          </MultiplyFunction>
           <Constant>
             <Name>SenessingLeafRelativeSize</Name>
             <Value>0.1</Value>
             <Units>0-1</Units>
           </Constant>
+          <PhaseLookup>
+            <Name>MaxArea</Name>
+            <PhaseLookupValue>
+              <Name>VegetativeGrowth</Name>
+              <LinearInterpolationFunction>
+                <Name>MaxAreaVeg</Name>
+                <XYPairs>
+                  <Name>XYPairs</Name>
+                  <X>
+                    <double>1</double>
+                    <double>12</double>
+                  </X>
+                  <Y>
+                    <double>100</double>
+                    <double>6000</double>
+                  </Y>
+                </XYPairs>
+                <XProperty>[Structure].MainStemNodeNo</XProperty>
+              </LinearInterpolationFunction>
+              <Start>Emergence</Start>
+              <End>TerminalSpikelet</End>
+            </PhaseLookupValue>
+            <PhaseLookupValue>
+              <Name>StemElongation</Name>
+              <AddFunction>
+                <Name>MaxAreaStem</Name>
+                <LinearInterpolationFunction>
+                  <Name>MaxAreaVeg</Name>
+                  <XYPairs>
+                    <Name>XYPairs</Name>
+                    <X>
+                      <double>1</double>
+                      <double>3</double>
+                    </X>
+                    <Y>
+                      <double>0</double>
+                      <double>0</double>
+                    </Y>
+                  </XYPairs>
+                  <XProperty>[Leaf].CohortParameters.LeafRankAfterTerminalSpikelet.Value</XProperty>
+                </LinearInterpolationFunction>
+                <OnEventFunction>
+                  <Name>LeafSizeAtTerminalSpikelet</Name>
+                  <VariableReference>
+                    <Name>PreEventValue</Name>
+                    <VariableName>[Leaf].AreaLargestLeaf</VariableName>
+                  </VariableReference>
+                  <VariableReference>
+                    <Name>PostEventValue</Name>
+                    <VariableName>[Leaf].AreaLargestLeaf</VariableName>
+                  </VariableReference>
+                  <SetEvent>TerminalSpikelet</SetEvent>
+                </OnEventFunction>
+              </AddFunction>
+              <Start>TerminalSpikelet</Start>
+              <End>FlagLeaf</End>
+            </PhaseLookupValue>
+          </PhaseLookup>
+          <OnEventFunction>
+            <Name>LeafNumberAtTerminalSpikelet</Name>
+            <Constant>
+              <Name>PreEventValue</Name>
+              <Value>0</Value>
+            </Constant>
+            <VariableReference>
+              <Name>PostEventValue</Name>
+              <VariableName>[Structure].MainStemNodeNo</VariableName>
+            </VariableReference>
+            <SetEvent>TerminalSpikelet</SetEvent>
+          </OnEventFunction>
+          <ExpressionFunction>
+            <Name>LeafRankAfterTerminalSpikelet</Name>
+            <Expression>[Structure].MainStemNodeNo - [Leaf].CohortParameters.LeafNumberAtTerminalSpikelet.Value </Expression>
+          </ExpressionFunction>
         </LeafCohortParameters>
         <RUEModel>
           <Name>Photosynthesis</Name>
@@ -1521,28 +1599,38 @@ The model consists of:
           <Name>BiomassRemovalDefaults</Name>
           <OrganBiomassRemovalType>
             <Name>Harvest</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.3</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Cut</Name>
-            <FractionRemoved>0.8</FractionRemoved>
-            <FractionToResidue>0</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Prune</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.6</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Graze</Name>
-            <FractionRemoved>0.6</FractionRemoved>
-            <FractionToResidue>0.1</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Thin</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.05</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
         </Folder>
         <CurrentExpandingLeaf>0</CurrentExpandingLeaf>
@@ -1630,28 +1718,38 @@ The model consists of:
           <Name>BiomassRemovalDefaults</Name>
           <OrganBiomassRemovalType>
             <Name>Harvest</Name>
-            <FractionRemoved>0.5</FractionRemoved>
-            <FractionToResidue>0.1</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Cut</Name>
-            <FractionRemoved>0.8</FractionRemoved>
-            <FractionToResidue>0</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Prune</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.6</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Graze</Name>
-            <FractionRemoved>0.6</FractionRemoved>
-            <FractionToResidue>0.2</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Thin</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.05</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
         </Folder>
       </GenericAboveGroundOrgan>
@@ -1767,28 +1865,38 @@ The model consists of:
           <Name>BiomassRemovalDefaults</Name>
           <OrganBiomassRemovalType>
             <Name>Harvest</Name>
-            <FractionRemoved>0.5</FractionRemoved>
-            <FractionToResidue>0.1</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Cut</Name>
-            <FractionRemoved>0.8</FractionRemoved>
-            <FractionToResidue>0</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Prune</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.6</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Graze</Name>
-            <FractionRemoved>0.6</FractionRemoved>
-            <FractionToResidue>0.2</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
           <OrganBiomassRemovalType>
             <Name>Thin</Name>
-            <FractionRemoved>0</FractionRemoved>
-            <FractionToResidue>0.05</FractionToResidue>
+            <FractionLiveToRemove>0</FractionLiveToRemove>
+            <FractionDeadToRemove>0</FractionDeadToRemove>
+            <FractionLiveToResidue>0</FractionLiveToResidue>
+            <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
         </Folder>
         <DivideFunction>
@@ -2727,10 +2835,12 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Leaf.MaxLeafArea[1:11]</string>
             <string>Wheat.Leaf.CohortArea[1:11]</string>
             <string>Wheat.Leaf.CohortSize[1:11]</string>
+            <string>Wheat.Leaf.CohortSLA[1:11]</string>
             <string>Wheat.Leaf.CohortLagDuration[1:11]</string>
             <string>Wheat.Leaf.CohortGrowthDuration[1:11]</string>
             <string>Wheat.Leaf.CohortDeltaWaterConstrainedArea[1:11]</string>
             <string>Wheat.Leaf.CohortDeltaCarbonConstrainedArea[1:11]</string>
+            <string>Wheat.Leaf.CohortLivePopulation[1:11]</string>
             <string />
             <string>Wheat.Leaf.AppearedCohortNo</string>
             <string>Wheat.Leaf.InitialisedCohortNo</string>
@@ -2738,10 +2848,12 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Leaf.GreenCohortNo</string>
             <string>Wheat.Leaf.SenescingCohortNo</string>
             <string>Wheat.Leaf.DeadCohortNo</string>
+            <string>Wheat.Leaf.ExpandedCohortNo</string>
             <string>Wheat.Leaf.PlantAppearedGreenLeafNo</string>
             <string>Wheat.Leaf.PlantAppearedLeafNo</string>
             <string>Wheat.Leaf.PlantsenescedLeafNo</string>
             <string>Wheat.Leaf.FinalLeafFraction</string>
+            <string />
             <string />
             <string>Wheat.Leaf.LAI</string>
             <string>Wheat.Leaf.LAIDead</string>
@@ -2756,6 +2868,8 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <string>Wheat.Leaf.Fn</string>
             <string />
             <string>Wheat.WaterSupplyDemandRatio</string>
+            <string>Wheat.Leaf.CohortParameters.LeafRankAfterTerminalSpikelet.Value</string>
+            <string>Wheat.Leaf.CohortParameters.LeafNumberAtTerminalSpikelet.Value</string>
           </VariableNames>
           <EventNames>
             <string>[Clock].DoReport</string>
