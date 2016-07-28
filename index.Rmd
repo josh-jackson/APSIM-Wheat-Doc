@@ -66,12 +66,10 @@ The main contents include
 - Figures of general outputs
 
 
-## Authors
-<!--
+## Contributors of this documentation
 Bangyou Zheng <bangyou.zheng@csiro.au>
 Karine Chenu <karine.chenu@uq.edu.au>
 
--->
 
 ## How to contribute?
 

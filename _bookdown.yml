@@ -11,4 +11,5 @@ rmd_files:
   - "nitrogen.Rmd"
   - "arbitrator.Rmd"
   - "output.Rmd"
+  - "reference.Rmd"
 
