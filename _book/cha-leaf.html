@@ -82,7 +82,7 @@ MathJax.Hub.Config({
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#authors"><i class="fa fa-check"></i><b>1.1</b> Authors</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contributors-of-this-documentation"><i class="fa fa-check"></i><b>1.1</b> Contributors of this documentation</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-to-contribute"><i class="fa fa-check"></i><b>1.2</b> How to contribute?</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="cha-terminology.html"><a href="cha-terminology.html"><i class="fa fa-check"></i><b>2</b> Terminology</a><ul>
@@ -131,6 +131,7 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="10.1" data-path="cha-output.html"><a href="cha-output.html#phenology"><i class="fa fa-check"></i><b>10.1</b> Phenology</a></li>
 <li class="chapter" data-level="10.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>10.2</b> Structure</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="cha-reference.html"><a href="cha-reference.html"><i class="fa fa-check"></i><b>11</b> Reference</a></li>
 <li class="divider"></li>
 <li><a href="https://byzheng.github.io/APSIM-Wheat-Sens" target="blank">Sensitivity analysis</a></li>
 <li><a href="http://www.apsim.info/" target="blank">APSIM</a></li>
@@ -162,8 +163,8 @@ MathJax.Hub.Config({
 <p>The growth cycle of leaf cohort is divided into 7 stages and 6 periods from <code>Initialized</code> to <code>Detached</code>. The length of each period depends on the <code>plastrochron</code> and <code>phylochron</code> for initialization and appearance and is configured by <code>CohortParameters</code> for others.</p>
 <p>Several status variables are defined for each leaf cohort, which can be used in other modules to describe the current status of leaf cohort, i.e. <code>IsNotAppeared</code>, <code>IsGrowing</code>, <code>IsAlive</code>, <code>IsGreen</code>, <code>IsNotSenescing</code>, <code>Senescing</code>, <code>isFullyExpanded</code>, <code>ShouldBeDead</code>, <code>IsAppeared</code> and <code>IsInitialised</code>.</p>
 <div class="fig-input">
-<div id="htmlwidget-8868" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8868">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4627" style="width:95%;height:470.4px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4627">{"x":{"diagram":"sequenceDiagram;\n\tInitialized->>Appeared: Appearance \n\tAppeared->>Expanded: GrowthDuration\n\tExpanded->>Senescing: LagDuration\n\tSenescing->>Senesced: SenescenceDuration\n\tSenesced->>Detaching: DetachmentLagDuration\n\tDetaching->>Detached: DetachmentDuration\n    Initialized->Appeared: IsNotAppeared\n    Initialized->Expanded: IsGrowing\n\tInitialized->>Senesced: IsAlive\n\tInitialized->>Senesced: IsGreen\n\tInitialized->>Senescing: IsNotSenescing\n\tSenescing->>Senesced: IsSenescing\n\tExpanded->>Detached: IsFullyExpanded\n\tSenesced->>Detached: ShouldBeDead\n\tSenesced->>Detached: Finished\n\tAppeared->>Detached: IsAppeared\n\tInitialized->>Detached: IsInitialised\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="leaf-age" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> leaf age</h3>
@@ -432,6 +433,8 @@ Figure 5.18: Coverage
 </div>
 <div id="leaf-biomass" class="section level2">
 <h2><span class="header-section-number">5.5</span> Leaf biomass</h2>
+<p>Biomass supply</p>
+<p>Biomass demand</p>
 <div class="fig-output">
 <div class="figure" style="text-align: center"><span id="fig:leaf-biomass"></span>
 <img src="APSIM-Wheat_files/figure-html/leaf-biomass-1.png" alt="Leaf biomass" width="80%" />
@@ -468,7 +471,7 @@ Why does specific leaf area of flag leaf decrease after a few days of appearance
 
 </div>
 </div>
-<h3>References</h3>
+<h3> Reference</h3>
 <div id="refs" class="references">
 <div id="ref-skinner_elongation_1995">
 <p>Skinner, R. H., and C. J. Nelson. 1995. “Elongation of the Grass Leaf and Its Relationship to the Phyllochron.” <em>Crop Science</em> 35 (1): 4. doi:<a href="https://doi.org/10.2135/cropsci1995.0011183X003500010002x">10.2135/cropsci1995.0011183X003500010002x</a>.</p>

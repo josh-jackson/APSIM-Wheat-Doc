@@ -82,7 +82,7 @@ MathJax.Hub.Config({
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#authors"><i class="fa fa-check"></i><b>1.1</b> Authors</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contributors-of-this-documentation"><i class="fa fa-check"></i><b>1.1</b> Contributors of this documentation</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-to-contribute"><i class="fa fa-check"></i><b>1.2</b> How to contribute?</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="cha-terminology.html"><a href="cha-terminology.html"><i class="fa fa-check"></i><b>2</b> Terminology</a><ul>
@@ -131,6 +131,7 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="10.1" data-path="cha-output.html"><a href="cha-output.html#phenology"><i class="fa fa-check"></i><b>10.1</b> Phenology</a></li>
 <li class="chapter" data-level="10.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>10.2</b> Structure</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="cha-reference.html"><a href="cha-reference.html"><i class="fa fa-check"></i><b>11</b> Reference</a></li>
 <li class="divider"></li>
 <li><a href="https://byzheng.github.io/APSIM-Wheat-Sens" target="blank">Sensitivity analysis</a></li>
 <li><a href="http://www.apsim.info/" target="blank">APSIM</a></li>
@@ -162,7 +163,8 @@ MathJax.Hub.Config({
 <p>A plastochron is defined as the time interval between two successive recurring events during the growth of plant shoots, such as leaf initiation. The phyllochron is the intervening period between the sequential emergence of leaves on the main stem of a plant <span class="citation">(McMaster and Hunt <a href="#ref-mcmaster_re-examining_2003">2003</a>)</span>.</p>
 <p>The non-linear reponse of temperature on phyllchron were observed by Friend et al. <span class="citation">(<a href="#ref-friend_leaf_1962">1962</a>)</span> and Cao and Moss <span class="citation">(<a href="#ref-cao_temperature_1989">1989</a>)</span>. The soil temperature provided more accurately prediction of leaf development than air temperature <span class="citation">(P. D. Jamieson et al. <a href="#ref-jamieson_prediction_1995">1995</a>)</span>. However, a simple linear reponse of phyllochron to air temperature works surprusingly well in predicting phyllochron for most field conditions <span class="citation">(McMaster and Hunt <a href="#ref-mcmaster_re-examining_2003">2003</a>)</span>. If improvements are desired, the use of non-linear reponses and soil temperature shows promise <span class="citation">(P. D. Jamieson et al. <a href="#ref-jamieson_prediction_1995">1995</a>; Yan and Hunt <a href="#ref-yan_equation_1999">1999</a>)</span>. Consequently, we assume the linear reponse of air temperature on leaf appearance (phyllochorn) in the current APSIM-Wheat model.</p>
 <p>Brown et al. <span class="citation">(<a href="#ref-brown_integration_2013">2013</a>)</span> showed final leaf number (FLN) could be estimated as 2.86 + HSTS * 1.1 where HSTS is the the Haun stage at terminal spikelet. To caputre this in the wheat model we have set the initial number of primordia (determined by the number of initialleaf objects on the leaf class) to 3 and have set this function to produce primordia 10% faster than mainstem leaves. Primordia are initiated until the therminal spikelet stage and then the number remains fixed, giving final leaf number.</p>
-<p>Based on <span class="citation">(P. D. Jamieson et al. <a href="#ref-jamieson_prediction_1995">1995</a>)</span>, leaf appearace could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves &lt; 2 and 130% of base phyllochron for leaves &gt; 7. The base phyllochron set as 100 <sup>o</sup>Cd.</p>
+<p>Based on <span class="citation">(P. D. Jamieson et al. <a href="#ref-jamieson_prediction_1995">1995</a>)</span>, leaf appearance could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves &lt; 2 and 130% of base phyllochroen for leaves &gt; 7. The base phyllochron set as 100 <sup>o</sup>Cd.</p>
+<p>In the wheat model, we use a fake plastochron when are calculated from emergence to terminal spikelet.</p>
 <div class="fig-input">
 <div class="figure" style="text-align: center"><span id="fig:str-phyllochron"></span>
 <img src="APSIM-Wheat_files/figure-html/str-phyllochron-1.png" alt="Phyllochron of leaf cohort is depending on the rank on the main stem" width="80%" />
@@ -360,7 +362,7 @@ Figure 4.14: Total plant node number
 
 </div>
 </div>
-<h3>References</h3>
+<h3> Reference</h3>
 <div id="refs" class="references">
 <div id="ref-mcmaster_re-examining_2003">
 <p>McMaster, Gregory S., and L. A. Hunt. 2003. “Re-Examining Current Questions of Wheat Leaf Appearance and Temperature.” In <em>Modeling Temperature Response in Wheat and Maize</em>, 18. <a href="http://repository.cimmyt.org/xmlui/bitstream/handle/10883/1043/76760.pdf?sequence=1#page=25" class="uri">http://repository.cimmyt.org/xmlui/bitstream/handle/10883/1043/76760.pdf?sequence=1#page=25</a>.</p>
