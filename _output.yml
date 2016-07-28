@@ -3,6 +3,7 @@ bookdown::gitbook:
     in_header: _includes/header.html
     after_body: _includes/after_body.html
   css: _includes/style.css
+  split_bib: false
   config:
     toc:
       collapse: section
@@ -29,3 +30,4 @@ bookdown::pdf_book:
   keep_tex: yes
   latex_engine: xelatex
   citation_package: natbib
+

@@ -15,3 +15,4 @@
 
 ## Leaf {#output-leaf}
 
+- **Huan Index** is mainly concerned with the leaf production stage of development [@haun_visual_1973]. The length of each emerging leaf is expressed as a fraction of the length of the preceding fully emerged leaf. For example, a 3.2 indicates that three leaves are fully emerged, and a fourth leaf has emerged two-tenths of the length of the third.

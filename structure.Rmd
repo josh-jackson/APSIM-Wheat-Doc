@@ -15,8 +15,9 @@ Brown et al. [-@brown_integration_2013] showed final leaf number (FLN) could be 
 
 
 
-Based on [@jamieson_prediction_1995], leaf appearace could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves < 2 and 130% of base phyllochron for leaves > 7. The base phyllochron set as 100 <sup>o</sup>Cd.
+Based on [@jamieson_prediction_1995], leaf appearance could be described by a base phyllochron determined between leaves 2 and 7 and a phyllochron that was 70% of base phyllochron for leaves < 2 and 130% of base phyllochroen for leaves > 7. The base phyllochron set as 100 <sup>o</sup>Cd.
 
+In the wheat model, we use a fake plastochron when are calculated from  emergence to terminal spikelet.
 
 <div class="fig-input">
 ```{r str-phyllochron, fig.asp = 0.75, fig.cap='Phyllochron of leaf cohort is depending on the rank on the main stem'}

@@ -467,6 +467,10 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Coverage')
 
 ## Leaf biomass
 
+Biomass supply
+
+Biomass demand
+
 <div class="fig-output">
 ```{r leaf-biomass, fig.cap='Leaf biomass'}
 y_cols <- c(
