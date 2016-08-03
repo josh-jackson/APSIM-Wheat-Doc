@@ -2457,6 +2457,7 @@ The EarLive composite biomass object includes the Live pools of all organs withi
         <string>Wheat.Grain.FSize</string>
         <string>Wheat.Grain.LiveFWt</string>
         <string>Wheat.Grain.Wt</string>
+        <string>Wheat.Grain.DMDemandFunction.Value as Wheat.Grain.DMDemandFunction</string>
       </VariableNames>
       <EventNames>
         <string>[Clock].DoReport</string>

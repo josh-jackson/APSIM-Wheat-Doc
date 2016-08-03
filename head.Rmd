@@ -45,10 +45,10 @@ In the previous version of APSIM-Wheat (7.8), the grain number is determined by 
 
 
 <div class="fig-output">
-```{r grain-number, fig.cap='Coverage'}
+```{r grain-number, fig.cap='Grain number'}
 y_cols <- c(
     'Wheat.Grain.Number')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Coverage')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain number')
 
 ```
 </div>
@@ -56,14 +56,23 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Coverage')
 
 
 <div class="fig-output">
-```{r grain-size, fig.cap='Coverage'}
+```{r grain-size, fig.cap='Grain size'}
 y_cols <- c(
-    'Wheat.Grain.size')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Coverage')
+    'Wheat.Grain.Size')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain size (g)')
 
 ```
 </div>
 
+<div class="fig-output">
+```{r grain-yield, fig.cap='Grain weight'}
+y_cols <- c(
+    'Wheat.Grain.Wt'
+    , 'Wheat.Grain.LiveFWt')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain weight (g/m2)')
+
+```
+</div>
 
 
 
