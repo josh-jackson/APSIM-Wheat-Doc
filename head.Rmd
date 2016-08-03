@@ -36,9 +36,10 @@ This section is directly copied from documentation of APSIM-Wheat 7.5. All detai
 
 ## Kernel number
 
-The number of kernels per plant ($N_{g}$) is determined by the total weight of stem and spike organs ($W_{s}$). $$N_{g}=R_{g}W_{s}$$ where $R_{g}$ is the grain number per gram stem and spike with default value at 25 grain g^-1^.
+The kernel number of wheat was simulated according the stem biomass at anthese in CERES [@moreno-sotomayor_improvements_2004], total above ground biomass at anthesis by O'Leary et al [-@oleary_simulation_1985].
 
-The kernel number is simulated according the stem biomass at anthese in CERES [@moreno-sotomayor_improvements_2004], total above ground biomass at anthesis by O'Leary et al [-@oleary_simulation_1985].
+
+The number of kernels per plant ($N_{g}$) is determined by the total weight of stem and spike organs ($W_{s}$). $$N_{g}=R_{g}W_{s}$$ where $R_{g}$ is the grain number per gram stem and spike with default value at 25 grain g^-1^.
 
 ```{block type='rmdnote', echo=TRUE}
 In the previous version of APSIM-Wheat (7.8), the grain number is determined by the stem dry weight at anthesis.
