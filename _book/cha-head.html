@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Documentation of APSIM-Wheat</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Documentation of APSIM-Wheat">
+  <meta name="generator" content="bookdown 0.1.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Documentation of APSIM-Wheat" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Documentation of APSIM-Wheat" />
+  <meta name="github-repo" content="byzheng/APSIM-Wheat" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Documentation of APSIM-Wheat" />
+  
+  <meta name="twitter:description" content="Documentation of APSIM-Wheat" />
+  
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="cha-biomass.html">
+<link rel="next" href="cha-water.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-0.7/htmlwidgets.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-0.8.4/DiagrammeR.js"></script>
+<script type = "text/javascript">
+
+</script>
+
+
+
+<link rel="stylesheet" href="_includes/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Documentation of ASPIM-Wheat</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contributors-of-this-documentation"><i class="fa fa-check"></i><b>1.1</b> Contributors of this documentation</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-to-contribute"><i class="fa fa-check"></i><b>1.2</b> How to contribute?</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="cha-terminology.html"><a href="cha-terminology.html"><i class="fa fa-check"></i><b>2</b> Terminology</a><ul>
+<li class="chapter" data-level="2.1" data-path="cha-terminology.html"><a href="cha-terminology.html#output-phenology"><i class="fa fa-check"></i><b>2.1</b> Phenology</a></li>
+<li class="chapter" data-level="2.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>2.2</b> Structure</a></li>
+<li class="chapter" data-level="2.3" data-path="cha-terminology.html"><a href="cha-terminology.html#output-leaf"><i class="fa fa-check"></i><b>2.3</b> Leaf</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="cha-overview.html"><a href="cha-overview.html"><i class="fa fa-check"></i><b>3</b> Overview</a><ul>
+<li class="chapter" data-level="3.1" data-path="cha-overview.html"><a href="cha-overview.html#history"><i class="fa fa-check"></i><b>3.1</b> History</a></li>
+<li class="chapter" data-level="3.2" data-path="cha-overview.html"><a href="cha-overview.html#organs"><i class="fa fa-check"></i><b>3.2</b> Organs</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="cha-phenology.html"><a href="cha-phenology.html"><i class="fa fa-check"></i><b>4</b> Phenology</a><ul>
+<li class="chapter" data-level="4.1" data-path="cha-phenology.html"><a href="cha-phenology.html#thermal-time"><i class="fa fa-check"></i><b>4.1</b> Thermal time</a></li>
+<li class="chapter" data-level="4.2" data-path="cha-phenology.html"><a href="cha-phenology.html#stage-period"><i class="fa fa-check"></i><b>4.2</b> Stages and periods</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="cha-structure.html"><a href="cha-structure.html"><i class="fa fa-check"></i><b>5</b> Structure</a><ul>
+<li class="chapter" data-level="5.1" data-path="cha-structure.html"><a href="cha-structure.html#plastochron-phyllochron"><i class="fa fa-check"></i><b>5.1</b> Plastochron and phyllochron</a></li>
+<li class="chapter" data-level="5.2" data-path="cha-structure.html"><a href="cha-structure.html#promordia-and-node-number"><i class="fa fa-check"></i><b>5.2</b> Promordia and node number</a></li>
+<li class="chapter" data-level="5.3" data-path="cha-structure.html"><a href="cha-structure.html#tillering"><i class="fa fa-check"></i><b>5.3</b> Tillering</a></li>
+<li class="chapter" data-level="5.4" data-path="cha-structure.html"><a href="cha-structure.html#population"><i class="fa fa-check"></i><b>5.4</b> Population</a></li>
+<li class="chapter" data-level="5.5" data-path="cha-structure.html"><a href="cha-structure.html#sec-structure-mortality"><i class="fa fa-check"></i><b>5.5</b> Mortality</a></li>
+<li class="chapter" data-level="5.6" data-path="cha-structure.html"><a href="cha-structure.html#canopy-height"><i class="fa fa-check"></i><b>5.6</b> Canopy height</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="cha-leaf.html"><a href="cha-leaf.html"><i class="fa fa-check"></i><b>6</b> Leaf</a><ul>
+<li class="chapter" data-level="6.1" data-path="cha-leaf.html"><a href="cha-leaf.html#life-growth-cycle"><i class="fa fa-check"></i><b>6.1</b> Life growth cycle</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-age"><i class="fa fa-check"></i><b>6.1.1</b> leaf age</a></li>
+<li class="chapter" data-level="6.1.2" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-initialization"><i class="fa fa-check"></i><b>6.1.2</b> Leaf initialization</a></li>
+<li class="chapter" data-level="6.1.3" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-appearance"><i class="fa fa-check"></i><b>6.1.3</b> Leaf appearance</a></li>
+<li class="chapter" data-level="6.1.4" data-path="cha-leaf.html"><a href="cha-leaf.html#growth-duration"><i class="fa fa-check"></i><b>6.1.4</b> Growth duration</a></li>
+<li class="chapter" data-level="6.1.5" data-path="cha-leaf.html"><a href="cha-leaf.html#lag-duration"><i class="fa fa-check"></i><b>6.1.5</b> Lag duration</a></li>
+<li class="chapter" data-level="6.1.6" data-path="cha-leaf.html"><a href="cha-leaf.html#senescene-and-detachment-duration"><i class="fa fa-check"></i><b>6.1.6</b> Senescene and detachment duration</a></li>
+<li class="chapter" data-level="6.1.7" data-path="cha-leaf.html"><a href="cha-leaf.html#drought-stress"><i class="fa fa-check"></i><b>6.1.7</b> Drought stress</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="cha-leaf.html"><a href="cha-leaf.html#cohort-population"><i class="fa fa-check"></i><b>6.2</b> Cohort population</a></li>
+<li class="chapter" data-level="6.3" data-path="cha-leaf.html"><a href="cha-leaf.html#development-of-leaf-size"><i class="fa fa-check"></i><b>6.3</b> Development of leaf size</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="cha-leaf.html"><a href="cha-leaf.html#maximum-potential-leaf-area"><i class="fa fa-check"></i><b>6.3.1</b> Maximum (potential) leaf area</a></li>
+<li class="chapter" data-level="6.3.2" data-path="cha-leaf.html"><a href="cha-leaf.html#potential-expansion-of-leaf-cohort"><i class="fa fa-check"></i><b>6.3.2</b> Potential expansion of leaf cohort</a></li>
+<li class="chapter" data-level="6.3.3" data-path="cha-leaf.html"><a href="cha-leaf.html#water-constrained-leaf-area"><i class="fa fa-check"></i><b>6.3.3</b> Water constrained leaf area</a></li>
+<li class="chapter" data-level="6.3.4" data-path="cha-leaf.html"><a href="cha-leaf.html#carbon-constrained-leaf-area"><i class="fa fa-check"></i><b>6.3.4</b> Carbon constrained leaf area</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="cha-leaf.html"><a href="cha-leaf.html#ground-coverage"><i class="fa fa-check"></i><b>6.4</b> Ground coverage</a></li>
+<li class="chapter" data-level="6.5" data-path="cha-leaf.html"><a href="cha-leaf.html#leaf-biomass"><i class="fa fa-check"></i><b>6.5</b> Leaf biomass</a></li>
+<li class="chapter" data-level="6.6" data-path="cha-leaf.html"><a href="cha-leaf.html#frost-impact"><i class="fa fa-check"></i><b>6.6</b> Frost impact</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cha-biomass.html"><a href="cha-biomass.html"><i class="fa fa-check"></i><b>7</b> Biomass</a><ul>
+<li class="chapter" data-level="7.1" data-path="cha-biomass.html"><a href="cha-biomass.html#biomass-accumulation-photosynthesis"><i class="fa fa-check"></i><b>7.1</b> Biomass accumulation (Photosynthesis)</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="cha-biomass.html"><a href="cha-biomass.html#potential-biomass-accumulation-from-radiation-use-efficiency"><i class="fa fa-check"></i><b>7.1.1</b> Potential biomass accumulation from radiation use efficiency</a></li>
+<li class="chapter" data-level="7.1.2" data-path="cha-biomass.html"><a href="cha-biomass.html#radiation-interception"><i class="fa fa-check"></i><b>7.1.2</b> Radiation interception</a></li>
+<li class="chapter" data-level="7.1.3" data-path="cha-biomass.html"><a href="cha-biomass.html#radiation-use-efficiency"><i class="fa fa-check"></i><b>7.1.3</b> Radiation use efficiency</a></li>
+<li class="chapter" data-level="7.1.4" data-path="cha-biomass.html"><a href="cha-biomass.html#stress-factor-temperature-nitrogen-phosphorus-not-applied-oxygen-not-applied"><i class="fa fa-check"></i><b>7.1.4</b> Stress factor (Temperature, nitrogen, phosphorus (not applied), oxygen (not applied))</a></li>
+<li class="chapter" data-level="7.1.5" data-path="cha-biomass.html"><a href="cha-biomass.html#actual-daily-biomass-accumulation"><i class="fa fa-check"></i><b>7.1.5</b> Actual daily biomass accumulation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="cha-biomass.html"><a href="cha-biomass.html#biomass-partitioning"><i class="fa fa-check"></i><b>7.2</b> Biomass partitioning</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="cha-head.html"><a href="cha-head.html"><i class="fa fa-check"></i><b>8</b> Head development</a><ul>
+<li class="chapter" data-level="8.1" data-path="cha-head.html"><a href="cha-head.html#kernel-number"><i class="fa fa-check"></i><b>8.1</b> Kernel number</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="cha-head.html"><a href="cha-head.html#grain-meal-demand"><i class="fa fa-check"></i><b>8.1.1</b> <code>Grain</code> (<code>Meal</code>) demand</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="cha-head.html"><a href="cha-head.html#pod"><i class="fa fa-check"></i><b>8.2</b> <code>Pod</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="cha-water.html"><a href="cha-water.html"><i class="fa fa-check"></i><b>9</b> Water</a></li>
+<li class="chapter" data-level="10" data-path="cha-nitrogen.html"><a href="cha-nitrogen.html"><i class="fa fa-check"></i><b>10</b> Nitrogen</a></li>
+<li class="chapter" data-level="11" data-path="cha-arbitrator.html"><a href="cha-arbitrator.html"><i class="fa fa-check"></i><b>11</b> Arbitrator</a></li>
+<li class="chapter" data-level="12" data-path="cha-output.html"><a href="cha-output.html"><i class="fa fa-check"></i><b>12</b> Output</a><ul>
+<li class="chapter" data-level="12.1" data-path="cha-output.html"><a href="cha-output.html#phenology"><i class="fa fa-check"></i><b>12.1</b> Phenology</a></li>
+<li class="chapter" data-level="12.2" data-path="cha-terminology.html"><a href="cha-terminology.html#output-structure"><i class="fa fa-check"></i><b>12.2</b> Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="cha-reference.html"><a href="cha-reference.html"><i class="fa fa-check"></i><b>13</b> Reference</a></li>
+<li class="divider"></li>
+<li><a href="https://byzheng.github.io/APSIM-Wheat-Sens" target="blank">Sensitivity analysis</a></li>
+<li><a href="http://www.apsim.info/" target="blank">APSIM</a></li>
+<li><a href="http://github.com/APSIMInitiative/ApsimX" target="blank">Next generation of APSIM</a></li>
+<li><a href="http://byzheng.github.io/ApsimX/Documentation/html/index.html" target="blank">Developer documentation</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Documentation of APSIM-Wheat</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cha-head" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Head development</h1>
+<div class="rmdimportant">
+<p>
+This section is directly copied from documentation of APSIM-Wheat 7.5. All details need to be checked for the APSIM next generation.
+</p>
+</div>
+<div id="kernel-number" class="section level2">
+<h2><span class="header-section-number">8.1</span> Kernel number</h2>
+<p>The number of kernels per plant (<span class="math inline">\(N_{g}\)</span>) is determined by the total weight of stem and spike organs (<span class="math inline">\(W_{s}\)</span>). <span class="math display">\[N_{g}=R_{g}W_{s}\]</span> where <span class="math inline">\(R_{g}\)</span> is the grain number per gram stem and spike with default value at 25 grain g<sup>-1</sup>.</p>
+<p>The kernel number is simulated according the stem biomass at anthese in CERES <span class="citation">(Moreno-Sotomayor and Weiss <a href="cha-reference.html#ref-moreno-sotomayor_improvements_2004">2004</a>)</span>, total above ground biomass at anthesis by O’Leary et al <span class="citation">(<a href="cha-reference.html#ref-oleary_simulation_1985">1985</a>)</span>.</p>
+<div class="rmdnote">
+<p>
+In the previous version of APSIM-Wheat (7.8), the grain number is determined by the stem dry weight at anthesis.
+</p>
+</div>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:grain-number"></span>
+<img src="APSIM-Wheat_files/figure-html/grain-number-1.png" alt="Grain number" width="80%" />
+<p class="caption">
+Figure 8.1: Grain number
+</p>
+</div>
+</div>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:grain-size"></span>
+<img src="APSIM-Wheat_files/figure-html/grain-size-1.png" alt="Grain size" width="80%" />
+<p class="caption">
+Figure 8.2: Grain size
+</p>
+</div>
+</div>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:grain-yield"></span>
+<img src="APSIM-Wheat_files/figure-html/grain-yield-1.png" alt="Grain weight" width="80%" />
+<p class="caption">
+Figure 8.3: Grain weight
+</p>
+</div>
+</div>
+<div class="fig-output">
+<div class="figure" style="text-align: center"><span id="fig:grain-demand"></span>
+<img src="APSIM-Wheat_files/figure-html/grain-demand-1.png" alt="Grain demand" width="80%" />
+<p class="caption">
+Figure 8.4: Grain demand
+</p>
+</div>
+</div>
+<div id="grain-meal-demand" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> <code>Grain</code> (<code>Meal</code>) demand</h3>
+<p>The <code>Grain</code> demand (or <code>Meal</code> demand, <span class="math inline">\(D_{g}\)</span>) is calculated in the growth phase <code>postflowering</code> (from flowering to end of grain filling ). <span class="math inline">\(D_{g}\)</span> equals to 0 before flowering.</p>
+<p><span class="math display">\[D_{g}=N_{g}R_{p}h_{g}(T_{mean})f_{N,\,grain}\label{eq:MealDemand}\]</span></p>
+<p>where <span class="math inline">\(N_{g}\)</span> is the grain number, <span class="math inline">\(R_{p}\)</span> is the potential rate of grain filling (0.0010 grain<sup>-1</sup> d<sup>-1</sup> from flowering to start of grain filling (); 0.0020 grain<sup>-1</sup> d<sup>-1</sup> during grain filling ()), <span class="math inline">\(h_{g}(T_{mean})\)</span> is a function of daily mean temperature which affects the rate of grain filling (0-1) and is defined by parameters <code>x_temp_grainfill</code> and <code>y_rel_grainfill</code> in wheat.xml and linearly interpolated by APSIM ().</p>
+<p><span class="math inline">\(f_{N,\,grain}\)</span> is a nitrogen factor to grain filling.</p>
+<p><span class="math display">\[f_{N,\,grain}=\frac{h_{N,\ poten}}{h_{N,\ min}}h_{N,\,grain}\sum_{stem,\,leaf}\frac{C_{N}-C_{N,\,min}}{C_{N,\,crit}\times f_{c,\,N}-C_{N,\,min}}\qquad(0\leq f_{N,\,fill}\leq1)\]</span></p>
+<p>where <span class="math inline">\(h_{N,\ poten}\)</span> is the potential rate of grain filling which is specified by <code>potential_grain_n_filling_rate</code> in wheat.xml and has a default value of 0.000055 g grain<sup>-1</sup> d<sup>-1</sup>; <span class="math inline">\(h_{N,\ min}\)</span> is the minimum rate of grain filling which is specified by <code>minimum_grain_n_filling_rate</code> in wheat.xml and has a default value of 0.000015 g grain<sup>-1</sup> d<sup>-1</sup>; <span class="math inline">\(h_{N,\,grain}\)</span> is a multiplier for nitrogen deficit effect on grain, which is specified by <code>n_fact_grain</code> in wheat.xml and has a default value of 1; <span class="math inline">\(C_{N}\)</span> is the nitrogen concentration of <code>Stem</code> or <code>Leaf</code> parts; <span class="math inline">\(C_{N,\,crit}\)</span> and <span class="math inline">\(C_{N,\,min}\)</span> are critical and minimum nitrogen concentration, respectively, for <code>Stem</code> and <code>Leaf</code> parts. <span class="math inline">\(C_{N,\,crit}\)</span> and <span class="math inline">\(C_{N,\,min}\)</span> are functions of growth stage and nitrogen concentration which is defined by parameters <code>x_stage_code</code>, <code>y_n_conc_min_leaf</code>, <code>y_n_conc_crit_leaf</code>, <code>y_n_conc_min_stem</code>, <code>y_n_conc_crit_stem</code> in wheat.xml and linearly interpolated by APSIM (); and <span class="math inline">\(f_{c,\,N}\)</span> is a factor with a value of 1 (i.e. no impact) for Stem, and is depending on CO<sub>2</sub> for <code>Leaf</code> ().</p>
+<p>Finally, <code>Grain</code> demand is limited by the maximum grain size (corresponding to <span class="math inline">\(D_{gm}\)</span>) <span class="math display">\[\begin{array}{c}
+D_{g}=\min(D_{g},\,D_{gm})\\
+D_{gm}=N_{g}S_{gm}-Q_{meal}\qquad(D_{gm}\geq0)
+\end{array}\]</span> where <span class="math inline">\(N_{g}\)</span> is the grain number; <span class="math inline">\(Q_{meal}\)</span> is the dry weight of <code>Meal</code> part (i.e. the <code>Grains</code>); <span class="math inline">\(S_{gm}\)</span> is the maximum grain size which is specified by max_grain_size in wheat.xml and is a cultivar-specific parameter with 0.04 g for default value.</p>
+</div>
+</div>
+<div id="pod" class="section level2">
+<h2><span class="header-section-number">8.2</span> <code>Pod</code></h2>
+<p><code>Pod</code> demand (<span class="math inline">\(D_{p}\)</span>) is calculated by <code>Grain</code> demand (<span class="math inline">\(D_{g}\)</span>, ) or daily biomass accumulation (<span class="math inline">\(\Delta Q\)</span>, )</p>
+<p><span class="math display">\[D_{p}=\begin{array}{c}
+D_{g}h_{p}(S)\qquad D_{g}\text{&gt;0}\\
+\Delta Qh_{p}(S)\qquad D_{g}\text{=0}
+\end{array}\label{eq:GrainDemand}\]</span></p>
+<p>where <span class="math inline">\(h_{p}(S)\)</span> is a function of the growth stage (<span class="math inline">\(S\)</span>) and of the <code>Pod</code> demand fraction of <span class="math inline">\(D_{g}\)</span> or <span class="math inline">\(\Delta Q\)</span>. <span class="math inline">\(h_{p}(S)\)</span> is defined by parameters <code>x_stage_no_partition</code> and <code>y_frac_pod</code> in wheat.xml and linearly interpolated by APSIM ().</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cha-biomass.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cha-water.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"facebook": false,
+"twitter": false,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/byzheng/APSIM-Wheat-Doc/edit/master/head.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<a target="_blank" href="https://github.com/byzheng/APSIM-Wheat-Doc"><img id="fork-me" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
