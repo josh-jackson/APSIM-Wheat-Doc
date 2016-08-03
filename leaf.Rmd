@@ -92,7 +92,7 @@ A new leaf is initialized when the primordia number is increased by 1 at the mai
 <div class="fig-output">
 
 ```{r leaf-init-number, fig.cap='The primordia number in the main stem and initialised cohort number'}
-y_cols <- c('Wheat.Structure.MainStemPrimordiaNo',
+y_cols <- c('Wheat.Structure.LeafTipsAppeared',
             'Wheat.Leaf.InitialisedCohortNo')
 
 plot_report(df, x_var, y_cols, x_lab = x_lab, 
@@ -114,7 +114,7 @@ A new leaf is appeared when the node number is increased by 1 at the main stem. 
 <div class="fig-output">
 
 ```{r leaf-appear-number, fig.cap='The node number in the main stem and appeared cohort number'}
-y_cols <- c('Wheat.Structure.MainStemNodeNo',
+y_cols <- c('Wheat.Structure.LeafTipsAppeared',
             'Wheat.Leaf.AppearedCohortNo')
 
 plot_report(df, x_var, y_cols, x_lab = x_lab, 
@@ -212,8 +212,8 @@ Cohort population is initialized as the total stem population at appearance of l
 
 <div class='fig-output'>
 ```{r live-population}
-y_cols <- c('Wheat.Leaf.CohortLivePopulation')
-plot_report_vector(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Live (cohort) population')
+# y_cols <- c('Wheat.Leaf.CohortLivePopulation')
+# plot_report_vector(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Live (cohort) population')
 
 ```
 </div>
@@ -224,7 +224,7 @@ The total leaf number is multiplied by leaf cohort number and stem number (Figur
 ```{r leaf-number, fig.asp = 1.3, fig.cap='Appeared number of green, senesced and total leaves'}
 y_cols <- c(
     'Wheat.Leaf.PlantAppearedLeafNo',
-    'Wheat.Leaf.PlantAppearedGreenLeafNo',
+    #'Wheat.Leaf.PlantAppearedGreenLeafNo',
     'Wheat.Leaf.PlantsenescedLeafNo')
 
 plot_report(df, x_var, y_cols, x_lab = x_lab, 
@@ -243,11 +243,11 @@ The fraction of final leaf is set as 1, but return the actual fraction of the fi
 
 <div class="fig-output">
 ```{r final-leaf-fraction, fig.cap='Fraction of final leaf'}
-y_cols <- c(
-    'Wheat.Leaf.FinalLeafFraction')
-
-plot_report(df, x_var, y_cols, x_lab = x_lab, 
-            y_lab = 'Fraction of final leaf')
+# y_cols <- c(
+#     'Wheat.Leaf.FinalLeafFraction')
+# 
+# plot_report(df, x_var, y_cols, x_lab = x_lab, 
+#             y_lab = 'Fraction of final leaf')
 ```
 </div>
 

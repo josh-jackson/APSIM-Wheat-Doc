@@ -8,6 +8,7 @@ rmd_files:
   - "structure.Rmd"
   - "leaf.Rmd"
   - "biomass.Rmd"
+  - "head.Rmd"
   - "water.Rmd"
   - "nitrogen.Rmd"
   - "arbitrator.Rmd"
