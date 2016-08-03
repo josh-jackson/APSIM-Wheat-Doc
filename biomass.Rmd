@@ -1,3 +1,10 @@
-# Biomass production {#cha:biomass-production}
+# Biomass {#cha:biomass}
+
+
+
+## Biomass production
 
 Radiation use efficiency (RUE) model is used to calculate the daily photosynthesis. 
+
+## Biomass partitioning
+
