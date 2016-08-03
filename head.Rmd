@@ -1,8 +1,8 @@
-# head {#cha-head}
+# Head development {#cha-head}
 
 
 
-```{r setup_leaf, message=FALSE, echo=FALSE, warning=FALSE}
+```{r setup_head, message=FALSE, echo=FALSE, warning=FALSE}
 library(knitr)
 opts_chunk$set(
     cache = FALSE, echo = FALSE, 
@@ -34,13 +34,16 @@ This section is directly copied from documentation of APSIM-Wheat 7.5. All detai
 ```
 
 
-## Grain number
+## Kernel number
 
-The number of grains per plant ($N_{g}$) is determined by the total weight of stem and spike organs ($W_{s}$). $$N_{g}=R_{g}W_{s}$$ where $R_{g}$ is the grain number per gram stem and spike with default value at 25 grain g^-1^.
+The number of kernels per plant ($N_{g}$) is determined by the total weight of stem and spike organs ($W_{s}$). $$N_{g}=R_{g}W_{s}$$ where $R_{g}$ is the grain number per gram stem and spike with default value at 25 grain g^-1^.
+
+The kernel number is simulated according the stem biomass at anthese in CERES [@moreno-sotomayor_improvements_2004], total above ground biomass at anthesis by O'Leary et al [-@oleary_simulation_1985].
 
 ```{block type='rmdnote', echo=TRUE}
 In the previous version of APSIM-Wheat (7.8), the grain number is determined by the stem dry weight at anthesis.
 ```
+
 
 
 
@@ -69,6 +72,17 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain size (g)')
 y_cols <- c(
     'Wheat.Grain.Wt'
     , 'Wheat.Grain.LiveFWt')
+plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain weight (g/m2)')
+
+```
+</div>
+
+
+
+<div class="fig-output">
+```{r grain-demand, fig.cap='Grain demand'}
+y_cols <- c(
+    'Wheat.Grain.DMDemandFunction')
 plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain weight (g/m2)')
 
 ```
