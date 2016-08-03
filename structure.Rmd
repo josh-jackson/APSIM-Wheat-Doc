@@ -74,9 +74,9 @@ The daily delta primordia number is not a output variable.
 
 <div class="fig-output">
 ```{r delta-node, fig.cap='Daily increase of node number in main stem'}
-y_cols <- c('Wheat.Structure.DeltaNodeNumber')
+#y_cols <- c('Wheat.Structure.DeltaNodeNumber')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Daily increase of node number in main stem')
+#plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Daily increase of node number in main stem')
 ```
 </div>
 
@@ -98,8 +98,7 @@ where, $T_{0}$ is day of plant initialization which is set by Leaf model (Emerge
 <div class="fig-output">
 ```{r node-number, fig.cap='Primordia and node number in main stem'}
 y_cols <- c(
-    'Wheat.Structure.MainStemNodeNo', 
-    'Wheat.Structure.MainStemPrimordiaNo')
+    'Wheat.Structure.LeafTipsAppeared')
 
 plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Primordia or node number in main stem') +
     scale_y_continuous(breaks = seq(1, 15))
@@ -124,9 +123,6 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Relative appeared node nu
 ```
 </div>
 
-```{block, type='rmdwarning', echo=TRUE}
-`Wheat.Structure.RelativeNodeAppearance` is not a good indicator for progress of node/leaf development, which should be avoided to use in other components.
-```
 
 ## Tillering
 
@@ -307,4 +303,4 @@ plot_report(df,
 
 ## Canopy height
 
-...
+

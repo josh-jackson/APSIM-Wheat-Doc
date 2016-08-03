@@ -294,6 +294,7 @@ The model consists of:
         <ZadokPMF>
           <Name>Zadok</Name>
         </ZadokPMF>
+        <DaysAfterSowing>0</DaysAfterSowing>
       </Phenology>
       <Structure>
         <Name>Structure</Name>
@@ -343,7 +344,7 @@ The model consists of:
                 <double>1.3</double>
               </Y>
             </XYPairs>
-            <XProperty>[Structure].MainStemNodeNo</XProperty>
+            <XProperty>[Structure].LeafTipsAppeared</XProperty>
           </LinearInterpolationFunction>
           <Constant>
             <Name>BasePhyllochron</Name>
@@ -399,31 +400,46 @@ The model consists of:
             <Name>PotentialBranchingRate</Name>
             <PhaseLookupValue>
               <Name>Vegetative</Name>
-              <LinearInterpolationFunction>
-                <Name>PotentialBranchingRate</Name>
-                <XYPairs>
-                  <Name>XYPairs</Name>
-                  <X>
-                    <double>1</double>
-                    <double>2</double>
-                    <double>3</double>
-                    <double>4</double>
-                    <double>5</double>
-                    <double>6</double>
-                    <double>7</double>
-                  </X>
-                  <Y>
-                    <double>0</double>
-                    <double>0</double>
-                    <double>1</double>
-                    <double>1</double>
-                    <double>2</double>
-                    <double>2</double>
-                    <double>3</double>
-                  </Y>
-                </XYPairs>
-                <XProperty>[Leaf].AppearedCohortNo</XProperty>
-              </LinearInterpolationFunction>
+              <LessThanFunction>
+                <Name>LessThanFunction</Name>
+                <VariableReference>
+                  <Name>VariableReference</Name>
+                  <VariableName>[Leaf].CoverGreen</VariableName>
+                </VariableReference>
+                <Constant>
+                  <Name>ThresholdCoverage</Name>
+                  <Value>0.7</Value>
+                </Constant>
+                <LinearInterpolationFunction>
+                  <Name>PotentialBranchingRate</Name>
+                  <XYPairs>
+                    <Name>XYPairs</Name>
+                    <X>
+                      <double>1</double>
+                      <double>2</double>
+                      <double>3</double>
+                      <double>4</double>
+                      <double>5</double>
+                      <double>6</double>
+                      <double>7</double>
+                    </X>
+                    <Y>
+                      <double>0</double>
+                      <double>0</double>
+                      <double>1</double>
+                      <double>1</double>
+                      <double>2</double>
+                      <double>2</double>
+                      <double>3</double>
+                    </Y>
+                  </XYPairs>
+                  <XProperty>[Leaf].AppearedCohortNo</XProperty>
+                </LinearInterpolationFunction>
+                <Constant>
+                  <Name>Zero</Name>
+                  <Value>0</Value>
+                </Constant>
+              </LessThanFunction>
               <Start>Emergence</Start>
               <End>TerminalSpikelet</End>
             </PhaseLookupValue>
@@ -526,39 +542,31 @@ The model consists of:
             <End>Flowering</End>
           </PhaseLookupValue>
         </PhaseLookup>
-        <OnEventFunction>
-          <Name>ReproductiveNodes</Name>
-          <SubtractFunction>
-            <Name>PostEventValue</Name>
-            <VariableReference>
-              <Name>VegetativePrimordia</Name>
-              <VariableName>[Structure].MainStemPrimordiaNo</VariableName>
-            </VariableReference>
-            <VariableReference>
-              <Name>AppearedLeaves</Name>
-              <VariableName>[Structure].MainStemNodeNo</VariableName>
-            </VariableReference>
-          </SubtractFunction>
-          <Constant>
-            <Name>PreEventValue</Name>
-            <Value>0</Value>
-          </Constant>
-          <SetEvent>TerminalSpikelet</SetEvent>
-        </OnEventFunction>
-        <OnEventFunction>
+        <HoldFunction>
           <Name>MainStemFinalNodeNumber</Name>
-          <Constant>
-            <Name>PreEventValue</Name>
-            <Value>26</Value>
-          </Constant>
-          <VariableReference>
-            <Name>PostEventValue</Name>
-            <VariableName>[Structure].MainStemPrimordiaNo</VariableName>
-          </VariableReference>
-          <SetEvent>TerminalSpikelet</SetEvent>
-        </OnEventFunction>
-        <InitialiseStage>Emergence</InitialiseStage>
-        <PrimaryBudNo>1</PrimaryBudNo>
+          <AddFunction>
+            <Name>ValueToHold</Name>
+            <MultiplyFunction>
+              <Name>LeafTipAppeared</Name>
+              <VariableReference>
+                <Name>LeafTipAppeared</Name>
+                <VariableName>[Structure].LeafTipsAppeared</VariableName>
+              </VariableReference>
+              <Constant>
+                <Name>Constant</Name>
+                <Value>1.1</Value>
+              </Constant>
+            </MultiplyFunction>
+            <Constant>
+              <Name>Constant</Name>
+              <Value>2.58</Value>
+            </Constant>
+          </AddFunction>
+          <WhenToHold>TerminalSpikelet</WhenToHold>
+        </HoldFunction>
+        <Initialised>false</Initialised>
+        <Germinated>false</Germinated>
+        <Emerged>false</Emerged>
       </Structure>
       <ReproductiveOrgan>
         <Name>Grain</Name>
@@ -815,7 +823,9 @@ The model consists of:
             <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
         </Folder>
+        <MaintenanceRespiration>0</MaintenanceRespiration>
         <RipeStage>Ripe</RipeStage>
+        <GrowthRespiration>0</GrowthRespiration>
       </ReproductiveOrgan>
       <Root>
         <Name>Root</Name>
@@ -1037,6 +1047,7 @@ The model consists of:
           <Value>40</Value>
           <Units>m/g</Units>
         </Constant>
+        <MaintenanceRespiration>0</MaintenanceRespiration>
         <NuptakeSupply>0</NuptakeSupply>
       </Root>
       <Leaf>
@@ -1047,6 +1058,7 @@ The model consists of:
           <DeltaCarbonConstrainedArea>0</DeltaCarbonConstrainedArea>
           <Rank>1</Rank>
           <Area>200</Area>
+          <MaintenanceRespiration>0</MaintenanceRespiration>
         </LeafCohort>
         <LeafCohort>
           <Name>InitialLeaves[2]</Name>
@@ -1054,6 +1066,7 @@ The model consists of:
           <DeltaCarbonConstrainedArea>0</DeltaCarbonConstrainedArea>
           <Rank>2</Rank>
           <Area>0</Area>
+          <MaintenanceRespiration>0</MaintenanceRespiration>
         </LeafCohort>
         <LeafCohort>
           <Name>InitialLeaves[3]</Name>
@@ -1061,6 +1074,7 @@ The model consists of:
           <DeltaCarbonConstrainedArea>0</DeltaCarbonConstrainedArea>
           <Rank>3</Rank>
           <Area>0</Area>
+          <MaintenanceRespiration>0</MaintenanceRespiration>
         </LeafCohort>
         <CompositeBiomass>
           <Name>Live</Name>
@@ -1133,8 +1147,8 @@ The model consists of:
                   <double>1</double>
                 </X>
                 <Y>
-                  <double>0.1</double>
-                  <double>0.1</double>
+                  <double>1</double>
+                  <double>1</double>
                   <double>1</double>
                 </Y>
               </XYPairs>
@@ -1377,14 +1391,16 @@ The model consists of:
                   <Name>XYPairs</Name>
                   <X>
                     <double>1</double>
+                    <double>3</double>
                     <double>12</double>
                   </X>
                   <Y>
                     <double>100</double>
-                    <double>6000</double>
+                    <double>500</double>
+                    <double>5000</double>
                   </Y>
                 </XYPairs>
-                <XProperty>[Structure].MainStemNodeNo</XProperty>
+                <XProperty>[Structure].LeafTipsAppeared</XProperty>
               </LinearInterpolationFunction>
               <Start>Emergence</Start>
               <End>TerminalSpikelet</End>
@@ -1433,13 +1449,13 @@ The model consists of:
             </Constant>
             <VariableReference>
               <Name>PostEventValue</Name>
-              <VariableName>[Structure].MainStemNodeNo</VariableName>
+              <VariableName>[Structure].LeafTipsAppeared</VariableName>
             </VariableReference>
             <SetEvent>TerminalSpikelet</SetEvent>
           </OnEventFunction>
           <ExpressionFunction>
             <Name>LeafRankAfterTerminalSpikelet</Name>
-            <Expression>[Structure].MainStemNodeNo - [Leaf].CohortParameters.LeafNumberAtTerminalSpikelet.Value </Expression>
+            <Expression>[Structure].LeafTipsAppeared - [Leaf].CohortParameters.LeafNumberAtTerminalSpikelet.Value </Expression>
           </ExpressionFunction>
         </LeafCohortParameters>
         <RUEModel>
@@ -1633,10 +1649,10 @@ The model consists of:
             <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
         </Folder>
+        <MaintenanceRespiration>0</MaintenanceRespiration>
         <CurrentExpandingLeaf>0</CurrentExpandingLeaf>
         <StartFractionExpanded>0</StartFractionExpanded>
         <FractionNextleafExpanded>0</FractionNextleafExpanded>
-        <_ExpandedNodeNo>0</_ExpandedNodeNo>
         <DeadNodesYesterday>0</DeadNodesYesterday>
         <MaxCover>1</MaxCover>
         <Albedo>0.2</Albedo>
@@ -1644,8 +1660,13 @@ The model consists of:
         <R50>150</R50>
         <FRGR>0</FRGR>
         <PotentialEP>0</PotentialEP>
+        <FudgeToGetETDemandRight>0</FudgeToGetETDemandRight>
         <KDead>0.3</KDead>
         <MaximumMainStemLeafNumber>30</MaximumMainStemLeafNumber>
+        <DMConversionEfficiency>0</DMConversionEfficiency>
+        <GrowthRespiration>0</GrowthRespiration>
+        <TipsAtEmergence>0</TipsAtEmergence>
+        <CohortsAtInitialisation>0</CohortsAtInitialisation>
         <FractionDied>0</FractionDied>
       </Leaf>
       <GenericAboveGroundOrgan>
@@ -1752,6 +1773,8 @@ The model consists of:
             <FractionDeadToResidue>0</FractionDeadToResidue>
           </OrganBiomassRemovalType>
         </Folder>
+        <MaintenanceRespiration>0</MaintenanceRespiration>
+        <GrowthRespiration>0</GrowthRespiration>
       </GenericAboveGroundOrgan>
       <GenericAboveGroundOrgan>
         <Name>Stem</Name>
@@ -1910,6 +1933,8 @@ The model consists of:
             <VariableName>[Stem].Live.Wt</VariableName>
           </VariableReference>
         </DivideFunction>
+        <MaintenanceRespiration>0</MaintenanceRespiration>
+        <GrowthRespiration>0</GrowthRespiration>
       </GenericAboveGroundOrgan>
       <CompositeBiomass>
         <Name>AboveGround</Name>
@@ -2194,8 +2219,8 @@ The EarLive composite biomass object includes the Live pools of all organs withi
           </Cultivar>
           <Cultivar>
             <Name>EGAGregory</Name>
-            <Command>[Phenology].Vernalisation.VernSens = 2.7</Command>
-            <Command>[Phenology].Vernalisation.PhotopSens = 3.2</Command>
+            <Command>[Phenology].Vernalisation.VernSens = 2.1</Command>
+            <Command>[Phenology].Vernalisation.PhotopSens = 3.0</Command>
           </Cultivar>
           <Cultivar>
             <Name>Kelallac</Name>
@@ -2278,11 +2303,6 @@ The EarLive composite biomass object includes the Live pools of all organs withi
             <Command>[Phenology].Vernalisation.PhotopSens = 3.2</Command>
           </Cultivar>
           <Cultivar>
-            <Name>ega_gregory</Name>
-            <Command>[Phenology].Vernalisation.VernSens = 2.7</Command>
-            <Command>[Phenology].Vernalisation.PhotopSens = 3.2</Command>
-          </Cultivar>
-          <Cultivar>
             <Name>Lorikeet</Name>
             <Command>[Phenology].Vernalisation.VernSens = 2.0</Command>
             <Command>[Phenology].Vernalisation.PhotopSens = 4.0</Command>
@@ -2358,7 +2378,90 @@ The EarLive composite biomass object includes the Live pools of all organs withi
         </CultivarFolder>
       </CultivarFolder>
       <CropType>Wheat</CropType>
+      <SowingDate>0001-01-01T00:00:00</SowingDate>
     </Plant>
+    <Report>
+      <Name>Report</Name>
+      <ExperimentFactorNames />
+      <ExperimentFactorValues />
+      <VariableNames>
+        <string>[Clock].Today</string>
+        <string>Wheat.Phenology.DaysAfterSowing</string>
+        <string>Wheat.Phenology.ThermalTime.Value as Wheat.Phenology.ThermalTime</string>
+        <string>Wheat.Phenology.AccumulateThermalTime.Value as Wheat.Phenology.AccumulateThermalTime</string>
+        <string>Wheat.Phenology.CurrentPhaseName</string>
+        <string>Wheat.Phenology.CurrentStageName</string>
+        <string>Wheat.Phenology.Stage</string>
+        <string>Wheat.Structure.LeafTipsAppeared</string>
+        <string>Wheat.Structure.PlantTotalNodeNo</string>
+        <string>Wheat.Structure.InitialiseStage</string>
+        <string>Wheat.Structure.MainStemFinalNodeNumber</string>
+        <string>Wheat.Structure.BranchNumber</string>
+        <string>Wheat.Structure.RemainingNodeNo</string>
+        <string>Wheat.Structure.DeltaNodeNumber</string>
+        <string>Wheat.Structure.ProportionBranchMortality</string>
+        <string>Wheat.Structure.ProportionPlantMortality</string>
+        <string>Wheat.Structure.BranchingRate.Value as Wheat.Structure.BranchingRate</string>
+        <string>Wheat.Structure.BranchMortality.Value as Wheat.Structure.BranchMortality</string>
+        <string>Wheat.Structure.PrimaryBudNo</string>
+        <string>Wheat.Structure.PrimaryBudTotalNodeNo</string>
+        <string>Wheat.Structure.MainStemPopn</string>
+        <string>Wheat.Structure.TotalStemPopn</string>
+        <string>Wheat.Structure.PlantTotalNodeNo</string>
+        <string>Wheat.Structure.MeanTillerGrowthRate.Value as Wheat.Structure.MeanTillerGrowthRate</string>
+        <string>Wheat.Structure.RelativeNodeApperance</string>
+        <string>Wheat.Arbitrator.FN</string>
+        <string>Wheat.Arbitrator.DMSupply</string>
+        <string>Wheat.Leaf.CohortAge[1:11]</string>
+        <string>Wheat.Leaf.MaxLeafArea[1:11]</string>
+        <string>Wheat.Leaf.CohortArea[1:11]</string>
+        <string>Wheat.Leaf.CohortSize[1:11]</string>
+        <string>Wheat.Leaf.CohortSLA[1:11]</string>
+        <string>Wheat.Leaf.CohortLagDuration[1:11]</string>
+        <string>Wheat.Leaf.CohortGrowthDuration[1:11]</string>
+        <string>Wheat.Leaf.CohortDeltaWaterConstrainedArea[1:11]</string>
+        <string>Wheat.Leaf.CohortDeltaCarbonConstrainedArea[1:11]</string>
+        <string>Wheat.Leaf.CohortLivePopulation[1:11]</string>
+        <string />
+        <string>Wheat.Leaf.AppearedCohortNo</string>
+        <string>Wheat.Leaf.InitialisedCohortNo</string>
+        <string>Wheat.Leaf.ExpandingCohortNo</string>
+        <string>Wheat.Leaf.GreenCohortNo</string>
+        <string>Wheat.Leaf.SenescingCohortNo</string>
+        <string>Wheat.Leaf.DeadCohortNo</string>
+        <string>Wheat.Leaf.ExpandedCohortNo</string>
+        <string>Wheat.Leaf.PlantAppearedGreenLeafNo</string>
+        <string>Wheat.Leaf.PlantAppearedLeafNo</string>
+        <string>Wheat.Leaf.PlantsenescedLeafNo</string>
+        <string>Wheat.Leaf.FinalLeafFraction</string>
+        <string />
+        <string />
+        <string>Wheat.Leaf.LAI</string>
+        <string>Wheat.Leaf.LAIDead</string>
+        <string>Wheat.Leaf.LAITotal</string>
+        <string>Wheat.Leaf.CoverDead</string>
+        <string>Wheat.Leaf.CoverGreen</string>
+        <string>Wheat.Leaf.CoverTotal</string>
+        <string />
+        <string>Wheat.Leaf.CohortLive.Wt as Wheat.Leaf.LiveWeight</string>
+        <string>Wheat.Leaf.CohortDead.Wt as Wheat.Leaf.DeadWeight</string>
+        <string>Wheat.Leaf.SpecificArea</string>
+        <string>Wheat.Leaf.Fn</string>
+        <string />
+        <string>Wheat.WaterSupplyDemandRatio</string>
+        <string>Wheat.Leaf.CohortParameters.LeafRankAfterTerminalSpikelet.Value</string>
+        <string>Wheat.Leaf.CohortParameters.LeafNumberAtTerminalSpikelet.Value</string>
+        <string />
+        <string>Wheat.Grain.Number</string>
+        <string>Wheat.Grain.Size</string>
+        <string>Wheat.Grain.FSize</string>
+        <string>Wheat.Grain.LiveFWt</string>
+        <string>Wheat.Grain.Wt</string>
+      </VariableNames>
+      <EventNames>
+        <string>[Clock].DoReport</string>
+      </EventNames>
+    </Report>
   </Replacements>
   <DataStore>
     <Name>DataStore</Name>
@@ -2499,7 +2602,6 @@ The EarLive composite biomass object includes the Live pools of all organs withi
           </Water>
           <SoilWater>
             <Name>SoilWater</Name>
-            <residueinterception>0</residueinterception>
             <SummerDate>1-Nov</SummerDate>
             <SummerU>6</SummerU>
             <SummerCona>3.5</SummerCona>
@@ -2534,6 +2636,7 @@ The EarLive composite biomass object includes the Live pools of all organs withi
               <double>0.3</double>
               <double>0.3</double>
             </SWCON>
+            <residueinterception>0</residueinterception>
           </SoilWater>
           <SoilNitrogen>
             <Name>SoilNitrogen</Name>
@@ -2736,6 +2839,7 @@ The EarLive composite biomass object includes the Live pools of all organs withi
           <Name>wheat</Name>
           <ResourceName>wheat</ResourceName>
           <CropType>Wheat</CropType>
+          <SowingDate>0001-01-01T00:00:00</SowingDate>
         </Plant>
         <Operations>
           <Name>Sowing</Name>
