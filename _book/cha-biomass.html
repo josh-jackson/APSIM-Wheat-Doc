@@ -91,7 +91,8 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="2.3" data-path="cha-terminology.html"><a href="cha-terminology.html#output-leaf"><i class="fa fa-check"></i><b>2.3</b> Leaf</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="cha-overview.html"><a href="cha-overview.html"><i class="fa fa-check"></i><b>3</b> Overview</a><ul>
-<li class="chapter" data-level="3.1" data-path="cha-overview.html"><a href="cha-overview.html#organs"><i class="fa fa-check"></i><b>3.1</b> Organs</a></li>
+<li class="chapter" data-level="3.1" data-path="cha-overview.html"><a href="cha-overview.html#history"><i class="fa fa-check"></i><b>3.1</b> History</a></li>
+<li class="chapter" data-level="3.2" data-path="cha-overview.html"><a href="cha-overview.html#organs"><i class="fa fa-check"></i><b>3.2</b> Organs</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="cha-phenology.html"><a href="cha-phenology.html"><i class="fa fa-check"></i><b>4</b> Phenology</a><ul>
 <li class="chapter" data-level="4.1" data-path="cha-phenology.html"><a href="cha-phenology.html#thermal-time"><i class="fa fa-check"></i><b>4.1</b> Thermal time</a></li>
@@ -127,7 +128,13 @@ MathJax.Hub.Config({
 <li class="chapter" data-level="6.6" data-path="cha-leaf.html"><a href="cha-leaf.html#frost-impact"><i class="fa fa-check"></i><b>6.6</b> Frost impact</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="cha-biomass.html"><a href="cha-biomass.html"><i class="fa fa-check"></i><b>7</b> Biomass</a><ul>
-<li class="chapter" data-level="7.1" data-path="cha-biomass.html"><a href="cha-biomass.html#biomass-production"><i class="fa fa-check"></i><b>7.1</b> Biomass production</a></li>
+<li class="chapter" data-level="7.1" data-path="cha-biomass.html"><a href="cha-biomass.html#biomass-accumulation-photosynthesis"><i class="fa fa-check"></i><b>7.1</b> Biomass accumulation (Photosynthesis)</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="cha-biomass.html"><a href="cha-biomass.html#potential-biomass-accumulation-from-radiation-use-efficiency"><i class="fa fa-check"></i><b>7.1.1</b> Potential biomass accumulation from radiation use efficiency</a></li>
+<li class="chapter" data-level="7.1.2" data-path="cha-biomass.html"><a href="cha-biomass.html#radiation-interception"><i class="fa fa-check"></i><b>7.1.2</b> Radiation interception</a></li>
+<li class="chapter" data-level="7.1.3" data-path="cha-biomass.html"><a href="cha-biomass.html#radiation-use-efficiency"><i class="fa fa-check"></i><b>7.1.3</b> Radiation use efficiency</a></li>
+<li class="chapter" data-level="7.1.4" data-path="cha-biomass.html"><a href="cha-biomass.html#stress-factor-temperature-nitrogen-phosphorus-not-applied-oxygen-not-applied"><i class="fa fa-check"></i><b>7.1.4</b> Stress factor (Temperature, nitrogen, phosphorus (not applied), oxygen (not applied))</a></li>
+<li class="chapter" data-level="7.1.5" data-path="cha-biomass.html"><a href="cha-biomass.html#actual-daily-biomass-accumulation"><i class="fa fa-check"></i><b>7.1.5</b> Actual daily biomass accumulation</a></li>
+</ul></li>
 <li class="chapter" data-level="7.2" data-path="cha-biomass.html"><a href="cha-biomass.html#biomass-partitioning"><i class="fa fa-check"></i><b>7.2</b> Biomass partitioning</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="cha-water.html"><a href="cha-water.html"><i class="fa fa-check"></i><b>8</b> Water</a></li>
@@ -163,9 +170,80 @@ MathJax.Hub.Config({
             <section class="normal" id="section-">
 <div id="cha:biomass" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Biomass</h1>
-<div id="biomass-production" class="section level2">
-<h2><span class="header-section-number">7.1</span> Biomass production</h2>
-<p>Radiation use efficiency (RUE) model is used to calculate the daily photosynthesis.</p>
+<div id="biomass-accumulation-photosynthesis" class="section level2">
+<h2><span class="header-section-number">7.1</span> Biomass accumulation (Photosynthesis)</h2>
+<div class="rmdimportant">
+<p>
+This section is directly copied from documentation of APSIM-Wheat 7.5. All details need to be checked for the APSIM next generation.
+</p>
+</div>
+<p>The daily biomass accumulation (<span class="math inline">\(\Delta Q\)</span>) corresponds to dry-matter above-ground biomass, and is calculated as a potential biomass accumulation resulting from radiation interception (<span class="math inline">\(\Delta Q_{r}\)</span>) that is limited by soil water deficiency (<span class="math inline">\(\Delta Q_{w}\)</span>).</p>
+<div id="potential-biomass-accumulation-from-radiation-use-efficiency" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Potential biomass accumulation from radiation use efficiency</h3>
+<p>The radiation-limited dry-biomass accumulation (<span class="math inline">\(\Delta Q_{r}\)</span>) is calculated by the intercepted radiation (<span class="math inline">\(I\)</span>), radiation use efficiency (<span class="math inline">\(RUE\)</span>), diffuse factor (<span class="math inline">\(f_{d}\)</span>), stress factor (<span class="math inline">\(f_{s}\)</span>) and carbon dioxide factor (<span class="math inline">\(f_{c}\)</span>).</p>
+<p><span class="math display">\[\Delta Q_{r}=I\times RUE\times f_{d}\times f_{s}\times f_{c}\label{eq:BiomassProduction}\]</span></p>
+<p>where <span class="math inline">\(f_{d}\)</span>, <span class="math inline">\(f_{s}\)</span> and <span class="math inline">\(f_{c}\)</span> are defined in the wheat.xml file. In the current version of APSIM-Wheat, only <code>Leaf</code> produces photosynthate. Diffuse factor (<span class="math inline">\(f_{d}\)</span>) equals to 1 (), so that can be: <span class="math display">\[\Delta Q_{r}=I\times RUE\times f_{s}\times f_{c}\label{eq:BiomassProduction2}\]</span></p>
+</div>
+<div id="radiation-interception" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> Radiation interception</h3>
+<p>Radiation interception is calculated from the leaf area index (LAI, m<span class="math inline">\(^{2}\)</span> m<span class="math inline">\(^{-2}\)</span>) and the extinction coefficient (<em>k</em>) <span class="citation">(<span class="citeproc-not-found" data-reference-id="monsi2005onthe"><strong>???</strong></span>)</span>. <span class="math display">\[I=I_{0}(1-\exp(-k\times LAI\times f_{h})/f_{h})\label{eq:RadiationInterception}\]</span> where <span class="math inline">\(I_{0}\)</span> is the total radiation at the top of the canopy (MJ) which is directly imported from weather records; <span class="math inline">\(f_{h}\)</span> is light interception modified to give hedge-row effect with skip row. <span class="math inline">\(f_{h}\)</span> could be calculated based on the canopy width, but is not used in the current version of APSIM (i.e. <span class="math inline">\(f_{h}\)</span> = 1). So, is reduced to. <span class="math display">\[I=I_{0}(1-\exp(-k\times LAI))\label{eq:RadiationInterception-1}\]</span></p>
+<p>Extinction coefficient (<span class="math inline">\(k\)</span>) varies with row spacing, <span class="math display">\[k=h_{e}(W_{r})\]</span> where <span class="math inline">\(W_{r}\)</span> is the row spacing which is specified by the user (in the APSIM interface, the .sim or .apsim file); <span class="math inline">\(h_{e}\)</span> is a function of rowing spacing which is defined for both green leaf and dead leaves by parameters <code>x_row_spacing</code>, <code>y_extinct_coef</code> in the wheat.xml file () and is linearly interpolated by APSIM. In the current version of APSIM-Wheat, no impact of row spacing is considered ()</p>
+</div>
+<div id="radiation-use-efficiency" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> Radiation use efficiency</h3>
+<p><span class="math inline">\(RUE\)</span> (g MJ<span class="math inline">\(^{\text{-1}}\)</span>) is a function of growth stages which is defined by parameters <code>x_stage_rue</code> and <code>y_rue</code> in wheat.xml () and linearly interpolated by APSIM. In the current version of APSIM-Wheat, <span class="math inline">\(RUE\)</span> equal to 1.24 from emergence to the end of grain-filling and does not vary as a function of daily incident radiation as in the model NWHEAT.</p>
+</div>
+<div id="stress-factor-temperature-nitrogen-phosphorus-not-applied-oxygen-not-applied" class="section level3">
+<h3><span class="header-section-number">7.1.4</span> Stress factor (Temperature, nitrogen, phosphorus (not applied), oxygen (not applied))</h3>
+<p>Actual daily radiation-limited biomass accumulation can be reduced by a stress factor (<span class="math inline">\(f_{s}\)</span>, and ). This stress factor is the minimum value of a temperature factor (<span class="math inline">\(f_{T,\ photo}\)</span>), a nitrogen factor (<span class="math inline">\(f_{N\ photo}\)</span>), a phosphorus factor (<span class="math inline">\(f_{P\ photo}\)</span>) and an oxygen factor (<span class="math inline">\(f_{O\ photo}\)</span>). <span class="math display">\[f_{s}=\min(f_{T,\ photo},\ f_{N,\ photo},\ f_{P,\ photo},\ f_{O,\ photo})\label{eq:StressFactor4Photosynthesis}\]</span> No phosphorus stress <span class="math inline">\(f_{P,\,photo}\)</span> and oxygen stress <span class="math inline">\(f_{O,\,photo}\)</span> are applied in the current version of APSIM-Wheat. So, is reduced to <span class="math display">\[f_{s}=\min(f_{T,\ photo},\ f_{N,\ photo})\label{eq:StressFactor4Photosynthesis2}\]</span></p>
+<div id="the-temperature-factor" class="section level4">
+<h4><span class="header-section-number">7.1.4.1</span> The temperature factor</h4>
+<p><span class="math inline">\(f_{T,\ photo}\)</span> is a function of the daily mean temperature and is defined by parameters <code>x_ave_temp</code> and <code>y_stress_photo</code> in the wheat.xml (). Values are linearly interpolated by APSIM. The temperature stress is applied from sowing to harvest.</p>
+<p><span class="math display">\[f_{T,\ photo}=h_{T,\ photo}(\frac{T_{max}+T_{min}}{2})\label{eq:TemStressPhoto}\]</span></p>
+</div>
+<div id="the-nitrogen-factor" class="section level4">
+<h4><span class="header-section-number">7.1.4.2</span> The nitrogen factor</h4>
+<p><span class="math inline">\(f_{N,\,photo}\)</span> is determined by the difference between leaf nitrogen concentration and leaf minimum and critical nitrogen concentration.</p>
+<p><span class="math display">\[f_{N,\,photo}=R_{N,\,photo}\sum_{leaf}\frac{C_{N}-C_{N,\,min}}{C_{N,\,crit}-C_{N,\,min}}\label{eq:NStressPhoto0}\]</span></p>
+<p>where <span class="math inline">\(C_{N}\)</span> is the nitrogen concentration of <code>Leaf</code> parts; <span class="math inline">\(R_{N,\,expan}\)</span> is multiplier for nitrogen deficit effect on phenology which is specified by <code>N_fact_photo</code> in the wheat.xml and default value is 1.5.</p>
+</div>
+<div id="the-co_text2-factor" class="section level4">
+<h4><span class="header-section-number">7.1.4.3</span> The CO<span class="math inline">\(_{\text{2}}\)</span> factor</h4>
+<p>For C3 plants (like wheat), the CO<span class="math inline">\(_{\text{2}}\)</span> factor of APSIM is calculated by a function of environmental CO<span class="math inline">\(_{\text{2}}\)</span> concentration (<span class="math inline">\(C\)</span>, ppm) and daily mean temperature (<span class="math inline">\(T_{mean}\)</span>) as published by <span class="citation">(<span class="citeproc-not-found" data-reference-id="reyenga1999modelling"><strong>???</strong></span>)</span></p>
+<p><span class="math display">\[f_{c}=\frac{(C-C_{i})(350+2C_{i})}{(C+2C_{i})(350-C_{i})}\label{eq:CO2Factor4Photosynthesis}\]</span></p>
+<p>where <span class="math inline">\(C_{i}\)</span> is the temperature dependent CO<span class="math inline">\(_{\text{2}}\)</span> compensation point (ppm) and is derived from the following function. <span class="math display">\[C_{i}=\frac{163-T_{mean}}{5-0.1T_{mean}}\]</span></p>
+</div>
+<div id="diffuse-factor-not-used-in-the-current-versionpardiffuse-factor" class="section level4">
+<h4><span class="header-section-number">7.1.4.4</span> Diffuse factor (not used in the current version)<span class="math display">\[par:Diffuse-factor\]</span></h4>
+<p>The daily diffuse fraction was calculated using the functions suggested by @roderick1999estimating:</p>
+<p><span class="math display">\[\begin{cases}
+\frac{R_{d}}{R_{s}}=Y_{0} &amp; \qquad for\:\frac{R_{s}}{R_{o}}\leq X_{0}\\
+\frac{R_{d}}{R_{s}}=A_{0}+A_{1}\frac{R_{s}}{R_{o}} &amp; \qquad for\:X_{0}&lt;\frac{R_{s}}{R_{o}}\leq X_{1}\\
+\frac{R_{d}}{R_{s}}=Y_{1} &amp; \qquad for\:\frac{R_{s}}{R_{o}}&gt;X_{1}
+\end{cases}\label{eq:DiffuseFraction}\]</span></p>
+<p>where <span class="math display">\[\begin{array}{c}
+A_{0}=Y_{1}-A_{1}X_{1}\\
+A_{1}=\frac{Y_{1}-Y_{0}}{X_{1}-X_{0}}
+\end{array}\]</span> where <span class="math inline">\(R_{o}\)</span> is the daily extra-terrestrial solar irradiance (i.e. top of the atmosphere); <span class="math inline">\(R_{d}\)</span> and <span class="math inline">\(R_{s}\)</span> are the daily diffuse and global solar irradiance at the surface, respectively. <span class="math inline">\(X_{0}\)</span>, <span class="math inline">\(X_{1}\)</span>, <span class="math inline">\(Y_{0}\)</span> and <span class="math inline">\(Y_{1}\)</span> are four empirical parameters. <span class="math display">\[\begin{array}{l}
+X_{0}=0.26,\qquad Y_{0}=0.96,\qquad Y_{1}=0.05,\;and\\
+X_{1}=0.80-0.0017|\varphi|+0.000044|\varphi|^{2}
+\end{array}\]</span> where <span class="math inline">\(\varphi\)</span> is latitude.</p>
+<p><span class="math inline">\(R_{o}\)</span> is derived from this function <span class="math display">\[R_{0}=\frac{86400\times1360\times(\varpi\times\sin(\varphi)\times\sin(\theta)+\cos(\varphi)\times\cos(\theta)\times\sin(\varpi_{0}))}{1000000\pi}\]</span> where <span class="math inline">\(\varpi_{0}\)</span> is the time of sunrise and sunset, which derives from any solar declination (<span class="math inline">\(\theta\)</span>) and latitude (<span class="math inline">\(\varphi\)</span>) in terms of local solar time when sunrise and sunset actually occur (<a href="http://en.wikipedia.org/wiki/Sunrise_equation" class="uri">http://en.wikipedia.org/wiki/Sunrise_equation</a>) <span class="math display">\[\varpi_{0}=\arccos(-\tan(\varphi)\tan(\theta))\]</span> Solar declination (<span class="math inline">\(\theta\)</span>) can be calculated by <span class="math display">\[\theta=23.45\sin(\frac{2\pi}{365.25}(N-82.25))\]</span> where <span class="math inline">\(N\)</span> is day of year.</p>
+<p><span class="math inline">\(f_{d}\)</span> is calculated by a function of the diffuse fraction which is not implemented in current wheat module, (i.e. <span class="math inline">\(f_{d}\)</span> = 1).</p>
+</div>
+</div>
+<div id="actual-daily-biomass-accumulation" class="section level3">
+<h3><span class="header-section-number">7.1.5</span> Actual daily biomass accumulation</h3>
+<p>The actual daily biomass accumulation (<span class="math inline">\(\Delta Q\)</span>) results from water limitation applied on the potential radiation-driven biomass accumulation (<span class="math inline">\(\Delta Q_{r}\)</span>). This water-limited biomass (<span class="math inline">\(\Delta Q_{w}\)</span>) is a function of the ratio between the daily water uptake (<span class="math inline">\(W_{u}\)</span>) and demand (<span class="math inline">\(W_{d}\)</span>) capped by <span class="math display">\[\Delta Q_{w}=\Delta Q_{r}f_{w,\,photo}=\Delta Q_{r}\frac{W_{u}}{W_{d}}\label{eq:WaterStressBiomassProduction-1}\]</span> where <span class="math inline">\(f_{w,\,photo}\)</span> is the water stress factor affecting photosynthesis (); <span class="math inline">\(W_{u}\)</span> is the actual daily water uptake from the root system (which corresponds to the soil water supply (<span class="math inline">\(W_{s}\)</span>) capped by <span class="math inline">\(W_{d}\)</span>), <span class="math inline">\(W_{d}\)</span> is the soil water demand of Leaf and Head parts ().</p>
+<p>When the soil water is non-limiting (<span class="math inline">\(f_{w,\,photo}\)</span> = 1, i.e. <span class="math inline">\(W_{d}\geq W_{s}\)</span>), biomass accumulation is limited by the radiation (<span class="math inline">\(\Delta Q=\Delta Q_{r}\)</span>). When the soil water is limiting, biomass accumulation is limited by water supply (<span class="math inline">\(\Delta Q=\Delta Q_{w}\)</span>).</p>
+<p>The water demand (<span class="math inline">\(W_{d}\)</span>, in mm) corresponds to the amount of water the crop would have transpired in the absence of soil water constraint, and is calculated from the potential biomass accumulation from RUE (<span class="math inline">\(\Delta Q_{r}\)</span>). Following <span class="citation">(<span class="citeproc-not-found" data-reference-id="sinclair1986waterand"><strong>???</strong></span>)</span>, transpiration demand is modeled as a function of the current day’s crop growth rate, estimated by the potential biomass accumulation associated with intercepted radiation (<span class="math inline">\(\Delta Q_{r}\)</span>, see ), divided by the transpiration efficiency.</p>
+<p><span class="math display">\[W_{d}=\frac{\Delta Q_{r}-R}{TE}\label{eq:soilWaterDemand-1}\]</span></p>
+<p>where <span class="math inline">\(R\)</span> is respiration rate and equals to zero in the current version of APSIM-Wheat, <span class="math inline">\(TE\)</span> is transpiration efficiency (). See for more details about water demand and supply.</p>
+<p>The daily biomass accumulation (<span class="math inline">\(\Delta Q\)</span>) corresponds to dry matter above ground biomass is limited by the radiation interception (<span class="math inline">\(\Delta Q_{r}\)</span>) or by soil water deficiency (<span class="math inline">\(\Delta Q_{w}\)</span>), so that daily biomass accumulation can be expressed as: <span class="math display">\[\Delta Q=\begin{cases}
+\Delta Q_{r}\qquad &amp; W_{u}=W_{d}\\
+\Delta Q_{w}\qquad &amp; W_{u}&lt;W_{d}
+\end{cases}\label{eq:actualBiomassProduction}\]</span> where <span class="math inline">\(W_{s}\)</span> is water supply, <span class="math inline">\(W_{d}\)</span> is the soil water demand from the shoot, limited by radiation interception (). In the current APSIM-Wheat, <span class="math inline">\(W_{d}\)</span> is actually only directly affected by the soil water demand of the leaf (). <span class="math inline">\(W_{u}\)</span> and <span class="math inline">\(W_{d}\)</span> are calculated by soil module of APSIM.</p>
+</div>
 </div>
 <div id="biomass-partitioning" class="section level2">
 <h2><span class="header-section-number">7.2</span> Biomass partitioning</h2>
