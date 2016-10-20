@@ -99,3 +99,5 @@ The daily biomass accumulation ($\Delta Q$) corresponds to dry matter above grou
 
 ## Biomass partitioning
 
+Photosynthate is not partitioned into root after heading [@fang_situ_2016].
+
