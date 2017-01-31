@@ -15,7 +15,7 @@ description: "Documentation of APSIM-Wheat"
 # Introduction
 
 ```{block, type = 'rmdimportant', echo=TRUE}
-This documentation is based on the current version of [APSIM-Wheat module](https://github.com/APSIMInitiative/ApsimX/blob/5937006840bcfcd663353378653598176262fe0a/Prototypes/Wheat/WheatValidation.apsimx) updated on 15-May-2016.
+This documentation is based on the current version of [APSIM-Wheat module](https://github.com/APSIMInitiative/ApsimX/tree/717ae3292ae4092d99ba28555433d7663454d999) updated on 31-Jan-2017.
 ```
 
 
