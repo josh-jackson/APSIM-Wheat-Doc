@@ -10,7 +10,8 @@
 
 - **Node (Phytomer)** A phytomer unit is defined as consisting of a leaf, and the associated axillary bud, node and internode.
 - **Main stem** The first culm that emerges from the seeds is the main stem.
-- **Branch (Tiller)** All remaining culms that emerges from main stem or other branches (tillers), are referred as branches or tillers.
+- **Tiller (Branch)** All remaining culms that emerges from main stem or other tillers (branches), are referred as tillers or branches.
+- **Apex**  A shoot apex is the terminal bud of plants that grows from 0.1-1.0 mm and consists of the apical meristem, developing leaves and the immediate surrounding leaf primordial. Each tiller has an apex which continuously developes new leaf. 
 
 
 ## Leaf {#output-leaf}
