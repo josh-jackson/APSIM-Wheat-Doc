@@ -67,8 +67,11 @@ The main contents include
 
 
 ## Contributors of this documentation
-Bangyou Zheng <bangyou.zheng@csiro.au>
-Karine Chenu <karine.chenu@uq.edu.au>
+ * Bangyou Zheng <bangyou.zheng@csiro.au>
+ * Karine Chenu <karine.chenu@uq.edu.au>
+ * Scott Chapman <scott.chapman@csiro.au>
+ * Enli Wang <enli.wang@csiro.au>
+
 
 
 ## How to contribute?
