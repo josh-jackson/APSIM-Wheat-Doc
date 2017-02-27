@@ -1,0 +1,13 @@
+base
+datasets
+utils
+grDevices
+graphics
+stats
+knitr
+readr
+dplyr
+ggplot2
+tidyr
+xml2
+DiagrammeR
