@@ -2,11 +2,36 @@
 
 
 
+```{r setup_nitrogen, message=FALSE, echo=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(
+    cache = TRUE, echo = FALSE, 
+    out.width = '80%', fig.asp = 1.2,
+    warning = FALSE, fig.align = 'center',
+    message = FALSE) 
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(xml2)
+library(DiagrammeR)
+source('_utility.R')
+report <- read_csv('simulation/simulation.db.Report.csv')
+pmf <- read_xml('simulation/simulation.apsimx')
+
+x_var <- c(
+    'Wheat.Phenology.Stage',
+    'Wheat.Phenology.AccumulateThermalTime')
+x_lab <- 'Accumulated thermal time, stage'
+```
+
+
+
 <div class="fig-output">
 ```{r nitrogen-functional-nitrogen, fig.cap='Coverage'}
 y_cols <- c(
     'Wheat.Leaf.Fn')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Ratio of functional nitrogen')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Ratio of functional nitrogen')
 
 ```
 </div>
@@ -19,7 +44,7 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Ratio of functional nitro
 y_cols <- c('Wheat.Arbitrator.FN')
 
 p <- plot_report(
-    df %>% filter(Wheat.Phenology.Stage < 10),
+    report %>% filter(Wheat.Phenology.Stage < 10),
             x_var, y_cols, x_lab = x_lab, y_lab = 'Ratio of nitrogen supply and demand???')
 p + geom_hline(yintercept = 1.5)
 

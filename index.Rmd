@@ -38,10 +38,8 @@ library(tidyr)
 library(xml2)
 library(DiagrammeR)
 source('_utility.R')
+# Read the raw data 
 report <- read_csv('simulation/simulation.db.Report.csv')
-
-df <- report 
-
 pmf <- read_xml('simulation/simulation.apsimx')
 
 # Configuration of x axis

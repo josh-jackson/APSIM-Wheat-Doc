@@ -5,7 +5,7 @@
 ```{r setup_head, message=FALSE, echo=FALSE, warning=FALSE}
 library(knitr)
 opts_chunk$set(
-    cache = FALSE, echo = FALSE, 
+    cache = TRUE, echo = FALSE, 
     out.width = '80%', fig.asp = 1.2,
     warning = FALSE, fig.align = 'center',
     message = FALSE) 
@@ -16,10 +16,13 @@ library(tidyr)
 library(xml2)
 library(DiagrammeR)
 source('_utility.R')
-report <- read_csv('simulation/simulation.db.Report.csv')
+if (!exists('report')) {
+    report <- read_csv('simulation/simulation.db.Report.csv')
+}
 
-df <- report 
-pmf <- read_xml('simulation/simulation.apsimx')
+if (!exists('pmf')) {
+    pmf <- read_xml('simulation/simulation.apsimx')
+}
 
 
 x_var <- c(
@@ -52,7 +55,7 @@ In the previous version of APSIM-Wheat (7.8), the grain number is determined by 
 ```{r grain-number, fig.cap='Grain number'}
 y_cols <- c(
     'Wheat.Grain.Number')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain number')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain number')
 
 ```
 </div>
@@ -63,7 +66,7 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain number')
 ```{r grain-size, fig.cap='Grain size'}
 y_cols <- c(
     'Wheat.Grain.Size')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain size (g)')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain size (g)')
 
 ```
 </div>
@@ -73,7 +76,7 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain size (g)')
 y_cols <- c(
     'Wheat.Grain.Wt'
     , 'Wheat.Grain.LiveFWt')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain weight (g/m2)')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain weight (g/m2)')
 
 ```
 </div>
@@ -84,7 +87,7 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain weight (g/m2)')
 ```{r grain-demand, fig.cap='Grain demand'}
 y_cols <- c(
     'Wheat.Grain.DMDemandFunction')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain weight (g/m2)')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Grain weight (g/m2)')
 
 ```
 </div>
