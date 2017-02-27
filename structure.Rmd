@@ -1,6 +1,32 @@
 # Structure {#cha-structure}
 
 
+
+```{r setup_structure, message=FALSE, echo=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(
+    cache = TRUE, echo = FALSE, 
+    out.width = '80%', fig.asp = 1.2,
+    warning = FALSE, fig.align = 'center',
+    message = FALSE) 
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(xml2)
+library(DiagrammeR)
+source('_utility.R')
+report <- read_csv('simulation/simulation.db.Report.csv')
+pmf <- read_xml('simulation/simulation.apsimx')
+
+x_var <- c(
+    'Wheat.Phenology.Stage',
+    'Wheat.Phenology.AccumulateThermalTime')
+x_lab <- 'Accumulated thermal time, stage'
+```
+
+
+
 The Structure model predicts the development and mortality of phytomer and branch (tiller) according to plastochron and phyllochron. 
 
 
@@ -47,7 +73,7 @@ The total leaf number in the main stem (MainStemFinalNodeNumber, Section \@ref(o
 y_cols <- c(
     'Wheat.Structure.MainStemFinalNodeNumber')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Final node number in main stem')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Final node number in main stem')
 
 ```
 </div>
@@ -76,7 +102,7 @@ The daily delta primordia number is not a output variable.
 ```{r delta-node, fig.cap='Daily increase of node number in main stem'}
 #y_cols <- c('Wheat.Structure.DeltaNodeNumber')
 
-#plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Daily increase of node number in main stem')
+#plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Daily increase of node number in main stem')
 ```
 </div>
 
@@ -100,7 +126,7 @@ where, $T_{0}$ is day of plant initialization which is set by Leaf model (Emerge
 y_cols <- c(
     'Wheat.Structure.LeafTipsAppeared')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Primordia or node number in main stem') +
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Primordia or node number in main stem') +
     scale_y_continuous(breaks = seq(1, 15))
 
 ```
@@ -118,7 +144,7 @@ The relative appeared node number (`RelativeNodeAppearance`) is calculated as th
 y_cols <- c(
     'Wheat.Structure.RelativeNodeApperance')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Relative appeared node number')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Relative appeared node number')
 
 ```
 </div>
@@ -177,7 +203,7 @@ Figure \@ref(fig:tiller-number) shows the branching rate and total branching num
 y_cols <- c('Wheat.Structure.BranchNumber', 
             'Wheat.Structure.BranchingRate')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Branch number or branching rate') +
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Branch number or branching rate') +
     scale_y_continuous(breaks = seq(1, 10))
 
 ```
@@ -220,7 +246,7 @@ y_cols <- c('Wheat.Structure.MainStemPopn',
             'Wheat.Structure.TotalStemPopn')
 
 plot_report(
-    df %>% filter(Wheat.Phenology.Stage < 10),
+    report %>% filter(Wheat.Phenology.Stage < 10),
             x_var, y_cols, x_lab = x_lab, y_lab = 'Total population of main stem and all stems')
 
 ```
@@ -237,7 +263,7 @@ Branching mortality starts from the Terminal Spikelet until Flowering which defi
 
 <div class="fig-input">
 ```{r mortality-growth-rate, fig.asp=0.75, fig.cap='Tiller mortality as a function of moving mean tiller growth rate'}
-xpath <- '//Name[text()="Mortality"]'
+xpath <- '//Name[text()="MortalityPerDegDay"]'
 plot_xypair(pmf, xpath, x_lab = 'Moving mean tiller growth rate', y_lab = 'Branch motality')
 ```
 </div>
@@ -251,7 +277,7 @@ Figure \@ref(fig:tiller-growth-rate-factor) and \@ref(fig:tiller-growth-rate) sh
 ```{r tiller-growth-rate, fig.cap='The moving tiller growth rate'}
 y_cols <- c(
     'Wheat.Structure.MeanTillerGrowthRate')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Moving tiller growth rate')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Moving tiller growth rate')
 
 ```
 </div>
@@ -260,12 +286,12 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Moving tiller growth rate
 
 <div class="fig-output">
 ```{r tiller-growth-rate-factor, fig.asp=1.25, fig.cap='Three factors to calculate the tiller growth rate'}
-y_cols <- c(
-    'Wheat.Arbitrator.DMSupply',
-    'Wheat.Phenology.ThermalTime',
-    'Wheat.Structure.TotalStemPopn')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Three factors to calculate the tiller growth rate.',
-            panel = TRUE)
+# y_cols <- c(
+#     'Wheat.Arbitrator.DMSupply',
+#     'Wheat.Phenology.ThermalTime',
+#     'Wheat.Structure.TotalStemPopn')
+# plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Three factors to calculate the tiller growth rate.',
+#             panel = TRUE)
 
 ```
 </div>
@@ -275,12 +301,12 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Three factors to calculat
 
 <div class="fig-output">
 ```{r tiller-number-mo, fig.cap='The mortality of tillers'}
-y_cols <- c(
-    
-    'Wheat.Structure.BranchMortality',
-    'Wheat.Structure.ProportionBranchMortality', 
-            'Wheat.Structure.ProportionPlantMortality')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Mortality of branching')
+# y_cols <- c(
+#     
+#     'Wheat.Structure.BranchMortality',
+#     'Wheat.Structure.ProportionBranchMortality', 
+#             'Wheat.Structure.ProportionPlantMortality')
+# plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Mortality of branching')
 
 ```
 </div>
@@ -293,7 +319,7 @@ As the primary bud number is equal to 1, the plant total node number and total p
 ```{r plant-node-number, fig.cap='Total plant node number'}
 y_cols <- c('Wheat.Structure.PlantTotalNodeNo', 'Wheat.Structure.PrimaryBudTotalNodeNo')
 
-plot_report(df,
+plot_report(report,
             x_var, y_cols, x_lab = x_lab, y_lab = 'Total plant node number')
 
 ```

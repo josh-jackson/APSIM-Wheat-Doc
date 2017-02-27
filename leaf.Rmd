@@ -16,10 +16,7 @@ library(xml2)
 library(DiagrammeR)
 source('_utility.R')
 report <- read_csv('simulation/simulation.db.Report.csv')
-
-df <- report 
 pmf <- read_xml('simulation/simulation.apsimx')
-
 
 x_var <- c(
     'Wheat.Phenology.Stage',
@@ -70,11 +67,11 @@ The age of leaf cohort is defined as the thermal time after appearance, (i.e. ke
 
 <div class="fig-output">
 ```{r leaf-age, fig.cap='Age of leaf cohort as a function of stage or accumulated thermal time'}
-y_cols <- c(
-    'Wheat.Leaf.CohortAge')
-plot_report_vector(
-    df, x_var, y_cols, x_lab = x_lab, 
-    y_lab = 'Age of leaf cohort (oCd)')
+# y_cols <- c(
+#     'Wheat.Leaf.CohortAge')
+# plot_report_vector(
+#     report, x_var, y_cols, x_lab = x_lab, 
+#     y_lab = 'Age of leaf cohort (oCd)')
 
 ```
 </div>
@@ -95,7 +92,7 @@ A new leaf is initialized when the primordia number is increased by 1 at the mai
 y_cols <- c('Wheat.Structure.LeafTipsAppeared',
             'Wheat.Leaf.InitialisedCohortNo')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, 
+plot_report(report, x_var, y_cols, x_lab = x_lab, 
             y_lab = 'Number')
 
 ```
@@ -117,7 +114,7 @@ A new leaf is appeared when the node number is increased by 1 at the main stem. 
 y_cols <- c('Wheat.Structure.LeafTipsAppeared',
             'Wheat.Leaf.AppearedCohortNo')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, 
+plot_report(report, x_var, y_cols, x_lab = x_lab, 
             y_lab = 'Number')
 
 ```
@@ -131,11 +128,11 @@ As the variation of phyllochron (Fig. \@ref(fig:str-phyllochron)), the growth du
 
 <div class="fig-output">
 ```{r leaf-growth-duration, fig.cap='Growth duration of leaf cohort which is determined at appearance of leaf cohort.'}
-y_cols <- c(
-    'Wheat.Leaf.CohortGrowthDuration')
-plot_report_vector(
-    df, x_var, y_cols, x_lab = x_lab, 
-    y_lab = 'Growth duration of leaf cohort (oCd)')
+# y_cols <- c(
+#     'Wheat.Leaf.CohortGrowthDuration')
+# plot_report_vector(
+#     report, x_var, y_cols, x_lab = x_lab, 
+#     y_lab = 'Growth duration of leaf cohort (oCd)')
 
 ```
 </div>
@@ -148,11 +145,11 @@ Lag duration (full functional duration) is defined as 4 phyllochrons for leaf ap
 
 <div class="fig-output">
 ```{r leaf-lag-duration, fig.cap='Lag duration of leaf cohort which is determined at appearance of leaf cohort.'}
-y_cols <- c(
-    'Wheat.Leaf.CohortLagDuration')
-plot_report_vector(
-    df, x_var, y_cols, x_lab = x_lab, 
-    y_lab = 'Lag duration of leaf cohort (oCd)')
+# y_cols <- c(
+#     'Wheat.Leaf.CohortLagDuration')
+# plot_report_vector(
+#     report, x_var, y_cols, x_lab = x_lab, 
+#     y_lab = 'Lag duration of leaf cohort (oCd)')
 
 ```
 </div>
@@ -173,7 +170,7 @@ y_cols <- c(
             'Wheat.Leaf.SenescingCohortNo',
             'Wheat.Leaf.DeadCohortNo')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, 
+plot_report(report, x_var, y_cols, x_lab = x_lab, 
             y_lab = 'Cohort number')
 ```
 </div>
@@ -189,9 +186,10 @@ After appearance, leaf development is accelerated by the drought stress through 
 
 <div class="fig-input">
 ```{r leaf-development-drought, fig.asp = 0.75, fig.cap='Drought stress accelerates leaf development. Daily thermal time is doubled when there is no water supply (i.e. Ratio of water supply and demand equals to zero), and no acceleration when ratio above 0.7.'}
+
+
 xpath <- '//AddFunction[Name="DroughtInducedSenAcceleration"]/MultiplyFunction[Name="Stress"]/LinearInterpolationFunction[Name="StressFactor"]'
 plot_xypair(pmf, xpath, x_lab = 'Ratio of water supply and demand', y_lab = 'Ratio of acceleration of thermal time')
-
 ```
 </div>
 
@@ -213,7 +211,7 @@ Cohort population is initialized as the total stem population at appearance of l
 <div class='fig-output'>
 ```{r live-population}
 # y_cols <- c('Wheat.Leaf.CohortLivePopulation')
-# plot_report_vector(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Live (cohort) population')
+# plot_report_vector(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Live (cohort) population')
 
 ```
 </div>
@@ -227,7 +225,7 @@ y_cols <- c(
     #'Wheat.Leaf.PlantAppearedGreenLeafNo',
     'Wheat.Leaf.PlantsenescedLeafNo')
 
-plot_report(df, x_var, y_cols, x_lab = x_lab, 
+plot_report(report, x_var, y_cols, x_lab = x_lab, 
             y_lab = 'Leaf number')
 ```
 </div>
@@ -246,7 +244,7 @@ The fraction of final leaf is set as 1, but return the actual fraction of the fi
 # y_cols <- c(
 #     'Wheat.Leaf.FinalLeafFraction')
 # 
-# plot_report(df, x_var, y_cols, x_lab = x_lab, 
+# plot_report(report, x_var, y_cols, x_lab = x_lab, 
 #             y_lab = 'Fraction of final leaf')
 ```
 </div>
@@ -286,11 +284,11 @@ In the test simulation, the maximum leaf areas are increasing from Rank 1 to Ran
 
 <div class="fig-output">
 ```{r leaf-cohort-max-area, fig.cap='Maximum area of leaf cohort as a function of stage or accumulated thermal time'}
-y_cols <- c(
-    'Wheat.Leaf.MaxLeafArea')
-plot_report_vector(
-    df, x_var, y_cols, x_lab = x_lab, 
-    y_lab = 'Maximum leaf area (mm2)')
+# y_cols <- c(
+#     'Wheat.Leaf.MaxLeafArea')
+# plot_report_vector(
+#     report, x_var, y_cols, x_lab = x_lab, 
+#     y_lab = 'Maximum leaf area (mm2)')
 
 ```
 </div>
@@ -338,12 +336,12 @@ The potential increase of leaf area is reduced by `ExpansionStress` with default
 
 <div class="fig-output">
 ```{r leaf-water-area, fig.cap='Delta of leaf area constrained by water and carbon.'}
-y_cols <- c(
-    'Wheat.Leaf.CohortDeltaWaterConstrainedArea',
-    'Wheat.Leaf.CohortDeltaCarbonConstrainedArea')
-plot_report_vector(
-    df, x_var, y_cols, x_lab = x_lab, 
-    y_lab = 'Delta of leaf area (mm2)')
+# y_cols <- c(
+#     'Wheat.Leaf.CohortDeltaWaterConstrainedArea',
+#     'Wheat.Leaf.CohortDeltaCarbonConstrainedArea')
+# plot_report_vector(
+#     report, x_var, y_cols, x_lab = x_lab, 
+#     y_lab = 'Delta of leaf area (mm2)')
 
 ```
 </div>
@@ -356,7 +354,7 @@ plot_report_vector(
 y_cols <- c(
     'Wheat.Leaf.CohortArea')
 plot_report_vector(
-    df, x_var, y_cols, x_lab = x_lab, 
+    report, x_var, y_cols, x_lab = x_lab, 
     y_lab = 'Leaf area (mm2)')
 
 ```
@@ -370,7 +368,7 @@ Not sure about the meaning of leaf size?
 y_cols <- c(
     'Wheat.Leaf.CohortSize')
 plot_report_vector(
-    df, x_var, y_cols, x_lab = x_lab, 
+    report, x_var, y_cols, x_lab = x_lab, 
     y_lab = 'Leaf size (mm3)')
 
 ```
@@ -389,7 +387,7 @@ y_cols <- c(
     'Wheat.Leaf.LAI', 
 'Wheat.Leaf.LAIDead',
 'Wheat.Leaf.LAITotal')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Leaf area index')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Leaf area index')
 
 ```
 </div>
@@ -430,8 +428,8 @@ Extinction coefficient of dead leaf ($k_{d}$) is not setable in the APSIM User I
 
 <div class="fig-input">
 ```{r k-lai, fig.asp = 0.75, fig.cap='Extinction coefficient as a function of leaf area index (LAI)'}
-xpath <- '//Name[text()="PotentialExtinctionCoeff"]'
-plot_xypair(pmf, xpath, x_lab = 'Leaf area index', y_lab = 'Extinction coefficient')
+# xpath <- '//Name[text()="PotentialExtinctionCoeff"]'
+# plot_xypair(pmf, xpath, x_lab = 'Leaf area index', y_lab = 'Extinction coefficient')
 
 ```
 </div>
@@ -440,8 +438,8 @@ The extinction coefficient of green leaf is adjusted by water stress which is th
 
 <div class="fig-input">
 ```{r k-water-stress, fig.asp = 0.75, fig.cap='Multiplier of extinction coefficient as a function of water stress'}
-xpath <- '//MultiplyFunction[Name="ExtinctionCoeff"]/LinearInterpolationFunction/Name[text()="WaterStress"]'
-plot_xypair(pmf, xpath, x_lab = 'Ratio of water supply and demand', y_lab = 'Extinction coefficient')
+# xpath <- '//MultiplyFunction[Name="ExtinctionCoeff"]/LinearInterpolationFunction/Name[text()="WaterStress"]'
+# plot_xypair(pmf, xpath, x_lab = 'Ratio of water supply and demand', y_lab = 'Extinction coefficient')
 
 ```
 </div>
@@ -457,7 +455,7 @@ y_cols <- c(
     'Wheat.Leaf.CoverGreen',
     'Wheat.Leaf.CoverDead',
     'Wheat.Leaf.CoverTotal')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Coverage')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Coverage')
 
 ```
 </div>
@@ -476,7 +474,7 @@ Biomass demand
 y_cols <- c(
     'Wheat.Leaf.LiveWeight', 
 'Wheat.Leaf.DeadWeight')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Leaf biomass (g/m2)')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Leaf biomass (g/m2)')
 
 ```
 </div>
@@ -486,7 +484,7 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Leaf biomass (g/m2)')
 <div class="fig-output">
 ```{r leaf-specific-leaf-area, fig.cap='Specific leaf area'}
 y_cols <- c('Wheat.Leaf.SpecificArea')
-plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g)')
+plot_report(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g)')
 
 ```
 </div>
@@ -495,7 +493,7 @@ plot_report(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g
 <div class="fig-output">
 ```{r leaf-cohortspecific-leaf-area, fig.cap='Specific leaf area by cohort'}
 y_cols <- c('Wheat.Leaf.CohortSLA')
-plot_report_vector(df, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g)')
+plot_report_vector(report, x_var, y_cols, x_lab = x_lab, y_lab = 'Specific leaf area (mm2/g)')
 
 ```
 </div>

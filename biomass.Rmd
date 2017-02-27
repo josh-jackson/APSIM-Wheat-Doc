@@ -1,6 +1,36 @@
 # Biomass {#cha:biomass}
 
 
+```{r setup_biomass, message=FALSE, echo=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(
+    cache = TRUE, echo = FALSE, 
+    out.width = '80%', fig.asp = 1.2,
+    warning = FALSE, fig.align = 'center',
+    message = FALSE) 
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(xml2)
+library(DiagrammeR)
+source('_utility.R')
+report <- read_csv('simulation/simulation.db.Report.csv')
+pmf <- read_xml('simulation/simulation.apsimx')
+
+x_var <- c(
+    'Wheat.Phenology.Stage',
+    'Wheat.Phenology.AccumulateThermalTime')
+x_lab <- 'Accumulated thermal time, stage'
+```
+
+
+The biomass and nitrogen of each organ is separated into three types of pools, i.e. structural, metabolic and non-structural [@brown_plant_2014].
+
+* **Structural biomass and N** are essential for the growth of the organ. They remain within the organ once it has been allocated and are passed from Live to Dead pools as the organ senesces.
+* **Metabolic biomass and N** are essential for growth and their concentration can influence the function of organs (e.g. photosynthetic efficiency of the leaf depends on Metabolic nitrogen content). Metabolic biomass and nitrogen may be reallocated (moved to another organ upon senescence of this organ) or retranslocated
+(moved to another organ at any time when supplies do not meet the structural and metabolic biomass demands of growing organs).
+* **NonStructural biomass and N** are non-essential to the function of an organ. They will be allocated to an organ only when all other organs have received their Structural and Metabolic allocations and may be reallocated or retranslocated.
 
 ## Biomass accumulation (Photosynthesis)
 
@@ -12,39 +42,61 @@ The daily biomass accumulation ($\Delta Q$) corresponds to dry-matter above-grou
 
 ### Potential biomass accumulation from radiation use efficiency
 
+The radiation-limited dry-biomass accumulation ($\Delta Q_{r}$) is calculated by the intercepted radiation ($I$), radiation use efficiency ($RUE$).
 
-The radiation-limited dry-biomass accumulation ($\Delta Q_{r}$) is calculated by the intercepted radiation ($I$), radiation use efficiency ($RUE$), diffuse factor ($f_{d}$), stress factor ($f_{s}$) and carbon dioxide factor ($f_{c}$).
+$$
+\Delta Q_{r}=I \times RUE
+$$
 
-$$\Delta Q_{r}=I\times RUE\times f_{d}\times f_{s}\times f_{c}\label{eq:BiomassProduction}$$
+#### Radiation interception
 
-where $f_{d}$, $f_{s}$ and $f_{c}$ are defined in the wheat.xml file. In the current version of APSIM-Wheat, only `Leaf` produces photosynthate. Diffuse factor ($f_{d}$) equals to 1 (), so that can be: $$\Delta Q_{r}=I\times RUE\times f_{s}\times f_{c}\label{eq:BiomassProduction2}$$
+Radiation interception is calculated from the leaf area index (LAI, m$^{2}$ m$^{-2}$) and the extinction coefficient (*k*) [@monsi_factor_2005]. 
+$$
+I=I_{0}(1-\exp(-k\times LAI)
+$$
 
-### Radiation interception
 
-Radiation interception is calculated from the leaf area index (LAI, m$^{2}$ m$^{-2}$) and the extinction coefficient (*k*) [@monsi2005onthe]. $$I=I_{0}(1-\exp(-k\times LAI\times f_{h})/f_{h})\label{eq:RadiationInterception}$$ where $I_{0}$ is the total radiation at the top of the canopy (MJ) which is directly imported from weather records; $f_{h}$ is light interception modified to give hedge-row effect with skip row. $f_{h}$ could be calculated based on the canopy width, but is not used in the current version of APSIM (i.e. $f_{h}$ = 1). So, is reduced to. $$I=I_{0}(1-\exp(-k\times LAI))\label{eq:RadiationInterception-1}$$
+where $I_{0}$ is the total radiation at the top of the canopy (MJ) which is directly imported from weather records. Extinction coefficient ($k$) set as a constant value 0.5 in current version of APSIM.
 
-Extinction coefficient ($k$) varies with row spacing, $$k=h_{e}(W_{r})$$ where $W_{r}$ is the row spacing which is specified by the user (in the APSIM interface, the .sim or .apsim file); $h_{e}$ is a function of rowing spacing which is defined for both green leaf and dead leaves by parameters `x_row_spacing`, `y_extinct_coef` in the wheat.xml file () and is linearly interpolated by APSIM. In the current version of APSIM-Wheat, no impact of row spacing is considered ()
+#### Actual radiation use efficiency
 
-### Radiation use efficiency
+The actual $RUE$ (g MJ$^{\text{-1}}$) is calculated as the potential $RUE$ ($RUE_p$) and several reduction factors, including plant nutrition ($F_{n,\ photo}$), air temperature($F_{t,\ photo}$), vapour pressure deficit ($F_{vpd}$), water supply ($F_w$) and atmospheric CO2 concentration ($F_{co2}$).
 
-$RUE$ (g MJ$^{\text{-1}}$) is a function of growth stages which is defined by parameters `x_stage_rue` and `y_rue` in wheat.xml () and linearly interpolated by APSIM. In the current version of APSIM-Wheat, $RUE$ equal to 1.24 from emergence to the end of grain-filling and does not vary as a function of daily incident radiation as in the model NWHEAT.
+\begin{equation}
+RUE = RUE_p \times \min{(F_{t,\ photo}, F_{n,\ photo}, F_{VPD})} \times F_W \times F_{CO2}
+\end{equation}
 
-### Stress factor (Temperature, nitrogen, phosphorus (not applied), oxygen (not applied))
+*The potential RUE ($RUE_p$)* has a default value 1.5 in the current version of APSIM.
 
-Actual daily radiation-limited biomass accumulation can be reduced by a stress factor ($f_{s}$, and ). This stress factor is the minimum value of a temperature factor ($f_{T,\ photo}$), a nitrogen factor ($f_{N\ photo}$), a phosphorus factor ($f_{P\ photo}$) and an oxygen factor ($f_{O\ photo}$). $$f_{s}=\min(f_{T,\ photo},\ f_{N,\ photo},\ f_{P,\ photo},\ f_{O,\ photo})\label{eq:StressFactor4Photosynthesis}$$ No phosphorus stress $f_{P,\,photo}$ and oxygen stress $f_{O,\,photo}$ are applied in the current version of APSIM-Wheat. So, is reduced to $$f_{s}=\min(f_{T,\ photo},\ f_{N,\ photo})\label{eq:StressFactor4Photosynthesis2}$$
+*The temperature factor ($F_t$)* is calculated as a function of average daily temperature weighted toward maximum temperature according to the specified `MaximumTemperatureWeighting` factor ($W_{maxt}$) with default value 0.75 (reference).
 
-#### The temperature factor
 
-$f_{T,\ photo}$ is a function of the daily mean temperature and is defined by parameters `x_ave_temp` and `y_stress_photo` in the wheat.xml (). Values are linearly interpolated by APSIM. The temperature stress is applied from sowing to harvest.
+$$F_{t,\ photo}=h_{t,\ photo}[W_{maxt}T_{max}+(1-W_{maxt})T_{min}]$$
 
-$$f_{T,\ photo}=h_{T,\ photo}(\frac{T_{max}+T_{min}}{2})\label{eq:TemStressPhoto}$$
 
-#### The nitrogen factor
+<div class="fig-input">
+```{r biomass-ft, fig.asp = 0.75, fig.cap='The temperature factor which influences radiation use efficiency'}
+xpath <- '//Name[text()="FT"]'
+plot_xypair(pmf, xpath, x_lab = 'Average daily temperature weighted toward maximum temperature', y_lab = 'Temperature factor to photosynthesis')
 
-$f_{N,\,photo}$ is determined by the difference between leaf nitrogen concentration and leaf minimum and critical nitrogen concentration.
+```
+</div>
 
-$$f_{N,\,photo}=R_{N,\,photo}\sum_{leaf}\frac{C_{N}-C_{N,\,min}}{C_{N,\,crit}-C_{N,\,min}}\label{eq:NStressPhoto0}$$
 
+*The plant nutrition factor* $f_{n,\,photo}$ is determined by the difference between leaf nitrogen concentration and leaf minimum and critical nitrogen concentration.
+
+$$
+f_{N,\,photo}=R_{N,\,photo}\sum_{leaf}\frac{C_{N}-C_{N,\,min}}{C_{N,\,crit}-C_{N,\,min}}\label{eq:NStressPhoto0}
+$$
+
+
+<div class="fig-input">
+```{r biomass-fn, fig.asp = 0.75, fig.cap='The nitrogen factor which influences radiation use efficiency'}
+xpath <- '//Name[text()="FN"]'
+plot_xypair(pmf, xpath, x_lab = 'Average daily temperature weighted toward maximum temperature', y_lab = 'Temperature factor to photosynthesis')
+
+```
+</div>
 where $C_{N}$ is the nitrogen concentration of `Leaf` parts; $R_{N,\,expan}$ is multiplier for nitrogen deficit effect on phenology which is specified by `N_fact_photo` in the wheat.xml and default value is 1.5.
 
 #### The CO$_{\text{2}}$ factor

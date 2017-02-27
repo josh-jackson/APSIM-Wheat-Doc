@@ -2,6 +2,30 @@
 
 
 
+```{r setup_phenology, message=FALSE, echo=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(
+    cache = TRUE, echo = FALSE, 
+    out.width = '80%', fig.asp = 1.2,
+    warning = FALSE, fig.align = 'center',
+    message = FALSE) 
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(xml2)
+library(DiagrammeR)
+source('_utility.R')
+report <- read_csv('simulation/simulation.db.Report.csv')
+pmf <- read_xml('simulation/simulation.apsimx')
+
+x_var <- c(
+    'Wheat.Phenology.Stage',
+    'Wheat.Phenology.AccumulateThermalTime')
+x_lab <- 'Accumulated thermal time, stage'
+```
+
+
 ## Thermal time
 
 The daily thermal time is calculated using daily records of maximum and minimum temperature. Before the terminal spikelet stage, the soil temperature is estimated using soil model in APSIM and used to calcualte the thermal time. After terminal spikelet stage, the air temperature is directly used. 
@@ -46,7 +70,7 @@ ReadyForHarvesting        | NA                 | NA            | NA          | N
 ```{r leaf-tt-stage, fig.asp=0.75, fig.cap='The growthing stage as a function of accumulated thermal  time '}
 
 plot_report(
-    df, 
+    report, 
     x_var = 'Wheat.Phenology.AccumulateThermalTime', 
     y_cols = 'Wheat.Phenology.Stage', 
     x_lab = 'Accumulated thermal time (oCd)', 
